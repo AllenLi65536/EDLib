@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Data.OleDb;
 
 namespace EDLib
 {
@@ -60,8 +61,8 @@ namespace EDLib
             }
         }
 
-        public static DataTable ExecMySqlQry(string sql, MySqlConnection conn, string dataTableName = null) {
-            using (MySqlDataAdapter adp = new MySqlDataAdapter(sql, conn)) {
+        public static DataTable ExecMySqlQry(MySqlCommand cmd, string dataTableName = null) {
+            using (MySqlDataAdapter adp = new MySqlDataAdapter(cmd)) {
                 DataTable dt;
                 if (dataTableName == null)
                     dt = new DataTable();
@@ -72,10 +73,41 @@ namespace EDLib
             }
         }
 
+        public static DataTable ExecMySqlQry(string sql, MySqlConnection conn, string dataTableName = null) {
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn)) {
+                return ExecMySqlQry(cmd);
+            }
+
+            /*using (MySqlDataAdapter adp = new MySqlDataAdapter(sql, conn)) {
+                DataTable dt;
+                if (dataTableName == null)
+                    dt = new DataTable();
+                else
+                    dt = new DataTable(dataTableName);
+                adp.Fill(dt);
+                return dt;
+            }*/
+        }
+
         public static DataTable ExecMySqlQry(string sql, string connstr, string dataTableName = null) {
             using (MySqlConnection conn = new MySqlConnection(connstr)) {
                 conn.Open();
                 return ExecMySqlQry(sql, conn, dataTableName);
+            }
+        }
+
+        public static DataTable ExecCMoneyQry(string sql, string dataTableName = null) {
+            CMADODB5.CMConnection conobj = new CMADODB5.CMConnection();
+            ADODB.Recordset rs = new ADODB.Recordset();
+            rs = conobj.CMExecute("5", "10.60.0.191", "", sql);//1433
+            using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter()) {
+                DataTable dt;
+                if (dataTableName == null)
+                    dt = new DataTable();
+                else
+                    dt = new DataTable(dataTableName);
+                dataAdapter.Fill(dt, rs);
+                return dt;
             }
         }
 
