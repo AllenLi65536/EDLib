@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDLib", "EDLib\EDLib.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "TestLib\TestLib.csproj", "{6708ABBB-2C9E-4521-94CB-C21996BD0993}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "HelpFile", "HelpFile\HelpFile.shfbproj", "{1BDFE2E9-010C-400E-B29E-CA7A536760E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6708ABBB-2C9E-4521-94CB-C21996BD0993}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6708ABBB-2C9E-4521-94CB-C21996BD0993}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6708ABBB-2C9E-4521-94CB-C21996BD0993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BDFE2E9-010C-400E-B29E-CA7A536760E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BDFE2E9-010C-400E-B29E-CA7A536760E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BDFE2E9-010C-400E-B29E-CA7A536760E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BDFE2E9-010C-400E-B29E-CA7A536760E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
