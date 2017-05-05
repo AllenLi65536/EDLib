@@ -6,6 +6,18 @@ namespace EDLib
     {
         public enum CommodityType { Stock, IndexFuture, Warrant, ETF, Others };
 
+        public static CommodityType GetCommodityType(string ID) {
+            if (ID.StartsWith("IX"))
+                return CommodityType.IndexFuture;
+            if (ID.StartsWith("00"))
+                return CommodityType.ETF;
+            if (ID.Length == 4)
+                return CommodityType.Stock;
+            if (ID.Length == 6)
+                return CommodityType.Warrant;
+            return CommodityType.Others;
+        }
+
         public static double UpTickSize(string ID, double price) {
             CommodityType type = GetCommodityType(ID);
             price = Math.Round(price, 2);
@@ -106,18 +118,5 @@ namespace EDLib
             }
             return N;
         }
-
-        public static CommodityType GetCommodityType(string ID) {
-            if (ID.StartsWith("IX"))
-                return CommodityType.IndexFuture;
-            if (ID.StartsWith("00"))
-                return CommodityType.ETF;
-            if (ID.Length == 4)
-                return CommodityType.Stock;
-            if (ID.Length == 6)
-                return CommodityType.Warrant;
-            return CommodityType.Others;
-        }
-
     }
 }
