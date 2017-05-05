@@ -5,9 +5,17 @@ using System.Data.OleDb;
 
 namespace EDLib.SQL
 {
-    public class SQL
-    {
-        // For reuse of SqlConnection            
+    /// <summary>
+    /// MSSQL, MySQL, and CMoney SQL query assistant
+    /// </summary>
+    public static class SQL
+    {                 
+        /// <summary>
+        /// Execute MS SQL query
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns>A DataTable</returns>
         public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
                 DataTable dt;
@@ -20,11 +28,25 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute MS SQL query
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="conn"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecSqlQry(string sql, SqlConnection conn, string dataTableName = null) {
             using (SqlCommand cmd = new SqlCommand(sql, conn)) {
                 return ExecSqlQry(cmd, dataTableName);
             }
         }
+        /// <summary>
+        /// Execute MS SQL query
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="connstr"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecSqlQry(string sql, string connstr, string dataTableName = null) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();
@@ -32,6 +54,12 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute MS SQL command
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="conn"></param>
+        /// <returns></returns>
         public static bool ExecSqlCmd(string sql, SqlConnection conn) {
             try {
                 bool wasClosed = false;
@@ -50,6 +78,12 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute MS SQL command
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="connstr"></param>
+        /// <returns></returns>
         public static bool ExecSqlCmd(string sql, string connstr) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();
@@ -57,6 +91,12 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute MYSQL query
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecMySqlQry(MySqlCommand cmd, string dataTableName = null) {
             using (MySqlDataAdapter adp = new MySqlDataAdapter(cmd)) {
                 DataTable dt;
@@ -69,12 +109,26 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute MYSQL query
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="conn"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecMySqlQry(string sql, MySqlConnection conn, string dataTableName = null) {
             using (MySqlCommand cmd = new MySqlCommand(sql, conn)) {
                 return ExecMySqlQry(cmd);
             }
         }
 
+        /// <summary>
+        /// Execute MYSQL query
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="connstr"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecMySqlQry(string sql, string connstr, string dataTableName = null) {
             using (MySqlConnection conn = new MySqlConnection(connstr)) {
                 conn.Open();
@@ -82,6 +136,12 @@ namespace EDLib.SQL
             }
         }
 
+        /// <summary>
+        /// Execute CMoney query
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="dataTableName"></param>
+        /// <returns></returns>
         public static DataTable ExecCMoneyQry(string sql, string dataTableName = null) {
             CMADODB5.CMConnection conobj = new CMADODB5.CMConnection();
             ADODB.Recordset rs = new ADODB.Recordset();

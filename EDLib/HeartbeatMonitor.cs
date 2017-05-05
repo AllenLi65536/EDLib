@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace EDLib
 {
+    /// <summary>
+    /// Monitors heartbeat
+    /// </summary>
     public class HeartbeatMonitor
     {
         //public delegate void noHeartbeatCallback();
@@ -22,6 +25,13 @@ namespace EDLib
         private readonly int timeoutSecs;
         private Action callBack;
 
+        /// <summary>
+        /// Check the newest heartbeat time (updatedTime) every timeoutSecs.
+        /// If the newest heartbeat time is longer than timeoutSecs, noHeartbeatCallback will be called. 
+        /// </summary>
+        /// <param name="timeoutSecs"></param>
+        /// <param name="noHeartbeatCallback">Will be called when timed out</param>
+        /// <param name="hideConsole">Will hide the console until timed out. Rehide it when timed in.</param>
         public HeartbeatMonitor(int timeoutSecs, Action noHeartbeatCallback, bool hideConsole = false) {
             handle = GetConsoleWindow();
             updatedTime = DateTime.Now;
@@ -56,6 +66,9 @@ namespace EDLib
             }
         }
 
+        /// <summary>
+        /// Send heartbeat signal to HeartbeatMonitor
+        /// </summary>
         public void Heartbeat() {
             updatedTime = DateTime.Now;
         }

@@ -2,10 +2,21 @@
 
 namespace EDLib
 {
-    public class Tick
+    /// <summary>
+    /// Price tick related function of Taiwan stock/future market
+    /// </summary>
+    public static class Tick
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public enum CommodityType { Stock, IndexFuture, Warrant, ETF, Others };
 
+        /// <summary>
+        /// Get the commodity type of ID
+        /// </summary>
+        /// <param name="ID">Commodity ID</param>
+        /// <returns>CommodityType</returns>
         public static CommodityType GetCommodityType(string ID) {
             if (ID.StartsWith("IX"))
                 return CommodityType.IndexFuture;
@@ -18,6 +29,12 @@ namespace EDLib
             return CommodityType.Others;
         }
 
+        /// <summary>
+        /// Tick size of one tick up.
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
         public static double UpTickSize(string ID, double price) {
             CommodityType type = GetCommodityType(ID);
             price = Math.Round(price, 2);
@@ -69,10 +86,22 @@ namespace EDLib
             }
         }
 
+        /// <summary>
+        /// Tick size of one tick down.
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
         public static double DownTickSize(string ID, double price) {
             return -UpTickSize(ID, price - 0.01);
         }
 
+        /// <summary>
+        /// Get best 5 + 1 bid prices given bid1
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="bid1"></param>
+        /// <returns>An array with 6 bid prices</returns>
         public static double[] GetBids(string ID, double bid1) {
             double[] bids = new double[6];
             bids[0] = Math.Round(bid1, 2);
@@ -82,6 +111,12 @@ namespace EDLib
             return bids;
         }
 
+        /// <summary>
+        /// Get best 5 + 1 ask prices given ask1
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="ask1"></param>
+        /// <returns>An array with 6 ask prices</returns>
         public static double[] GetAsks(string ID, double ask1) {
             double[] asks = new double[6];
             asks[0] = Math.Round(ask1, 2);
@@ -91,6 +126,13 @@ namespace EDLib
             return asks;
         }
 
+        /// <summary>
+        /// Shift price N ticks up. (N &lt; 0 for down tick) 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="price"></param>
+        /// <param name="N"></param>
+        /// <returns>Shifted price</returns>
         public static double ShiftTicks(string ID, double price, int N) {
             price = Math.Round(price, 2);
 
@@ -104,6 +146,13 @@ namespace EDLib
             return price;
         }
 
+        /// <summary>
+        /// Get number of ticks between price1 and price2
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="price1"></param>
+        /// <param name="price2"></param>
+        /// <returns>Number of ticks</returns>
         public static int GetTickNum(string ID, double price1, double price2) {
             int N = 0;
             price1 = Math.Round(price1, 2);

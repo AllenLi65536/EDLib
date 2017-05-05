@@ -5,7 +5,10 @@ using System.Net.Mail;
 
 namespace EDLib
 {
-    public class SendMail
+    /// <summary>
+    /// Send e-mail
+    /// </summary>
+    public static class SendMail
     {
         /// <summary>
         /// smtp server

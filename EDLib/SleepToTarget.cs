@@ -3,17 +3,28 @@ using System.Threading;
 
 namespace EDLib
 {
+    /// <summary>
+    /// Make a thread to sleep to the target time.
+    /// </summary>
     public class SleepToTarget
     {
-        private DateTime TargetTime;
-        private Action MyAction;
-        private readonly int MinSleepMilliseconds = 250;
+        private DateTime targetTime;
+        private Action myAction;
+        private readonly int minSleepMilliseconds = 250;
 
-        public SleepToTarget(DateTime TargetTime, Action MyAction) {
-            this.TargetTime = TargetTime;
-            this.MyAction = MyAction;
+        /// <summary>
+        /// Sleep to the TargetTime and call MyAction
+        /// </summary>
+        /// <param name="targetTime"></param>
+        /// <param name="myAction"></param>
+        public SleepToTarget(DateTime targetTime, Action myAction) {
+            this.targetTime = targetTime;
+            this.myAction = myAction;
         }
 
+        /// <summary>
+        /// Start the thread
+        /// </summary>
         public void Start() {
             new Thread(new ThreadStart(ProcessTimer)).Start();
         }
@@ -21,14 +32,14 @@ namespace EDLib
         private void ProcessTimer() {
             DateTime Now = DateTime.Now;
 
-            while (Now < TargetTime) {
-                int SleepMilliseconds = (int) Math.Round((TargetTime - Now).TotalMilliseconds / 2);
+            while (Now < targetTime) {
+                int SleepMilliseconds = (int) Math.Round((targetTime - Now).TotalMilliseconds / 2);
                 Console.WriteLine(SleepMilliseconds);
-                Thread.Sleep(SleepMilliseconds > MinSleepMilliseconds ? SleepMilliseconds : MinSleepMilliseconds);
+                Thread.Sleep(SleepMilliseconds > minSleepMilliseconds ? SleepMilliseconds : minSleepMilliseconds);
                 Now = DateTime.Now;
             }
 
-            MyAction();
+            myAction();
         }
     }
 }

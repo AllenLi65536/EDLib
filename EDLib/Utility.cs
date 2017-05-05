@@ -5,7 +5,10 @@ using System.Text;
 
 namespace EDLib
 {
-    public class Utility
+    /// <summary>
+    /// Miscellaneous
+    /// </summary>
+    public static class Utility
     {       
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {
             int XORMask = 0;
@@ -42,7 +45,7 @@ namespace EDLib
             return reg1.IsMatch(str);
         }
     }
-    public class dMath
+    public static class dMath
     {
         //Returns the standard deviation of data array
         private static double StandardDeviation(double[] data) {

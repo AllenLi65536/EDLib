@@ -4,14 +4,24 @@ using System.Data.SqlClient;
 namespace EDLib
 {
     /// <summary>
-    /// TradeDate
+    /// Check for TradeDate
     /// </summary>
-    public class TradeDate
+    public static class TradeDate
     {
+        /// <summary>
+        /// Get last Nth trade day
+        /// </summary>
+        /// <param name="N">N trade days</param>
+        /// <returns>string of that date with format "yyyyMMdd"</returns>
         static public string LastNTradeDate(int N) {
             return LastNTradeDateDT(N).ToString("yyyyMMdd");
         }
 
+        /// <summary>
+        /// Get last Nth trade day
+        /// </summary>
+        /// <param name="N">N trade days</param>
+        /// <returns>DateTime of that date</returns>
         static public DateTime LastNTradeDateDT(int N) {
             //Get Last Trading Date
             int nDays = -1;
@@ -43,7 +53,12 @@ namespace EDLib
             holiday.Close();
             return retDate;
         }
-        bool IsTradeDay(DateTime day) {
+        /// <summary>
+        /// Is the day trade day
+        /// </summary>
+        /// <param name="day">The day</param>
+        /// <returns>bool</returns>
+        static bool IsTradeDay(DateTime day) {
             SqlConnection sqlConn = new SqlConnection("Server=10.19.1.20;DataBase=VOLDB;Uid=sa;pwd=dw910770;");
             sqlConn.Open();
             SqlCommand sqlCmd = new SqlCommand("", sqlConn);
@@ -74,7 +89,11 @@ namespace EDLib
             sqlConn.Close();
             return true;
         }
-        bool IsTodayTradeDay() {
+        /// <summary>
+        /// Is today trade day
+        /// </summary>
+        /// <returns>bool</returns>
+        static bool IsTodayTradeDay() {
             return IsTradeDay(DateTime.Now);
         }
     }

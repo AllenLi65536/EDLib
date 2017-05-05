@@ -3,13 +3,27 @@ using TIBCO.Rendezvous;
 
 namespace EDLib.TIBCORV
 {
+    /// <summary>
+    /// Function pointer of listener callback function
+    /// </summary>
+    /// <param name="listener"></param>
+    /// <param name="messageReceivedEventArgs"></param>
     public delegate void ListenerFunc(object listener , MessageReceivedEventArgs messageReceivedEventArgs);
 
+    /// <summary>
+    /// Listen to TIBCO Rendezvous service
+    /// </summary>
     public class TIBCORVListener
     {
         int N = 0;
         private Transport[] transport;
 
+        /// <summary>
+        /// Initiate listener with parameters
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="network"></param>
+        /// <param name="daemon"></param>
         public TIBCORVListener(string[] service , string[] network , string[] daemon) {
 
             N = service.Length;
@@ -42,6 +56,11 @@ namespace EDLib.TIBCORV
             }
         }
 
+        /// <summary>
+        /// Start listen to topics with callback functions
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <param name="CallBack"></param>
         public void Listen(string[] topic , ListenerFunc[] CallBack) {
             Listener[] listeners = new Listener[N];
             for (int i = 0; i < N; i++) {
@@ -77,10 +96,19 @@ namespace EDLib.TIBCORV
         }
     }
 
+    /// <summary>
+    /// Send via TIBCO Rendezvous service
+    /// </summary>
     public class TIBCORVSender
     {
         private Transport transport = null;
 
+        /// <summary>
+        /// Initiate sender with parameters
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="network"></param>
+        /// <param name="daemon"></param>
         public TIBCORVSender(string service , string network , string daemon) {
             try {
                 /* Create internal TIB/Rendezvous machinery */
@@ -111,6 +139,11 @@ namespace EDLib.TIBCORV
 
         }
 
+        /// <summary>
+        /// Send message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="topic"></param>
         public void Send(Message message , string topic) {
             // Create the message
             //Message message = new Message();
