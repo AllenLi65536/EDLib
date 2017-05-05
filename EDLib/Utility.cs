@@ -38,12 +38,12 @@ namespace EDLib
         
         public static bool ExecSqlCmd(string sql, SqlConnection conn) {
             try {
-                bool wasClosed = false;
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                bool wasClosed = false;                
                 if (conn.State == ConnectionState.Closed) {
                     conn.Open();
                     wasClosed = true;
                 }
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.CommandTimeout = 300;
                 cmd.ExecuteNonQuery();
                 if (wasClosed)
