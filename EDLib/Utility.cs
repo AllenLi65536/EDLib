@@ -6,6 +6,17 @@ using System.Text;
 namespace EDLib
 {
     /// <summary>
+    /// Global variables and parameters
+    /// </summary>
+    public static class GlobalVal
+    {
+        /// <summary>
+        /// SQL server connection string of HEDGE
+        /// </summary>
+        public static readonly string HEDGE = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
+    }
+
+    /// <summary>
     /// Miscellaneous
     /// </summary>
     public static class Utility

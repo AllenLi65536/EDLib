@@ -5,32 +5,44 @@ using System.Net.Mail;
 
 namespace EDLib
 {
-    //TODO: Make it unstatic!
-
     /// <summary>
     /// Send e-mail via dzmail01.kgi.com
     /// </summary>
-    public static class SendMail
+    public class MailService
     {
         /// <summary>
         /// smtp server
         /// </summary>
-        private static readonly string smtpServer = "dzmail01.kgi.com";
+        private string smtpServer;
 
         /// <summary>
         /// smtp server port default 25
         /// </summary>
-        private static readonly int smtpPort = 25;
+        private int smtpPort;
 
         /// <summary>
         /// Mail Account
         /// </summary>
-        private static readonly string mailAccount = null;
+        private string mailAccount;
 
         /// <summary>
         /// Mail Password
         /// </summary>
-        private static readonly string mailPwd = null;
+        private string mailPwd;
+
+        /// <summary>
+        /// Initiate MailService 
+        /// </summary>
+        /// <param name="smtpServer">SMTP server, default: dzmail01.kgi.com</param>
+        /// <param name="smtpPort">SMTP port, default: 25</param>
+        /// <param name="mailAccount">mail account: not needed for KGI</param>
+        /// <param name="mailPwd">mail password: not needed for KGI</param>
+        public MailService(string smtpServer = "dzmail01.kgi.com", int smtpPort = 25, string mailAccount = null, string mailPwd = null) {
+            this.smtpServer = smtpServer;
+            this.smtpPort = smtpPort;           
+            this.mailAccount = mailAccount;
+            this.mailPwd = mailPwd;
+        }
 
         /// <summary>
         /// Send mail
@@ -45,7 +57,7 @@ namespace EDLib
         /// <param name="filePaths">Paths to files to be attached.</param>
         /// <param name="deleteFileAttachment">Delete the attached files or not</param>
         /// <returns>Successful or not</returns>
-        static public bool MailSend(string mailFrom, string senderName, string[] mailTos, string[] ccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment) {
+        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment) {
 
             try {
 

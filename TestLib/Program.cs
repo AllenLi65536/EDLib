@@ -91,6 +91,8 @@ namespace TestLib
                 Console.WriteLine(TradeDate.LastNTradeDate(i));
             //new SleepToTarget(new DateTime(2017, 5, 9), null);
             new HeartbeatMonitor(1, null);
+            //MailService ms = new MailService(null);
+            
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.ReadKey();
         }
