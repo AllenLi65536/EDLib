@@ -29,9 +29,9 @@ namespace EDLib
         /// Check the newest heartbeat time (updatedTime) every timeoutSecs.
         /// If the newest heartbeat time is longer than timeoutSecs, noHeartbeatCallback will be called. 
         /// </summary>
-        /// <param name="timeoutSecs"></param>
-        /// <param name="noHeartbeatCallback">Will be called when timed out</param>
-        /// <param name="hideConsole">Will hide the console until timed out. Rehide it when timed in.</param>
+        /// <param name="timeoutSecs">Timeout seconds</param>
+        /// <param name="noHeartbeatCallback">Will be called when timeout</param>
+        /// <param name="hideConsole">Shall hide the console until timeout. Rehide it whan not timeout.</param>
         public HeartbeatMonitor(int timeoutSecs, Action noHeartbeatCallback, bool hideConsole = false) {
             handle = GetConsoleWindow();
             updatedTime = DateTime.Now;
@@ -51,8 +51,9 @@ namespace EDLib
 
         //Check data every timeoutSecs
         private void CheckHeartbeat() {
+            int timeoutMillisecs = timeoutSecs * 1000;
             while (true) {
-                Thread.Sleep(timeoutSecs * 1000);
+                Thread.Sleep(timeoutMillisecs);
                 if ((DateTime.Now - updatedTime).TotalSeconds > timeoutSecs) {
                     if (!consoleShow) {
                         ShowWindow(handle, SW_SHOW);

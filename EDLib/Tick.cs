@@ -8,9 +8,21 @@ namespace EDLib
     public static class Tick
     {
         /// <summary>
-        /// 
+        /// Commodity type
         /// </summary>
-        public enum CommodityType { Stock, IndexFuture, Warrant, ETF, Others };
+        public enum CommodityType
+        {
+            ///<summary>Stock</summary>
+            Stock,
+            ///<summary>Index Future</summary>
+            IndexFuture,
+            ///<summary>Warrant</summary>
+            Warrant,
+            ///<summary>ETF</summary>
+            ETF,
+            ///<summary>Others</summary>
+            Others
+        };
 
         /// <summary>
         /// Get the commodity type of ID
@@ -30,11 +42,11 @@ namespace EDLib
         }
 
         /// <summary>
-        /// Tick size of one tick up.
+        /// Tick size of one tick upward.
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="price"></param>
-        /// <returns></returns>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="price">Current price</param>
+        /// <returns>Tick size of uptick</returns>
         public static double UpTickSize(string ID, double price) {
             CommodityType type = GetCommodityType(ID);
             price = Math.Round(price, 2);
@@ -87,11 +99,11 @@ namespace EDLib
         }
 
         /// <summary>
-        /// Tick size of one tick down.
+        /// Tick size of one tick downard.
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="price"></param>
-        /// <returns></returns>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="price">Current price</param>
+        /// <returns>Tick size of downtick</returns>
         public static double DownTickSize(string ID, double price) {
             return -UpTickSize(ID, price - 0.01);
         }
@@ -99,8 +111,8 @@ namespace EDLib
         /// <summary>
         /// Get best 5 + 1 bid prices given bid1
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="bid1"></param>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="bid1">Bid1</param>
         /// <returns>An array with 6 bid prices</returns>
         public static double[] GetBids(string ID, double bid1) {
             double[] bids = new double[6];
@@ -114,8 +126,8 @@ namespace EDLib
         /// <summary>
         /// Get best 5 + 1 ask prices given ask1
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="ask1"></param>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="ask1">Ask1</param>
         /// <returns>An array with 6 ask prices</returns>
         public static double[] GetAsks(string ID, double ask1) {
             double[] asks = new double[6];
@@ -129,9 +141,9 @@ namespace EDLib
         /// <summary>
         /// Shift price N ticks up. (N &lt; 0 for down tick) 
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="price"></param>
-        /// <param name="N"></param>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="price">Current price</param>
+        /// <param name="N">N ticks</param>
         /// <returns>Shifted price</returns>
         public static double ShiftTicks(string ID, double price, int N) {
             price = Math.Round(price, 2);
@@ -149,9 +161,9 @@ namespace EDLib
         /// <summary>
         /// Get number of ticks between price1 and price2
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="price1"></param>
-        /// <param name="price2"></param>
+        /// <param name="ID">Commodity ID</param>
+        /// <param name="price1">price1</param>
+        /// <param name="price2">price2</param>
         /// <returns>Number of ticks</returns>
         public static int GetTickNum(string ID, double price1, double price2) {
             int N = 0;

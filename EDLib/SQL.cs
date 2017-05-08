@@ -13,9 +13,9 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
-        /// <param name="cmd"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns>A DataTable</returns>
+        /// <param name="cmd">SQL command</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
                 DataTable dt;
@@ -31,10 +31,10 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="conn"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="conn">SQL server connection</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecSqlQry(string sql, SqlConnection conn, string dataTableName = null) {
             using (SqlCommand cmd = new SqlCommand(sql, conn)) {
                 return ExecSqlQry(cmd, dataTableName);
@@ -43,10 +43,10 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="connstr"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="connstr">SQL server connection string</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecSqlQry(string sql, string connstr, string dataTableName = null) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();
@@ -57,9 +57,9 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute MS SQL command
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="conn"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="conn">SQL server connection</param>
+        /// <returns>Successful or not</returns>
         public static bool ExecSqlCmd(string sql, SqlConnection conn) {
             try {
                 bool wasClosed = false;
@@ -81,8 +81,8 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute MS SQL command
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="connstr"></param>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="connstr">SQL server connection string</param>
         /// <returns></returns>
         public static bool ExecSqlCmd(string sql, string connstr) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
@@ -92,11 +92,11 @@ namespace EDLib.SQL
         }
 
         /// <summary>
-        /// Execute MYSQL query
+        /// Execute MySQL query
         /// </summary>
-        /// <param name="cmd"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="cmd">MySQL command</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecMySqlQry(MySqlCommand cmd, string dataTableName = null) {
             using (MySqlDataAdapter adp = new MySqlDataAdapter(cmd)) {
                 DataTable dt;
@@ -110,12 +110,12 @@ namespace EDLib.SQL
         }
 
         /// <summary>
-        /// Execute MYSQL query
+        /// Execute MySQL query
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="conn"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="sql">MySQL command string</param>
+        /// <param name="conn">MySQL server connection</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecMySqlQry(string sql, MySqlConnection conn, string dataTableName = null) {
             using (MySqlCommand cmd = new MySqlCommand(sql, conn)) {
                 return ExecMySqlQry(cmd);
@@ -123,12 +123,12 @@ namespace EDLib.SQL
         }
 
         /// <summary>
-        /// Execute MYSQL query
+        /// Execute MySQL query
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="connstr"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="sql">MySQL command string</param>
+        /// <param name="connstr">MySQL server connection string</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecMySqlQry(string sql, string connstr, string dataTableName = null) {
             using (MySqlConnection conn = new MySqlConnection(connstr)) {
                 conn.Open();
@@ -139,9 +139,9 @@ namespace EDLib.SQL
         /// <summary>
         /// Execute CMoney query
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="dataTableName"></param>
-        /// <returns></returns>
+        /// <param name="sql">CMoney SQL command string</param>
+        /// <param name="dataTableName">Name of DataTable to be returned</param>
+        /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecCMoneyQry(string sql, string dataTableName = null) {
             CMADODB5.CMConnection conobj = new CMADODB5.CMConnection();
             ADODB.Recordset rs = new ADODB.Recordset();

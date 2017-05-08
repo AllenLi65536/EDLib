@@ -6,12 +6,12 @@ namespace EDLib.TIBCORV
     /// <summary>
     /// Function pointer of listener callback function
     /// </summary>
-    /// <param name="listener"></param>
-    /// <param name="messageReceivedEventArgs"></param>
+    /// <param name="listener">Caller of callback function</param>
+    /// <param name="messageReceivedEventArgs">Message received by callback function</param>
     public delegate void ListenerFunc(object listener , MessageReceivedEventArgs messageReceivedEventArgs);
 
     /// <summary>
-    /// Listen to TIBCO Rendezvous service
+    /// Listen to TIBCO Rendezvous services. This class can let you specify multiple net transports and listener callbacks.
     /// </summary>
     public class TIBCORVListener
     {
@@ -21,9 +21,9 @@ namespace EDLib.TIBCORV
         /// <summary>
         /// Initiate listener with parameters
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="network"></param>
-        /// <param name="daemon"></param>
+        /// <param name="service">String array of service parameters</param>
+        /// <param name="network">String array of network parameters</param>
+        /// <param name="daemon">String array of daemon parameters</param>
         public TIBCORVListener(string[] service , string[] network , string[] daemon) {
 
             N = service.Length;
@@ -57,17 +57,17 @@ namespace EDLib.TIBCORV
         }
 
         /// <summary>
-        /// Start listen to topics with callback functions
+        /// Start listen to topics with callback functions.
         /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="CallBack"></param>
-        public void Listen(string[] topic , ListenerFunc[] CallBack) {
+        /// <param name="topic">String array of topic parameters</param>
+        /// <param name="callBack">Callback function to be called on reveiviing message.</param>
+        public void Listen(string[] topic , ListenerFunc[] callBack) {
             Listener[] listeners = new Listener[N];
             for (int i = 0; i < N; i++) {
                 // Create listeners for specified subjects                
                 try {
                     listeners[i] = new Listener(Queue.Default , transport[i] , topic[i] , null);
-                    listeners[i].MessageReceived += new MessageReceivedEventHandler(CallBack[i]);
+                    listeners[i].MessageReceived += new MessageReceivedEventHandler(callBack[i]);
                     Console.Error.WriteLine("Listening on: " + topic[i]);
                 } catch (RendezvousException exception) {
                     Console.Error.WriteLine("Failed to create listener:");
@@ -106,9 +106,9 @@ namespace EDLib.TIBCORV
         /// <summary>
         /// Initiate sender with parameters
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="network"></param>
-        /// <param name="daemon"></param>
+        /// <param name="service">service parameter</param>
+        /// <param name="network">network parameter</param>
+        /// <param name="daemon">daemon parameter</param>
         public TIBCORVSender(string service , string network , string daemon) {
             try {
                 /* Create internal TIB/Rendezvous machinery */
@@ -142,8 +142,8 @@ namespace EDLib.TIBCORV
         /// <summary>
         /// Send message
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="topic"></param>
+        /// <param name="message">Message to be send.</param>
+        /// <param name="topic">Send message through topic.</param>
         public void Send(Message message , string topic) {
             // Create the message
             //Message message = new Message();

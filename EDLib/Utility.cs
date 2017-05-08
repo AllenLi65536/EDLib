@@ -10,7 +10,7 @@ namespace EDLib
     /// </summary>
     public static class Utility
     {       
-        public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {
+        /*public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {
             int XORMask = 0;
 
             //以Bit處理結果和以Byte相同
@@ -69,7 +69,7 @@ namespace EDLib
             if (value2 != 0)
                 return value1 / value2;
             return double.PositiveInfinity;
-        }
+        }*/
     }
 }
 

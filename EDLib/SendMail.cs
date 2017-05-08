@@ -6,7 +6,7 @@ using System.Net.Mail;
 namespace EDLib
 {
     /// <summary>
-    /// Send e-mail
+    /// Send e-mail via dzmail01.kgi.com
     /// </summary>
     public static class SendMail
     {
@@ -31,18 +31,18 @@ namespace EDLib
         private static readonly string mailPwd = null;
 
         /// <summary>
-        /// 完整的寄信功能
+        /// Send mail
         /// </summary>
-        /// <param name="mailFrom">寄信人E-mail Address</param>
-        /// <param name="senderName">寄信人名稱</param>
-        /// <param name="mailTos">收信人E-mail Address</param>
-        /// <param name="ccs">副本E-mail Address</param>
-        /// <param name="mailSub">主旨</param>
-        /// <param name="mailBody">信件內容</param>
-        /// <param name="isBodyHtml">是否採用HTML格式</param>
-        /// <param name="filePaths">附檔在WebServer檔案總管路徑</param>
-        /// <param name="deleteFileAttachment">是否刪除在WebServer上的附件</param>
-        /// <returns>是否成功</returns>
+        /// <param name="mailFrom">Sender's E-mail Address</param>
+        /// <param name="senderName">Sender's name</param>
+        /// <param name="mailTos">Receivers' E-mail Addresses</param>
+        /// <param name="ccs">CC to E-mail Addresses</param>
+        /// <param name="mailSub">Subject</param>
+        /// <param name="mailBody">Body of the mail</param>
+        /// <param name="isBodyHtml">Is body in html format</param>
+        /// <param name="filePaths">Paths to files to be attached.</param>
+        /// <param name="deleteFileAttachment">Delete the attached files or not</param>
+        /// <returns>Successful or not</returns>
         static public bool MailSend(string mailFrom, string senderName, string[] mailTos, string[] ccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment) {
 
             try {
@@ -50,34 +50,34 @@ namespace EDLib
                 //if (string.IsNullOrEmpty(MailFrom)) //※有些公司的Mail Server會規定寄信人的Domain Name要是該Mail Server的Domain Name
                 //    MailFrom = "allen.li@kgi.com";
 
-                //建立MailMessage物件
+                //A new mail message object
                 MailMessage mms = new MailMessage();
-                //指定一位寄信人MailAddress
+                //Sender's address and name
                 if (!string.IsNullOrEmpty(senderName))
                     mms.From = new MailAddress(mailFrom, senderName);
                 else
                     mms.From = new MailAddress(mailFrom);
-                //信件主旨
+                //Mail subject
                 mms.Subject = mailSub;
-                //信件內容
+                //Mail body
                 mms.Body = mailBody;
-                //信件內容 是否採用Html格式
+                //Mail body is html or not
                 mms.IsBodyHtml = isBodyHtml;
 
-                //加入信件的收信人(們)address
+                //Receivers' addresses
                 if (mailTos != null)
                     for (int i = 0; i < mailTos.Length; i++)
                         if (!string.IsNullOrEmpty(mailTos[i].Trim()))
                             mms.To.Add(new MailAddress(mailTos[i].Trim()));
 
-                //加入信件的副本(們)address
+                //CC
                 if (ccs != null)
                     for (int i = 0; i < ccs.Length; i++)
                         if (!string.IsNullOrEmpty(ccs[i].Trim()))
                             mms.CC.Add(new MailAddress(ccs[i].Trim()));
 
-                //加入信件的夾帶檔案
-                if (filePaths != null) //有夾帶檔案
+                //Attachments 
+                if (filePaths != null) 
                     for (int i = 0; i < filePaths.Length; i++)
                         if (!string.IsNullOrEmpty(filePaths[i].Trim())) {
                             Attachment file = new Attachment(filePaths[i].Trim());
@@ -85,19 +85,19 @@ namespace EDLib
                         }
 
                 using (SmtpClient client = new SmtpClient(smtpServer, smtpPort)) {
-                    if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //.config有帳密的話
-                        client.Credentials = new NetworkCredential(mailAccount, mailPwd);//寄信帳密
-                    client.Send(mms);//寄出一封信
+                    if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //Send with ID and password
+                        client.Credentials = new NetworkCredential(mailAccount, mailPwd);//ID & password
+                    client.Send(mms);//Send mail
                 }
 
-                //釋放每個附件，才不會Lock住
+                //Release read locks
                 if (mms.Attachments != null && mms.Attachments.Count > 0)
                     for (int i = 0; i < mms.Attachments.Count; i++) {
                         mms.Attachments[i].Dispose();
                         //mms.Attachments[i] = null;
                     }
 
-                #region 要刪除附檔
+                #region Delete attachments
                 if (deleteFileAttachment && filePaths != null && filePaths.Length > 0)
                     foreach (string filePath in filePaths)
                         File.Delete(filePath.Trim());

@@ -12,7 +12,7 @@ namespace EDLib
         /// Get last Nth trade day
         /// </summary>
         /// <param name="N">N trade days</param>
-        /// <returns>string of that date with format "yyyyMMdd"</returns>
+        /// <returns>string of that day with format "yyyyMMdd"</returns>
         static public string LastNTradeDate(int N) {
             return LastNTradeDateDT(N).ToString("yyyyMMdd");
         }
@@ -21,7 +21,7 @@ namespace EDLib
         /// Get last Nth trade day
         /// </summary>
         /// <param name="N">N trade days</param>
-        /// <returns>DateTime of that date</returns>
+        /// <returns>DateTime of that day</returns>
         static public DateTime LastNTradeDateDT(int N) {
             //Get Last Trading Date
             int nDays = -1;
@@ -57,7 +57,7 @@ namespace EDLib
         /// Is the day trade day
         /// </summary>
         /// <param name="day">The day</param>
-        /// <returns>bool</returns>
+        /// <returns>True of false</returns>
         static bool IsTradeDay(DateTime day) {
             SqlConnection sqlConn = new SqlConnection("Server=10.19.1.20;DataBase=VOLDB;Uid=sa;pwd=dw910770;");
             sqlConn.Open();
@@ -92,7 +92,7 @@ namespace EDLib
         /// <summary>
         /// Is today trade day
         /// </summary>
-        /// <returns>bool</returns>
+        /// <returns>True or false</returns>
         static bool IsTodayTradeDay() {
             return IsTradeDay(DateTime.Now);
         }

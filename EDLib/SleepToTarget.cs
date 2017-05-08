@@ -4,7 +4,7 @@ using System.Threading;
 namespace EDLib
 {
     /// <summary>
-    /// Make a thread to sleep to the target time.
+    /// Make a thread to sleep to the target time, and execute the designated function.
     /// </summary>
     public class SleepToTarget
     {
@@ -15,8 +15,8 @@ namespace EDLib
         /// <summary>
         /// Sleep to the TargetTime and call MyAction
         /// </summary>
-        /// <param name="targetTime"></param>
-        /// <param name="myAction"></param>
+        /// <param name="targetTime">Time to wakeup</param>
+        /// <param name="myAction">Function to be executed on wakeup</param>
         public SleepToTarget(DateTime targetTime, Action myAction) {
             this.targetTime = targetTime;
             this.myAction = myAction;
