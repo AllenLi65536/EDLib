@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace EDLib
@@ -8,48 +9,49 @@ namespace EDLib
     /// </summary>
     public static class TradeDate
     {
-        /// <summary>
-        /// Get last Nth trade day
-        /// </summary>
-        /// <param name="N">N trade days</param>
-        /// <returns>string of that day with format "yyyyMMdd"</returns>
-        static public string LastNTradeDate(int N) {
-            return LastNTradeDateDT(N).ToString("yyyyMMdd");
-        }
+        /* /// <summary>
+         /// Get last Nth trade day
+         /// </summary>
+         /// <param name="N">N trade days</param>
+         /// <returns>string of that day with format "yyyyMMdd"</returns>
+         static public string LastNTradeDate(int N) {
+             return LastNTradeDateDT(N).ToString("yyyyMMdd");
+         }*/
 
         /// <summary>
         /// Get last Nth trade day
         /// </summary>
-        /// <param name="N">N trade days</param>
+        /// <param name="N">N trade days, N has to be >= 0</param>
         /// <returns>DateTime of that day</returns>
-        static public DateTime LastNTradeDateDT(int N) {
-            //Get Last Trading Date
-            int nDays = -1;
-            DateTime retDate = DateTime.Today.AddDays(nDays);
-            string date = retDate.ToString("yyyyMMdd");
+        static public DateTime LastNTradeDate(int N) {
+            if (N < 0) 
+                throw new ArgumentOutOfRangeException("N", "N has to be >= 0");            
 
+            //Get Last Trading Date          
             SqlConnection conn2 = new SqlConnection("Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser");
             conn2.Open();
-            SqlCommand cmd2 = new SqlCommand("Select * from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2);
-            SqlDataReader holiday = cmd2.ExecuteReader();
-            if (!holiday.HasRows)
-                N--;
 
-            while (holiday.HasRows || N != 0) {
-                nDays--;
+            int nDays = 0;
+            DateTime retDate;
+            SqlDataReader holiday = null;
+            //DataTable holiday;
+            if (N == 0)
+                return DateTime.Today;
 
-                retDate = DateTime.Today.AddDays(nDays);
-                date = retDate.ToString("yyyyMMdd");
-
-                cmd2 = new SqlCommand("Select * from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2);
-                holiday.Close();
-                holiday = cmd2.ExecuteReader();
+            do {                
+                retDate = DateTime.Today.AddDays(--nDays);
+                string date = retDate.ToString("yyyyMMdd");
+                using (SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2)) {
+                    //holiday = SQL.SQL.ExecSqlQry(cmd2);
+                    if (holiday != null)
+                        holiday.Close();
+                    holiday = cmd2.ExecuteReader();
+                }
                 if (!holiday.HasRows)
                     N--;
-            }
+            } while (N > 0 || holiday.HasRows);
 
             conn2.Close();
-            cmd2.Dispose();
             holiday.Close();
             return retDate;
         }
@@ -58,42 +60,24 @@ namespace EDLib
         /// </summary>
         /// <param name="day">The day</param>
         /// <returns>True of false</returns>
-        static bool IsTradeDay(DateTime day) {
-            SqlConnection sqlConn = new SqlConnection("Server=10.19.1.20;DataBase=VOLDB;Uid=sa;pwd=dw910770;");
-            sqlConn.Open();
-            SqlCommand sqlCmd = new SqlCommand("", sqlConn);
-            SqlDataReader reader = null;
-            if (day.DayOfWeek == DayOfWeek.Sunday)
+        static public bool IsTradeDay(DateTime day) {
+            if (day <= new DateTime(2008, 2, 2))
+                throw new ArgumentOutOfRangeException("day", "day has to be >= 2008/2/2");
+
+            string date = day.ToString("yyyyMMdd");
+            SqlConnection conn2 = new SqlConnection("Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser");
+            conn2.Open();
+            SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2);
+            SqlDataReader holiday = cmd2.ExecuteReader();
+            if (holiday.HasRows)
                 return false;
-            if (day.DayOfWeek == DayOfWeek.Saturday) {
-                //檢查星期六補假
-                sqlCmd.CommandText = "SELECT COUNT(*) FROM OutWeekend WHERE TDate='" + day.ToString("yyyy-MM-dd") + "'";
-                reader = sqlCmd.ExecuteReader();
-                if (reader.Read()) {
-                    if (Convert.ToInt32(reader[0].ToString()) == 0)
-                        return false;
-                } else
-                    return false;
-            } else {
-                //檢查今天是否放假
-                sqlCmd.CommandText = "SELECT COUNT(*) FROM Holiday WHERE Date='" + day.ToString("yyyy-MM-dd") + "'";
-                reader = sqlCmd.ExecuteReader();
-                if (reader.Read()) {
-                    if (Convert.ToInt32(reader[0].ToString()) == 1)
-                        return false;
-                } else
-                    return true;
-            }
-            if (reader != null)
-                reader.Close();
-            sqlConn.Close();
             return true;
         }
         /// <summary>
         /// Is today trade day
         /// </summary>
         /// <returns>True or false</returns>
-        static bool IsTodayTradeDay() {
+        static public bool IsTodayTradeDay() {
             return IsTradeDay(DateTime.Now);
         }
     }

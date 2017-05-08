@@ -83,7 +83,7 @@ namespace EDLib.SQL
         /// </summary>
         /// <param name="sql">SQL command string</param>
         /// <param name="connstr">SQL server connection string</param>
-        /// <returns></returns>
+        /// <returns>Successful or not</returns>
         public static bool ExecSqlCmd(string sql, string connstr) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();

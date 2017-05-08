@@ -2,6 +2,7 @@
 
 namespace EDLib
 {
+    //TODO: Maybe make it un-static
     /// <summary>
     /// Price tick related function of Taiwan stock/future market
     /// </summary>

@@ -13,7 +13,7 @@ namespace EDLib
         private readonly int minSleepMilliseconds = 250;
 
         /// <summary>
-        /// Sleep to the TargetTime and call MyAction
+        /// Sleep to the TargetTime and call myAction
         /// </summary>
         /// <param name="targetTime">Time to wakeup</param>
         /// <param name="myAction">Function to be executed on wakeup</param>

@@ -63,7 +63,7 @@ namespace TestLib
                 //price = Math.Round(price, 2);
                 Console.Write(price + " ");
             }*/
-            double[] bids = Tick.GetAsks("2330", 9.19);
+            /*double[] bids = Tick.GetAsks("2330", 9.19);
             for (int i = 0; i < 6; i++)
                 Console.Write(bids[i] +" ");
             Console.WriteLine(Tick.GetTickNum("2330", 8.8, 8.76));
@@ -84,7 +84,12 @@ namespace TestLib
            + " having Sum(A.買張)-isnull(C.買張,0)<>0 or Sum(A.賣張)-isnull(C.賣張,0)<>0 or Sum(A.張增減)-isnull(C.張增減,0)<>0 or Sum(A.[買金額(千)])-isnull(C.[買金額(千)],0)<>0 or Sum(A.[賣金額(千)])-isnull(C.[賣金額(千)],0)<>0 or Sum(A.[金額增減(千)])-isnull(C.[金額增減(千)],0) <>0"
            + " order by A.股票代號 ";
             DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
-            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
+            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);*/
+            for (int i = 0; i < 10; i++)           
+                Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
+            for (int i = 0; i < 10; i++)
+                Console.WriteLine(TradeDate.LastNTradeDate(i));
+            Console.WriteLine(TradeDate.LastNTradeDate(-1));
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.ReadKey();

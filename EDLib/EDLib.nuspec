@@ -15,6 +15,6 @@
   <files>
    <!-- Add a readme -->
    <file src="README.txt" target="" />
-   <file src="..\Help\Documentation.chm" target="" />
+   <file src="..\HelpFile\Help\HelpFile.chm" target="" />
   </files>
 </package>

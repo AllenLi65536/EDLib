@@ -5,6 +5,8 @@ using System.Net.Mail;
 
 namespace EDLib
 {
+    //TODO: Make it unstatic!
+
     /// <summary>
     /// Send e-mail via dzmail01.kgi.com
     /// </summary>

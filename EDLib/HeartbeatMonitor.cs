@@ -30,8 +30,8 @@ namespace EDLib
         /// If the newest heartbeat time is longer than timeoutSecs, noHeartbeatCallback will be called. 
         /// </summary>
         /// <param name="timeoutSecs">Timeout seconds</param>
-        /// <param name="noHeartbeatCallback">Will be called when timeout</param>
-        /// <param name="hideConsole">Shall hide the console until timeout. Rehide it whan not timeout.</param>
+        /// <param name="noHeartbeatCallback">Function to be called when timeout</param>
+        /// <param name="hideConsole">Shall hide the console until timeout. Rehide it when not timeout.</param>
         public HeartbeatMonitor(int timeoutSecs, Action noHeartbeatCallback, bool hideConsole = false) {
             handle = GetConsoleWindow();
             updatedTime = DateTime.Now;

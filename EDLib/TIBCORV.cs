@@ -15,7 +15,7 @@ namespace EDLib.TIBCORV
     /// </summary>
     public class TIBCORVListener
     {
-        int N = 0;
+        private int N = 0;
         private Transport[] transport;
 
         /// <summary>
@@ -25,8 +25,10 @@ namespace EDLib.TIBCORV
         /// <param name="network">String array of network parameters</param>
         /// <param name="daemon">String array of daemon parameters</param>
         public TIBCORVListener(string[] service , string[] network , string[] daemon) {
-
             N = service.Length;
+            if (N != network.Length || N != daemon.Length)
+                throw new ArgumentException("Parameter arrays must have same length");
+
             transport = new Transport[N];
             try {
                 /* Create internal TIB/Rendezvous machinery */
@@ -41,12 +43,12 @@ namespace EDLib.TIBCORV
                 Console.ReadKey();
                 System.Environment.Exit(1);
             }
-            Console.WriteLine("Open Environment"); //
+            Console.WriteLine("Opened Environment"); //
             for (int i = 0; i < N; i++) {
                 // Create Network transport
                 try {
                     transport[i] = new NetTransport(service[i] , network[i] , daemon[i]);
-                    Console.WriteLine("Create Net Transport"); //
+                    Console.WriteLine("Created Net Transport"); //
                 } catch (RendezvousException exception) {
                     Console.Error.WriteLine("Failed to create NetTransport");
                     Console.Error.WriteLine(exception.StackTrace);
@@ -62,13 +64,16 @@ namespace EDLib.TIBCORV
         /// <param name="topic">String array of topic parameters</param>
         /// <param name="callBack">Callback function to be called on reveiviing message.</param>
         public void Listen(string[] topic , ListenerFunc[] callBack) {
+            if (N != topic.Length || N != callBack.Length)
+                throw new ArgumentException("Parameter arrays must have length " + N);
+
             Listener[] listeners = new Listener[N];
             for (int i = 0; i < N; i++) {
                 // Create listeners for specified subjects                
                 try {
                     listeners[i] = new Listener(Queue.Default , transport[i] , topic[i] , null);
                     listeners[i].MessageReceived += new MessageReceivedEventHandler(callBack[i]);
-                    Console.Error.WriteLine("Listening on: " + topic[i]);
+                    Console.WriteLine("Listening on: " + topic[i]);
                 } catch (RendezvousException exception) {
                     Console.Error.WriteLine("Failed to create listener:");
                     Console.Error.WriteLine(exception.StackTrace);
@@ -145,8 +150,6 @@ namespace EDLib.TIBCORV
         /// <param name="message">Message to be send.</param>
         /// <param name="topic">Send message through topic.</param>
         public void Send(Message message , string topic) {
-            // Create the message
-            //Message message = new Message();
 
             // Set send subject into the message
             try {
