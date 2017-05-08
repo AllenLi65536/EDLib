@@ -32,7 +32,14 @@ namespace EDLib
         /// <param name="timeoutSecs">Timeout seconds</param>
         /// <param name="noHeartbeatCallback">Function to be called when timeout</param>
         /// <param name="hideConsole">Shall hide the console until timeout. Rehide it when not timeout.</param>
+        /// <exception cref="ArgumentOutOfRangeException">timeoutSecs should > 0</exception>
+        /// <exception cref="ArgumentNullException">noHeartbeatCallback not specified</exception>
         public HeartbeatMonitor(int timeoutSecs, Action noHeartbeatCallback, bool hideConsole = false) {
+            if (timeoutSecs <= 0)
+                throw new ArgumentOutOfRangeException("timeoutSecs", "timeoutSecs should > 0");
+            if (noHeartbeatCallback == null)
+                throw new ArgumentNullException("noHeartbeatCallback", "noHeartbeatCallback not specified");
+
             handle = GetConsoleWindow();
             updatedTime = DateTime.Now;
             consoleShow = true;

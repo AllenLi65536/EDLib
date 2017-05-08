@@ -17,7 +17,13 @@ namespace EDLib
         /// </summary>
         /// <param name="targetTime">Time to wakeup</param>
         /// <param name="myAction">Function to be executed on wakeup</param>
+        /// <exception cref="ArgumentException">targetTime not initialized</exception>
+        /// <exception cref="ArgumentNullException">myAction not specified</exception>
         public SleepToTarget(DateTime targetTime, Action myAction) {
+            if (targetTime.Ticks == 0)
+                throw new ArgumentException("targetTime not initialized", "targetTime");
+            if (myAction == null)
+                throw new ArgumentNullException("myAction", "myAction not specified");
             this.targetTime = targetTime;
             this.myAction = myAction;
         }

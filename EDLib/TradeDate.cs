@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace EDLib
@@ -9,20 +8,12 @@ namespace EDLib
     /// </summary>
     public static class TradeDate
     {
-        /* /// <summary>
-         /// Get last Nth trade day
-         /// </summary>
-         /// <param name="N">N trade days</param>
-         /// <returns>string of that day with format "yyyyMMdd"</returns>
-         static public string LastNTradeDate(int N) {
-             return LastNTradeDateDT(N).ToString("yyyyMMdd");
-         }*/
-
         /// <summary>
         /// Get last Nth trade day
         /// </summary>
         /// <param name="N">N trade days, N has to be >= 0</param>
         /// <returns>DateTime of that day</returns>
+        /// <exception cref="ArgumentOutOfRangeException">N has to be >= 0</exception>
         static public DateTime LastNTradeDate(int N) {
             if (N < 0) 
                 throw new ArgumentOutOfRangeException("N", "N has to be >= 0");            
@@ -60,8 +51,9 @@ namespace EDLib
         /// </summary>
         /// <param name="day">The day</param>
         /// <returns>True of false</returns>
+        /// <exception cref="ArgumentOutOfRangeException">day has to be >= 2008/2/2</exception>
         static public bool IsTradeDay(DateTime day) {
-            if (day <= new DateTime(2008, 2, 2))
+            if (day < new DateTime(2008, 2, 2))
                 throw new ArgumentOutOfRangeException("day", "day has to be >= 2008/2/2");
 
             string date = day.ToString("yyyyMMdd");

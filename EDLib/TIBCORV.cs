@@ -24,6 +24,7 @@ namespace EDLib.TIBCORV
         /// <param name="service">String array of service parameters</param>
         /// <param name="network">String array of network parameters</param>
         /// <param name="daemon">String array of daemon parameters</param>
+        /// <exception cref="ArgumentException">Parameter arrays must have same length</exception>
         public TIBCORVListener(string[] service , string[] network , string[] daemon) {
             N = service.Length;
             if (N != network.Length || N != daemon.Length)
@@ -63,6 +64,7 @@ namespace EDLib.TIBCORV
         /// </summary>
         /// <param name="topic">String array of topic parameters</param>
         /// <param name="callBack">Callback function to be called on reveiviing message.</param>
+        /// <exception cref="ArgumentException">Parameter arrays must have length</exception>
         public void Listen(string[] topic , ListenerFunc[] callBack) {
             if (N != topic.Length || N != callBack.Length)
                 throw new ArgumentException("Parameter arrays must have length " + N);

@@ -89,10 +89,14 @@ namespace TestLib
                 Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
             for (int i = 0; i < 10; i++)
                 Console.WriteLine(TradeDate.LastNTradeDate(i));
-            Console.WriteLine(TradeDate.LastNTradeDate(-1));
-
+            //new SleepToTarget(new DateTime(2017, 5, 9), null);
+            new HeartbeatMonitor(1, null);
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.ReadKey();
+        }
+        static void myAction() {
+            Console.WriteLine("Haha");
+            return;
         }
     }
 }

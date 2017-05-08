@@ -16,7 +16,7 @@ namespace EDLib.SQL
         /// <param name="cmd">SQL command</param>
         /// <param name="dataTableName">Name of DataTable to be returned</param>
         /// <returns>A DataTable containing queried data</returns>
-        public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {
+        public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {            
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
                 DataTable dt;
                 if (dataTableName == null)
