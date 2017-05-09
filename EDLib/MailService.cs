@@ -13,22 +13,22 @@ namespace EDLib
         /// <summary>
         /// smtp server
         /// </summary>
-        private string smtpServer;
+        private readonly string smtpServer;
 
         /// <summary>
         /// smtp server port default 25
         /// </summary>
-        private int smtpPort;
+        private readonly int smtpPort;
 
         /// <summary>
         /// Mail Account
         /// </summary>
-        private string mailAccount;
+        private readonly string mailAccount;
 
         /// <summary>
         /// Mail Password
         /// </summary>
-        private string mailPwd;
+        private readonly string mailPwd;
 
         /// <summary>
         /// Initiate MailService 

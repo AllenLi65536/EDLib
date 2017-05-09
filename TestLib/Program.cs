@@ -85,15 +85,19 @@ namespace TestLib
            + " order by A.股票代號 ";
             DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
             Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);*/
-            for (int i = 0; i < 10; i++)           
+            for (int i = 0; i < 10; i++)
                 Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
             for (int i = 0; i < 10; i++)
                 Console.WriteLine(TradeDate.LastNTradeDate(i));
             //new SleepToTarget(new DateTime(2017, 5, 9), null);
-            new HeartbeatMonitor(1, null);
-            //MailService ms = new MailService(null);
-            
+            //new HeartbeatMonitor(1, null);
+            //MailService ms = new MailService();
+            //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, "安安ㄋ好", "安安", false, null, false);
+            SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
+            st.Start();
+
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
+            Console.WriteLine("press any key to exit");
             Console.ReadKey();
         }
         static void myAction() {

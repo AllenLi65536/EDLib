@@ -4,6 +4,11 @@ using TIBCO.Rendezvous;
 namespace EDLib.TIBCORV
 {
     /// <summary>
+    /// TIBCO Rendezvous services
+    /// </summary>
+    internal class NamespaceDoc { }
+
+    /// <summary>
     /// Function pointer of listener callback function
     /// </summary>
     /// <param name="listener">Caller of callback function</param>

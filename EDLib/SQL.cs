@@ -6,6 +6,10 @@ using System.Data.OleDb;
 namespace EDLib.SQL
 {
     /// <summary>
+    /// Some useful SQL helper functions
+    /// </summary>
+    internal class NamespaceDoc { }
+    /// <summary>
     /// MSSQL, MySQL, and CMoney SQL query assistant
     /// </summary>
     public static class SQL

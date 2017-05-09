@@ -13,7 +13,7 @@ namespace EDLib
         private readonly int minSleepMilliseconds = 250;
 
         /// <summary>
-        /// Sleep to the TargetTime and call myAction
+        /// Make a new thread to sleep to the targetTime and call myAction
         /// </summary>
         /// <param name="targetTime">Time to wakeup</param>
         /// <param name="myAction">Function to be executed on wakeup</param>
@@ -29,7 +29,7 @@ namespace EDLib
         }
 
         /// <summary>
-        /// Start the thread
+        /// Remember to call this to start the thread after construction
         /// </summary>
         public void Start() {
             new Thread(new ThreadStart(ProcessTimer)).Start();
