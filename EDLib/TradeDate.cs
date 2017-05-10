@@ -7,14 +7,15 @@ namespace EDLib
     /// Check for TradeDate
     /// </summary>
     public static class TradeDate
-    {
+    {       
         /// <summary>
         /// Get last Nth trade day
         /// </summary>
         /// <param name="N">N trade days, N has to be >= 0</param>
+        /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>DateTime of that day</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be >= 0</exception>
-        static public DateTime LastNTradeDate(int N) {
+        static public DateTime LastNTradeDate(int N, string region = "TWD") {
             if (N < 0) 
                 throw new ArgumentOutOfRangeException("N", "N has to be >= 0");            
 
@@ -32,7 +33,7 @@ namespace EDLib
             do {                
                 retDate = DateTime.Today.AddDays(--nDays);
                 string date = retDate.ToString("yyyyMMdd");
-                using (SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2)) {
+                using (SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='" + region + "' and HOL_DATE='" + date + "'", conn2)) {
                     //holiday = SQL.SQL.ExecSqlQry(cmd2);
                     if (holiday != null)
                         holiday.Close();
@@ -50,16 +51,17 @@ namespace EDLib
         /// Is the day trade day
         /// </summary>
         /// <param name="day">The day</param>
+        /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>True of false</returns>
         /// <exception cref="ArgumentOutOfRangeException">day has to be >= 2008/2/2</exception>
-        static public bool IsTradeDay(DateTime day) {
+        static public bool IsTradeDay(DateTime day, string region = "TWD") {
             if (day < new DateTime(2008, 2, 2))
                 throw new ArgumentOutOfRangeException("day", "day has to be >= 2008/2/2");
 
             string date = day.ToString("yyyyMMdd");
             SqlConnection conn2 = new SqlConnection(GlobalParameters.HEDGE);
             conn2.Open();
-            SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2);
+            SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='" + region + "' and HOL_DATE='" + date + "'", conn2);
             SqlDataReader holiday = cmd2.ExecuteReader();
             if (holiday.HasRows)
                 return false;

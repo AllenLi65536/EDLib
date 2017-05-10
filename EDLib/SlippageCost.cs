@@ -11,5 +11,9 @@ namespace EDLib
     /// </summary>
     public class SlippageCost
     {
+        public static double Calculate(double pricingBA, double hedgeLots, double[] bidsPx, double[] bidsQty) {
+            //TODO
+            return 0;
+        }
     }
 }

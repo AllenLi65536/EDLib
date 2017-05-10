@@ -1,7 +1,11 @@
 ﻿using System;
 using EDLib;
 using EDLib.SQL;
+using EDLib.TIBCORV;
 using System.Data;
+using TIBCO.Rendezvous;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace TestLib
 {
@@ -20,36 +24,7 @@ namespace TestLib
                 price += Tick.UpTickSize("2330", price);
                 //price = Math.Round(price, 2);
                 Console.Write(price + " ");
-            }           
-            
-            Console.WriteLine();
-            price = 49;
-            for (int i = 0; i < 30; i++) {
-                price += Tick.UpTickSize("2330", price);
-                //price = Math.Round(price, 2);
-                Console.Write(price + " ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < 30; i++) {
-                price += Tick.DownTickSize("2330", price);
-                //price = Math.Round(price, 2);
-                Console.Write(price + " ");
-            }
-
-            Console.WriteLine();
-            price = 98;
-            for (int i = 0; i < 30; i++) {
-                price += Tick.UpTickSize("2330", price);
-                //price = Math.Round(price, 2);
-                Console.Write(price + " ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < 30; i++) {
-                price += Tick.DownTickSize("2330", price);
-                //price = Math.Round(price, 2);
-                Console.Write(price + " ");
-            }
-
+            }               
             Console.WriteLine();
             price = 498;
             for (int i = 0; i < 10; i++) {
@@ -85,25 +60,55 @@ namespace TestLib
            + " order by A.股票代號 ";
             DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
             Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);*/
-            for (int i = 0; i < 10; i++)
-                Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
-            for (int i = 0; i < 10; i++)
-                Console.WriteLine(TradeDate.LastNTradeDate(i));
+
+            /* for (int i = 0; i < 10; i++)
+                 Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
+             for (int i = 0; i < 10; i++)
+                 Console.WriteLine(TradeDate.LastNTradeDate(i));*/
+
             //new SleepToTarget(new DateTime(2017, 5, 9), null);
             //new HeartbeatMonitor(1, null);
+
             //MailService ms = new MailService();
             //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, "安安ㄋ好", "安安", false, null, false);
-            SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
-            st.Start();
-            
 
-            //Console.WriteLine(TradeDate.LastNTradeDate(1));
-            Console.WriteLine("press any key to exit");
+            //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
+            //st.Start();
+
+            //TIBCORVListener listener = new TIBCORVListener(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
+            //TIBCORVListener listener = new TIBCORVListener(GlobalParameters.Liquidity);
+            //ListenerFunc[] callback = new ListenerFunc[1];
+            //callback[0] = new ListenerFunc(OnMessageReceived2);
+            //ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
+            //listener.Listen(callback);
+                    /*    
+
+            System.Windows.Controls.TextBox txtUserId = new System.Windows.Controls.TextBox();
+            System.Windows.Controls.PasswordBox txtPwd = new System.Windows.Controls.PasswordBox();
+
+            Configuration config = Configuration.WebConfigurationManager.OpenWebConfiguration(Null);
+            ConnectionStringSettings connString = config.ConnectionStrings.ConnectionString[“MyConnString”];
+
+            using (SqlConnection conn = new SqlConnection(connString.ConnectionString)) {
+                SecureString pwd = txtPwd.SecurePassword;
+                pwd.MakeReadOnly();
+                SqlCredential cred = new SqlCredential(txtUserId.Text, pwd);
+                conn.Credential = cred;
+                conn.Open();
+            }*/
+
+                //Console.WriteLine(TradeDate.LastNTradeDate(1));
+                Console.WriteLine("press any key to exit");
             Console.ReadKey();
         }
         static void myAction() {
             Console.WriteLine("Haha");
             return;
+        }
+        static void OnMessageReceived2(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
+            Message message = messageReceivedEventArgs.Message;
+                       
+            Console.WriteLine(message);                      
         }
     }
 }
