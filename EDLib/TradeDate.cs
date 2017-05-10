@@ -19,7 +19,7 @@ namespace EDLib
                 throw new ArgumentOutOfRangeException("N", "N has to be >= 0");            
 
             //Get Last Trading Date          
-            SqlConnection conn2 = new SqlConnection(GlobalVal.HEDGE);
+            SqlConnection conn2 = new SqlConnection(GlobalParameters.HEDGE);
             conn2.Open();
 
             int nDays = 0;
@@ -57,7 +57,7 @@ namespace EDLib
                 throw new ArgumentOutOfRangeException("day", "day has to be >= 2008/2/2");
 
             string date = day.ToString("yyyyMMdd");
-            SqlConnection conn2 = new SqlConnection(GlobalVal.HEDGE);
+            SqlConnection conn2 = new SqlConnection(GlobalParameters.HEDGE);
             conn2.Open();
             SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='TWD' and HOL_DATE='" + date + "'", conn2);
             SqlDataReader holiday = cmd2.ExecuteReader();

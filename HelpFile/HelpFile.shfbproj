@@ -34,7 +34,7 @@
       <DocumentationSource sourceFile="..\EDLib\bin\Debug\EDLib.dll" xmlns="" />
       <DocumentationSource sourceFile="..\EDLib\bin\Debug\EDLib.xml" xmlns="" />
     </DocumentationSources>
-    <HelpFileVersion>0.9.0.0-beta</HelpFileVersion>
+    <HelpFileVersion>1.0.0.0-alpha</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>

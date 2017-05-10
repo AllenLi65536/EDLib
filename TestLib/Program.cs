@@ -95,6 +95,7 @@ namespace TestLib
             //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, "安安ㄋ好", "安安", false, null, false);
             SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
             st.Start();
+            
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");

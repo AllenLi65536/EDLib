@@ -13,14 +13,14 @@ namespace EDLib.SQL
     /// MSSQL, MySQL, and CMoney SQL query assistant
     /// </summary>
     public static class SQL
-    {                 
+    {
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
         /// <param name="cmd">SQL command</param>
         /// <param name="dataTableName">Name of DataTable to be returned</param>
         /// <returns>A DataTable containing queried data</returns>
-        public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {            
+        public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
                 DataTable dt;
                 if (dataTableName == null)
@@ -63,32 +63,28 @@ namespace EDLib.SQL
         /// </summary>
         /// <param name="sql">SQL command string</param>
         /// <param name="conn">SQL server connection</param>
-        /// <returns>Successful or not</returns>
-        public static bool ExecSqlCmd(string sql, SqlConnection conn) {
-            try {
-                bool wasClosed = false;
-                if (conn.State == ConnectionState.Closed) {
-                    conn.Open();
-                    wasClosed = true;
-                }
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
-                if (wasClosed)
-                    conn.Close();
-                return true;
-            } catch {
-                return false;
+        /// <returns>Number of data rows affected</returns>
+        public static int ExecSqlCmd(string sql, SqlConnection conn) {
+            bool wasClosed = false;
+            if (conn.State == ConnectionState.Closed) {
+                conn.Open();
+                wasClosed = true;
             }
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.CommandTimeout = 300;
+            int ret = cmd.ExecuteNonQuery();
+            if (wasClosed)
+                conn.Close();
+            return ret;
         }
 
         /// <summary>
         /// Execute MS SQL command
         /// </summary>
         /// <param name="sql">SQL command string</param>
-        /// <param name="connstr">SQL server connection string</param>
-        /// <returns>Successful or not</returns>
-        public static bool ExecSqlCmd(string sql, string connstr) {
+        /// <param name="connstr">SQL server connection string</param>  
+        /// <returns>Number of data rows affected</returns>
+        public static int ExecSqlCmd(string sql, string connstr) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();
                 return ExecSqlCmd(sql, conn);
