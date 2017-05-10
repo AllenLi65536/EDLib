@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="de348b85-0790-4ad6-95bb-efa1836c0b83" visible="True" isDefault="true" isSelected="true" title="Welcome to the EDLib">
+  <Topic id="de348b85-0790-4ad6-95bb-efa1836c0b83" visible="True" isDefault="true" title="Welcome to the EDLib">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
@@ -14,5 +14,6 @@
         <HelpKeyword index="K" term="version, 1.0.0.0" />
       </HelpKeywords>
     </Topic>
+    <Topic id="71447429-554f-4193-9b70-82f1dd1627fa" visible="True" isSelected="true" title="Version 1.0.0.0-beta" />
   </Topic>
 </Topics>

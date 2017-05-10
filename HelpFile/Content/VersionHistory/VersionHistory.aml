@@ -2,7 +2,7 @@
 <topic id="7c51216c-f3d1-4439-a124-92fa436df119" revisionNumber="1">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
-			<para>The topics in this section describe the various changes made to the [TODO: Project Title] over the
+			<para>The topics in this section describe the various changes made to the EDLib over the
 life of the project.</para>
 		</introduction>
 
@@ -15,10 +15,16 @@ life of the project.</para>
 					<listItem>
 						<para><link xlink:href="2c734874-a054-488d-81a8-0a4a59614b7c" /></para>
 					</listItem>
-
+          <listItem>
+            <para>
+              <link xlink:href="71447429-554f-4193-9b70-82f1dd1627fa" />
+            </para>
+          </listItem>
+          <!-- 
 					<listItem>
 						<para>[TODO: Add links to each specific version page]</para>
 					</listItem>
+          -->
 
 				</list>
 
