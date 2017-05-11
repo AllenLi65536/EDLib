@@ -9,11 +9,11 @@
     <HelpKeywords>
       <HelpKeyword index="K" term="version, history" />
     </HelpKeywords>
-    <Topic id="2c734874-a054-488d-81a8-0a4a59614b7c" visible="True" title="Version 1.0.0.0">
+    <Topic id="71447429-554f-4193-9b70-82f1dd1627fa" visible="True" title="Version 1.0.0.0-beta" />
+    <Topic id="2c734874-a054-488d-81a8-0a4a59614b7c" visible="True" isSelected="true" title="Version 1.0.0.0">
       <HelpKeywords>
         <HelpKeyword index="K" term="version, 1.0.0.0" />
       </HelpKeywords>
     </Topic>
-    <Topic id="71447429-554f-4193-9b70-82f1dd1627fa" visible="True" isSelected="true" title="Version 1.0.0.0-beta" />
   </Topic>
 </Topics>

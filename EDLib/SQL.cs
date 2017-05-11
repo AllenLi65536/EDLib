@@ -9,9 +9,44 @@ namespace EDLib.SQL
     /// Some useful SQL helper functions
     /// </summary>
     internal class NamespaceDoc { }
+
+    /// <summary>
+    /// Global variables and parameters
+    /// </summary>
+    public static class GlobalParameters
+    {
+        /// <summary>
+        /// SQL server connection string of HEDGE
+        /// </summary>
+        public static readonly string HEDGE = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
+        /// <summary>
+        /// SQL server connection string of WMM3
+        /// </summary>
+        public static readonly string WMM3 = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
+
+    }
+
     /// <summary>
     /// MSSQL, MySQL, and CMoney SQL query assistant
     /// </summary>
+    /// <example>
+    /// <code>
+    /// //ExecCmoneyQry example
+    /// string SQLStr = "SELECT 代號 ,isnull(權證成交量,0),isnull([權證成交金額(千)],0) from 權證評估表 where 日期='20170511'";
+    /// DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");
+    /// Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
+    /// 
+    /// //ExecSqlQry example
+    /// DataTable Warrants = SQL.ExecSqlQry("select distinct TraderId,StkId,WId from Warrants where (MarketDate &lt;= CONVERT(varchar(10), GETDATE(), 111) and CONVERT(varchar(10), GETDATE(), 111) &lt;= LastTradeDate) and kgiwrt='自家'", GlobalParameters.WMM3);
+    /// Console.WriteLine("Warrants:" + Warrants.Rows.Count);
+    /// 
+    /// //ExecSqlCmd example
+    /// SqlConnection conn = new SqlConnection("Data Source=server;Initial Catalog=DB;User ID=user;Password=password");               
+    /// conn.Open();
+    /// SQL.ExecSqlCmd("DELETE FROM Table1 WHERE TDate ='20170508' ", conn); 
+    /// conn.Close();
+    /// </code>
+    /// </example>
     public static class SQL
     {
         /// <summary>

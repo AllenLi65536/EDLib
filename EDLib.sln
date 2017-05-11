@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "TestLib\TestLib.csproj", "{6708ABBB-2C9E-4521-94CB-C21996BD0993}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "HelpFile", "HelpFile\HelpFile.shfbproj", "{1BDFE2E9-010C-400E-B29E-CA7A536760E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{74601F50-00D2-4612-8E11-36F8F7622928} = {74601F50-00D2-4612-8E11-36F8F7622928}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

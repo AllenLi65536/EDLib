@@ -84,6 +84,30 @@ namespace EDLib.TIBCORV
     /// <summary>
     /// Listen to TIBCO Rendezvous services. This class can let you specify multiple net transports and listener callbacks.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// private static readonly RVParameters[] rvParameters = new RVParameters[] { GlobalParameters.WMMLog, new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.129:7500", "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD")};
+    /// static void main() {     
+    ///     TIBCORVListener listener = new TIBCORVListener(rvParameters);
+    ///     ListenerFunc[] callbacks = new ListenerFunc[rvParameters.Length];
+    ///     callbacks[0] = new ListenerFunc(OnMessageReceived);
+    ///     callbacks[1] = new ListenerFunc(OnMessageReceived2);    
+    ///     listener.Listen(callbacks);
+    /// }
+    ///  
+    /// static void OnMessageReceived(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
+    ///     Message message = messageReceivedEventArgs.Message;    
+    ///     //Do sth...
+    ///     Console.WriteLine(message);
+    /// }
+    /// 
+    /// static void OnMessageReceived2(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
+    ///     Message message = messageReceivedEventArgs.Message;   
+    ///     //Do sth...
+    ///     Console.WriteLine(message);
+    /// }
+    /// </code>
+    /// </example>
     public class TIBCORVListener
     {
         private int N = 0;
@@ -145,6 +169,7 @@ namespace EDLib.TIBCORV
         /// Initiate listener with RVParameters class
         /// </summary>
         /// <param name="rvParameter">RVParameters class</param>
+        
         public TIBCORVListener(RVParameters rvParameter) {
             N = 1;
             topics = new string[] { rvParameter.topic };
@@ -237,6 +262,17 @@ namespace EDLib.TIBCORV
     /// <summary>
     /// Send via TIBCO Rendezvous service
     /// </summary>
+    /// <example>
+    /// <code>
+    /// private static readonly TIBCORVSender Sender = new TIBCORVSender("9082", ";239.16.1.6", "10.60.0.128:7500");
+    /// static void main() {
+    ///      Message SendMsg = new Message();
+    ///      SendMsg.AddField("MSGTYPE", "SendExample");
+    ///      SendMsg.AddField("Time", DateTime.Now);
+    ///      Sender.Send(SendMsg, "TIBCO.SendExample"); 
+    /// }
+    /// </code>
+    /// </example>
     public class TIBCORVSender
     {
         private Transport transport = null;

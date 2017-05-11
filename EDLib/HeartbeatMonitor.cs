@@ -7,6 +7,25 @@ namespace EDLib
     /// <summary>
     /// Monitors heartbeat
     /// </summary>
+    /// <example>
+    /// <code>
+    /// static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
+    /// 
+    /// static void myAction() {
+    ///     //Do sth on timeout     
+    ///     Console.WriteLine("myAction");
+    ///     ...
+    /// }
+    /// 
+    /// //This function will be called on message receive with interval less than 5 seconds
+    /// static void OnMessageReceived(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
+    ///     Message message = messageReceivedEventArgs.Message;
+    ///     hm.Heartbeat();
+    ///     //Do sth
+    ///     ...
+    /// }
+    /// </code>
+    /// </example>
     public class HeartbeatMonitor
     {
         //public delegate void noHeartbeatCallback();

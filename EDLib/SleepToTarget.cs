@@ -6,6 +6,21 @@ namespace EDLib
     /// <summary>
     /// Make a thread to sleep to the target time, and execute the designated function.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// static void main() {
+    ///     ...
+    ///     SleepToTarget st = new SleepToTarget(new DateTime(2037, 5, 10, 09, 00, 00), myAction);
+    ///     st.Start();
+    ///     ...
+    /// }
+    /// 
+    /// //This function will be called on 2037/5/10 09:00:00. (As long as the program is still running at the time)
+    /// static void myAction() {
+    ///     Console.WriteLine("myAction");
+    /// }
+    /// </code>
+    /// </example>
     public class SleepToTarget
     {
         private DateTime targetTime;

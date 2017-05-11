@@ -8,6 +8,12 @@ namespace EDLib
     /// <summary>
     /// Send e-mail via dzmail01.kgi.com
     /// </summary>
+    /// <example>
+    /// <code>
+    /// MailService ms = new MailService();
+    /// ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, "安安ㄋ好", "安安", false, null, false);
+    /// </code>
+    /// </example>
     public class MailService
     {
         /// <summary>

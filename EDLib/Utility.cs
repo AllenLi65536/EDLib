@@ -11,21 +11,7 @@ namespace EDLib
     internal class NamespaceDoc { }
 
    
-    /// <summary>
-    /// Global variables and parameters
-    /// </summary>
-    public static class GlobalParameters
-    {
-        /// <summary>
-        /// SQL server connection string of HEDGE
-        /// </summary>
-        public static readonly string HEDGE = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
-        /// <summary>
-        /// SQL server connection string of WMM3
-        /// </summary>
-        public static readonly string WMM3 = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
-               
-    }
+   
 
     /// <summary>
     /// Miscellaneous

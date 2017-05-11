@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Data.SqlClient;
+using EDLib.SQL;
 
 namespace EDLib
 {
     /// <summary>
     /// Check for TradeDate
     /// </summary>
+    /// <example>
+    /// <code>
+    /// // Print whether last ten calendar days are trade day
+    /// for (int i = 0; i &lt; 10; i++)
+    ///     Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
+    /// // Print last ten trade dates (including today)
+    /// for (int i = 0; i &lt; 10; i++)
+    ///     Console.WriteLine(TradeDate.LastNTradeDate(i));
+    /// </code>
+    /// </example>
     public static class TradeDate
     {       
         /// <summary>

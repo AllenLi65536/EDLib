@@ -6,6 +6,26 @@ namespace EDLib
     /// <summary>
     /// Price tick related function of Taiwan stock/future market
     /// </summary>
+    /// <example>
+    /// <code>
+    /// double price = 498;
+    /// for (int i = 0; i &lt; 10; i++) {
+    ///     price += Tick.UpTickSize("2330", price);     
+    ///     Console.Write(price + " ");
+    /// }
+    /// Console.WriteLine();
+    /// for (int i = 0; i &lt; 10; i++) {
+    ///     price += Tick.DownTickSize("2330", price);
+    ///     Console.Write(price + " ");
+    /// }
+    /// double[] bids = Tick.GetAsks("2330", 9.19);
+    /// for (int i = 0; i &lt; 6; i++)
+    ///     Console.Write(bids[i] + " ");
+    /// Console.WriteLine(Tick.GetTickNum("2330", 8.8, 8.76));
+    /// Console.WriteLine(Tick.GetTickNum("2330", 9.24, 9.23999999));
+    /// Console.WriteLine(Tick.ShiftTicks("2330", 99, 25));
+    /// </code>
+    /// </example>
     public static class Tick
     {
         /// <summary>
