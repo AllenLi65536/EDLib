@@ -13,42 +13,45 @@ namespace EDLib.SQL
     /// <summary>
     /// Global variables and parameters
     /// </summary>
-    public static class GlobalParameters
-    {
+    public static class GlobalParameters {
         /// <summary>
         /// SQL server connection string of HEDGE
         /// </summary>
+        /// <value>
+        /// <code>
+        /// "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser"
+        /// </code>
+        /// </value>
         public static readonly string HEDGE = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
         /// <summary>
         /// SQL server connection string of WMM3
         /// </summary>
+        /// <value>
+        /// <code>
+        /// "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser"
+        /// </code>
+        /// </value>
         public static readonly string WMM3 = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
 
     }
 
     /// <summary>
-    /// MSSQL, MySQL, and CMoney SQL query assistant
+    /// MSSQL query assistant
     /// </summary>
     /// <example>
-    /// <code>
-    /// //ExecCmoneyQry example
-    /// string SQLStr = "SELECT 代號 ,isnull(權證成交量,0),isnull([權證成交金額(千)],0) from 權證評估表 where 日期='20170511'";
-    /// DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");
-    /// Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
-    /// 
+    /// <code> 
     /// //ExecSqlQry example
-    /// DataTable Warrants = SQL.ExecSqlQry("select distinct TraderId,StkId,WId from Warrants where (MarketDate &lt;= CONVERT(varchar(10), GETDATE(), 111) and CONVERT(varchar(10), GETDATE(), 111) &lt;= LastTradeDate) and kgiwrt='自家'", GlobalParameters.WMM3);
+    /// DataTable Warrants = MSSQL.ExecSqlQry("select distinct TraderId,StkId,WId from Warrants where (MarketDate &lt;= CONVERT(varchar(10), GETDATE(), 111) and CONVERT(varchar(10), GETDATE(), 111) &lt;= LastTradeDate) and kgiwrt='自家'", GlobalParameters.WMM3);
     /// Console.WriteLine("Warrants:" + Warrants.Rows.Count);
     /// 
     /// //ExecSqlCmd example
     /// SqlConnection conn = new SqlConnection("Data Source=server;Initial Catalog=DB;User ID=user;Password=password");               
     /// conn.Open();
-    /// SQL.ExecSqlCmd("DELETE FROM Table1 WHERE TDate ='20170508' ", conn); 
+    /// MSSQL.ExecSqlCmd("DELETE FROM Table1 WHERE TDate ='20170508' ", conn); 
     /// conn.Close();
     /// </code>
     /// </example>
-    public static class SQL
-    {
+    public static class MSSQL {
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
@@ -124,6 +127,45 @@ namespace EDLib.SQL
                 conn.Open();
                 return ExecSqlCmd(sql, conn);
             }
+        }               
+
+    }
+    /// <summary>
+    /// MySQL query assistant
+    /// </summary>
+    public static class MySQL
+    {
+        /// <summary>
+        /// Execute MySQL command
+        /// </summary>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="conn">SQL server connection</param>
+        /// <returns>Number of data rows affected</returns>
+        public static int ExecMySqlCmd(string sql, MySqlConnection conn) {
+            bool wasClosed = false;
+            if (conn.State == ConnectionState.Closed) {
+                conn.Open();
+                wasClosed = true;
+            }
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.CommandTimeout = 300;
+            int ret = cmd.ExecuteNonQuery();
+            if (wasClosed)
+                conn.Close();
+            return ret;
+        }
+
+        /// <summary>
+        /// Execute MySQL command
+        /// </summary>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="connstr">SQL server connection string</param>  
+        /// <returns>Number of data rows affected</returns>
+        public static int ExecMySqlCmd(string sql, string connstr) {
+            using (MySqlConnection conn = new MySqlConnection(connstr)) {
+                conn.Open();
+                return ExecMySqlCmd(sql, conn);
+            }
         }
 
         /// <summary>
@@ -170,7 +212,20 @@ namespace EDLib.SQL
                 return ExecMySqlQry(sql, conn, dataTableName);
             }
         }
-
+    }
+    /// <summary>
+    /// CMoney query assistant
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// //ExecCmoneyQry example
+    /// string SQLStr = "SELECT 代號 ,isnull(權證成交量,0),isnull([權證成交金額(千)],0) from 權證評估表 where 日期='20170511'";
+    /// DataTable WarrantMM = CMoney.ExecCMoneyQry(SQLStr, "WarrantMM");
+    /// Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
+    /// </code>
+    /// </example>
+    public static class CMoney
+    {
         /// <summary>
         /// Execute CMoney query
         /// </summary>
@@ -191,5 +246,7 @@ namespace EDLib.SQL
                 return dt;
             }
         }
+
     }
+
 }

@@ -11,11 +11,11 @@ namespace TestLib
 {
     class Program
     {
-        static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
+        //static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
         static void Main(string[] args) {
 
             #region TickExample
-            double price = 498;
+            /*double price = 498;
             for (int i = 0; i < 10; i++) {
                 price += Tick.UpTickSize("2330", price);
                 //price = Math.Round(price, 2);
@@ -32,11 +32,11 @@ namespace TestLib
                 Console.Write(bids[i] + " ");
             Console.WriteLine(Tick.GetTickNum("2330", 8.8, 8.76));
             Console.WriteLine(Tick.GetTickNum("2330", 9.24, 9.23999999));
-            Console.WriteLine(Tick.ShiftTicks("2330", 99, 25));
+            Console.WriteLine(Tick.ShiftTicks("2330", 99, 25));*/
             #endregion
 
             #region SQLExample
-            string LastTDate = "20170504";
+            /*string LastTDate = "20170504";
             string SQLStr = "SELECT A.股票代號 ,E.總公司代號 as Name1 , Sum(A.買張)-isnull(C.買張,0) as buy , Sum(A.賣張)-isnull(C.賣張,0) as sell, Sum(A.張增減)-isnull(C.張增減,0) as netbs "
            + " ,Sum(A.[買金額(千)])-isnull(C.[買金額(千)],0) as buyA, Sum(A.[賣金額(千)])-isnull(C.[賣金額(千)],0) as sellA, Sum(A.[金額增減(千)])-isnull(C.[金額增減(千)],0) as netbsA "
            + " , B.權證成交量,B.[權證成交金額(千)], D.發行機構代號, left(D.發行機構名稱,2) as Name2, D.名稱 "
@@ -50,14 +50,14 @@ namespace TestLib
            + " having Sum(A.買張)-isnull(C.買張,0)<>0 or Sum(A.賣張)-isnull(C.賣張,0)<>0 or Sum(A.張增減)-isnull(C.張增減,0)<>0 or Sum(A.[買金額(千)])-isnull(C.[買金額(千)],0)<>0 or Sum(A.[賣金額(千)])-isnull(C.[賣金額(千)],0)<>0 or Sum(A.[金額增減(千)])-isnull(C.[金額增減(千)],0) <>0"
            + " order by A.股票代號 ";
             DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
-            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
+            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);*/
             #endregion
 
             #region TradeDayExample
-            for (int i = 0; i < 10; i++)
+            /*for (int i = 0; i < 10; i++)
                 Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
             for (int i = 0; i < 10; i++)
-                Console.WriteLine(TradeDate.LastNTradeDate(i));
+                Console.WriteLine(TradeDate.LastNTradeDate(i));*/
             #endregion
 
 
@@ -67,31 +67,41 @@ namespace TestLib
             //MailService ms = new MailService();
             //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, "安安ㄋ好", "安安", false, null, false);
 
-            SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
-            st.Start();
-                       
+            //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
+            //st.Start();
 
+            /*
             //TIBCORVListener listener = new TIBCORVListener(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
             TIBCORVListener listener = new TIBCORVListener(EDLib.TIBCORV.GlobalParameters.ExecutionReport);
             //ListenerFunc[] callback = new ListenerFunc[1];
             //callback[0] = new ListenerFunc(OnMessageReceived2);
             ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
             listener.Listen(callback);
-            /*    
+            */
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            for (int i = 0; i < 100000; i++) {
+                SlippageCost.Calculate("2330", 50, -30, new double[] { 50, 49, 48, 47, 46 }, new int[] { 12, 11, 1, 1, 1 });
+                SlippageCost.Calculate("2330", 100, 30, new double[] { 100, 101, 102, 103, 104 }, new int[] { 12, 11, 1, 1, 1 });
+            }
+            watch.Stop();
+            Console.WriteLine(watch.ElapsedMilliseconds);
+            //Console.WriteLine(SlippageCost.Calculate("2330", 50, -10, new double[] {50, 49, 48, 47, 46}, new int[] {4, 1, 1, 1, 1 }));
 
-    System.Windows.Controls.TextBox txtUserId = new System.Windows.Controls.TextBox();
-    System.Windows.Controls.PasswordBox txtPwd = new System.Windows.Controls.PasswordBox();
+            /*
+            System.Windows.Controls.TextBox txtUserId = new System.Windows.Controls.TextBox();
+            System.Windows.Controls.PasswordBox txtPwd = new System.Windows.Controls.PasswordBox();
 
-    Configuration config = Configuration.WebConfigurationManager.OpenWebConfiguration(Null);
-    ConnectionStringSettings connString = config.ConnectionStrings.ConnectionString[“MyConnString”];
+            Configuration config = Configuration.WebConfigurationManager.OpenWebConfiguration(Null);
+            ConnectionStringSettings connString = config.ConnectionStrings.ConnectionString[“MyConnString”];
 
-    using (SqlConnection conn = new SqlConnection(connString.ConnectionString)) {
-        SecureString pwd = txtPwd.SecurePassword;
-        pwd.MakeReadOnly();
-        SqlCredential cred = new SqlCredential(txtUserId.Text, pwd);
-        conn.Credential = cred;
-        conn.Open();
-    }*/
+            using (SqlConnection conn = new SqlConnection(connString.ConnectionString)) {
+                SecureString pwd = txtPwd.SecurePassword;
+                pwd.MakeReadOnly();
+                SqlCredential cred = new SqlCredential(txtUserId.Text, pwd);
+                conn.Credential = cred;
+                conn.Open();
+            }
+            */
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");
@@ -103,7 +113,7 @@ namespace TestLib
         }
         static void OnMessageReceived2(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
             Message message = messageReceivedEventArgs.Message;
-            hm.Heartbeat();
+            //hm.Heartbeat();
 
             Console.WriteLine(message);
         }

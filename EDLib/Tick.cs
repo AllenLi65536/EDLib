@@ -173,7 +173,7 @@ namespace EDLib
                 for (int i = 0; i < N; i++)
                     price = Math.Round(price + UpTickSize(ID, price), 2);
             } else if (N < 0) {
-                for (int i = 0; i < N; i++)
+                for (int i = 0; i < -N; i++)
                     price = Math.Round(price + DownTickSize(ID, price), 2);
             }
             return price;
