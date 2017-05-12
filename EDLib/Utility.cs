@@ -5,17 +5,7 @@ using System.Text;
 
 namespace EDLib
 {
-    /// <summary>
-    /// Miscellaneous classes
-    /// </summary>
-    internal class NamespaceDoc { }
-
-   
-   
-
-    /// <summary>
-    /// Miscellaneous
-    /// </summary>
+          
     /*public static class Utility
     {       
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {

@@ -5,6 +5,11 @@ using System.Threading;
 namespace EDLib
 {
     /// <summary>
+    /// Miscellaneous classes
+    /// </summary>
+    internal class NamespaceDoc { }
+
+    /// <summary>
     /// Monitors heartbeat
     /// </summary>
     /// <example>

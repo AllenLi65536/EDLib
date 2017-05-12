@@ -18,7 +18,7 @@ namespace EDLib
     /// </code>
     /// </example>
     public static class TradeDate
-    {       
+    {
         /// <summary>
         /// Get last Nth trade day
         /// </summary>
@@ -27,22 +27,22 @@ namespace EDLib
         /// <returns>DateTime of that day</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be >= 0</exception>
         static public DateTime LastNTradeDate(int N, string region = "TWD") {
-            if (N < 0) 
-                throw new ArgumentOutOfRangeException("N", "N has to be >= 0");            
+            if (N < 0)
+                throw new ArgumentOutOfRangeException("N", "N has to be >= 0");
+            if (N == 0)
+                return DateTime.Today;
 
             //Get Last Trading Date          
             SqlConnection conn2 = new SqlConnection(GlobalParameters.HEDGE);
             conn2.Open();
 
-            int nDays = 0;
-            DateTime retDate;
+            //int nDays = 0;
+            DateTime retDate = DateTime.Today;
             SqlDataReader holiday = null;
             //DataTable holiday;
-            if (N == 0)
-                return DateTime.Today;
 
-            do {                
-                retDate = DateTime.Today.AddDays(--nDays);
+            do {
+                retDate = retDate.AddDays(-1);//DateTime.Today
                 string date = retDate.ToString("yyyyMMdd");
                 using (SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='" + region + "' and HOL_DATE='" + date + "'", conn2)) {
                     //holiday = SQL.SQL.ExecSqlQry(cmd2);
