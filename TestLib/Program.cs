@@ -54,10 +54,15 @@ namespace TestLib
             #endregion
 
             #region TradeDayExample
-            /*for (int i = 0; i < 10; i++)
-                Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
             for (int i = 0; i < 10; i++)
-                Console.WriteLine(TradeDate.LastNTradeDate(i));*/
+                Console.WriteLine(TradeDate.IsTradeDay(DateTime.Today.AddDays(-i)));
+            for (int i = 1; i < 10; i++)
+                Console.WriteLine(TradeDate.LastNTradeDate(i));
+            for (int i = 1; i < 10; i++)
+                Console.WriteLine(TradeDate.NextNTradeDate(i));
+            DateTime[] dt = TradeDate.NextNTradeDates(10);
+            for (int i = 0; i < 10; i++)
+                Console.WriteLine(dt[i]);
             #endregion
 
 
@@ -78,13 +83,14 @@ namespace TestLib
             ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
             listener.Listen(callback);
             */
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            /*var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < 100000; i++) {
                 SlippageCost.Calculate("2330", 50, -30, new double[] { 50, 49, 48, 47, 46 }, new int[] { 12, 11, 1, 1, 1 });
                 SlippageCost.Calculate("2330", 100, 30, new double[] { 100, 101, 102, 103, 104 }, new int[] { 12, 11, 1, 1, 1 });
             }
             watch.Stop();
-            Console.WriteLine(watch.ElapsedMilliseconds);
+            Console.WriteLine(watch.ElapsedMilliseconds);*/
             //Console.WriteLine(SlippageCost.Calculate("2330", 50, -10, new double[] {50, 49, 48, 47, 46}, new int[] {4, 1, 1, 1, 1 }));
 
             /*

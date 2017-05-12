@@ -22,7 +22,7 @@ namespace EDLib.SQL
         /// "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser"
         /// </code>
         /// </value>
-        public static readonly string HEDGE = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
+        public static readonly string hedgeSqlConnStr = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
         /// <summary>
         /// SQL server connection string of WMM3
         /// </summary>
@@ -31,7 +31,7 @@ namespace EDLib.SQL
         /// "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser"
         /// </code>
         /// </value>
-        public static readonly string WMM3 = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
+        public static readonly string wmm3SqlConnStr = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
 
     }
 
