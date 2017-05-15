@@ -22,7 +22,7 @@ namespace EDLib
     ///     ...
     /// }
     /// 
-    /// //This function will be called on message receive with interval less than 5 seconds
+    /// //This function shall be called on message receive with interval less than 5 seconds
     /// static void OnMessageReceived(object listener, MessageReceivedEventArgs messageReceivedEventArgs) {
     ///     Message message = messageReceivedEventArgs.Message;
     ///     hm.Heartbeat();

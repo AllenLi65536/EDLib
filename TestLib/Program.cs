@@ -36,7 +36,7 @@ namespace TestLib
             #endregion
 
             #region SQLExample
-            /*string LastTDate = "20170504";
+            string LastTDate = "20170504";
             string SQLStr = "SELECT A.股票代號 ,E.總公司代號 as Name1 , Sum(A.買張)-isnull(C.買張,0) as buy , Sum(A.賣張)-isnull(C.賣張,0) as sell, Sum(A.張增減)-isnull(C.張增減,0) as netbs "
            + " ,Sum(A.[買金額(千)])-isnull(C.[買金額(千)],0) as buyA, Sum(A.[賣金額(千)])-isnull(C.[賣金額(千)],0) as sellA, Sum(A.[金額增減(千)])-isnull(C.[金額增減(千)],0) as netbsA "
            + " , B.權證成交量,B.[權證成交金額(千)], D.發行機構代號, left(D.發行機構名稱,2) as Name2, D.名稱 "
@@ -49,8 +49,8 @@ namespace TestLib
            + " group by A.股票代號, E.總公司代號 ,B.權證成交量,B.[權證成交金額(千)], D.發行機構代號, left(D.發行機構名稱,2), D.名稱 , C.買張 , C.賣張, C.張增減, C.[買金額(千)], C.[賣金額(千)], C.[金額增減(千)] "
            + " having Sum(A.買張)-isnull(C.買張,0)<>0 or Sum(A.賣張)-isnull(C.賣張,0)<>0 or Sum(A.張增減)-isnull(C.張增減,0)<>0 or Sum(A.[買金額(千)])-isnull(C.[買金額(千)],0)<>0 or Sum(A.[賣金額(千)])-isnull(C.[賣金額(千)],0)<>0 or Sum(A.[金額增減(千)])-isnull(C.[金額增減(千)],0) <>0"
            + " order by A.股票代號 ";
-            DataTable WarrantMM = SQL.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
-            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);*/
+            DataTable WarrantMM = CMoney.ExecCMoneyQry(SQLStr, "WarrantMM");// = new DataTable("WarrantMM");
+            Console.WriteLine("CMoneyCount:" + WarrantMM.Rows.Count);
             #endregion
 
             #region TradeDayExample

@@ -60,11 +60,9 @@ namespace EDLib.SQL
         /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecSqlQry(SqlCommand cmd, string dataTableName = null) {
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
-                DataTable dt;
-                if (dataTableName == null)
-                    dt = new DataTable();
-                else
-                    dt = new DataTable(dataTableName);
+                DataTable dt = new DataTable();
+                if (dataTableName != null)
+                    dt.TableName = dataTableName;                    
                 adp.Fill(dt);
                 return dt;
             }
@@ -176,11 +174,9 @@ namespace EDLib.SQL
         /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecMySqlQry(MySqlCommand cmd, string dataTableName = null) {
             using (MySqlDataAdapter adp = new MySqlDataAdapter(cmd)) {
-                DataTable dt;
-                if (dataTableName == null)
-                    dt = new DataTable();
-                else
-                    dt = new DataTable(dataTableName);
+                DataTable dt = new DataTable();
+                if (dataTableName != null)
+                    dt.TableName = dataTableName;               
                 adp.Fill(dt);
                 return dt;
             }
@@ -234,14 +230,11 @@ namespace EDLib.SQL
         /// <returns>A DataTable containing queried data</returns>
         public static DataTable ExecCMoneyQry(string sql, string dataTableName = null) {
             CMADODB5.CMConnection conobj = new CMADODB5.CMConnection();
-            ADODB.Recordset rs = new ADODB.Recordset();
-            rs = conobj.CMExecute("5", "10.60.0.191", "", sql);//1433
+            ADODB.Recordset rs = conobj.CMExecute("5", "10.60.0.191", "", sql);//1433
             using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter()) {
-                DataTable dt;
-                if (dataTableName == null)
-                    dt = new DataTable();
-                else
-                    dt = new DataTable(dataTableName);
+                DataTable dt = new DataTable();
+                if (dataTableName != null)
+                    dt.TableName = dataTableName;                 
                 dataAdapter.Fill(dt, rs);
                 return dt;
             }
