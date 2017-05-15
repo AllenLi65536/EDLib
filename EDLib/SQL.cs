@@ -11,31 +11,6 @@ namespace EDLib.SQL
     internal class NamespaceDoc { }
 
     /// <summary>
-    /// Global variables and parameters
-    /// </summary>
-    public static class GlobalParameters {
-        /// <summary>
-        /// SQL server connection string of HEDGE
-        /// </summary>
-        /// <value>
-        /// <code>
-        /// "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser"
-        /// </code>
-        /// </value>
-        public static readonly string hedgeSqlConnStr = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
-        /// <summary>
-        /// SQL server connection string of WMM3
-        /// </summary>
-        /// <value>
-        /// <code>
-        /// "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser"
-        /// </code>
-        /// </value>
-        public static readonly string wmm3SqlConnStr = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
-
-    }
-
-    /// <summary>
     /// MSSQL query assistant
     /// </summary>
     /// <example>
@@ -51,7 +26,8 @@ namespace EDLib.SQL
     /// conn.Close();
     /// </code>
     /// </example>
-    public static class MSSQL {
+    public static class MSSQL
+    {
         /// <summary>
         /// Execute MS SQL query
         /// </summary>
@@ -62,7 +38,7 @@ namespace EDLib.SQL
             using (SqlDataAdapter adp = new SqlDataAdapter(cmd)) {
                 DataTable dt = new DataTable();
                 if (dataTableName != null)
-                    dt.TableName = dataTableName;                    
+                    dt.TableName = dataTableName;
                 adp.Fill(dt);
                 return dt;
             }
@@ -125,7 +101,7 @@ namespace EDLib.SQL
                 conn.Open();
                 return ExecSqlCmd(sql, conn);
             }
-        }               
+        }
 
     }
     /// <summary>
@@ -176,7 +152,7 @@ namespace EDLib.SQL
             using (MySqlDataAdapter adp = new MySqlDataAdapter(cmd)) {
                 DataTable dt = new DataTable();
                 if (dataTableName != null)
-                    dt.TableName = dataTableName;               
+                    dt.TableName = dataTableName;
                 adp.Fill(dt);
                 return dt;
             }
@@ -234,7 +210,7 @@ namespace EDLib.SQL
             using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter()) {
                 DataTable dt = new DataTable();
                 if (dataTableName != null)
-                    dt.TableName = dataTableName;                 
+                    dt.TableName = dataTableName;
                 dataAdapter.Fill(dt, rs);
                 return dt;
             }

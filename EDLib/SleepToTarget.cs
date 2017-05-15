@@ -15,7 +15,7 @@ namespace EDLib
     ///     ...
     /// }
     /// 
-    /// //This function will be called on 2037/5/10 09:00:00. (As long as the program is still running at the time)
+    /// //This function will be called on 2037/5/10 09:00:00. (As long as the program is still alive)
     /// static void myAction() {
     ///     Console.WriteLine("myAction");
     /// }
@@ -41,13 +41,15 @@ namespace EDLib
                 throw new ArgumentNullException("myAction", "myAction not specified");
             this.targetTime = targetTime;
             this.myAction = myAction;
+
+            //new Thread(ProcessTimer).Start();
         }
 
         /// <summary>
-        /// Remember to call this to start the thread after construction
+        /// Remember to call this to start the thread at some time after construction.
         /// </summary>
         public void Start() {
-            new Thread(new ThreadStart(ProcessTimer)).Start();
+            new Thread(ProcessTimer).Start();
         }
 
         private void ProcessTimer() {
@@ -55,7 +57,7 @@ namespace EDLib
 
             while (Now < targetTime) {
                 int SleepMilliseconds = (int) Math.Round((targetTime - Now).TotalMilliseconds / 2);
-                Console.WriteLine(SleepMilliseconds);
+                //Console.WriteLine(SleepMilliseconds);
                 Thread.Sleep(SleepMilliseconds > minSleepMilliseconds ? SleepMilliseconds : minSleepMilliseconds);
                 Now = DateTime.Now;
             }

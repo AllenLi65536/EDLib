@@ -64,61 +64,59 @@ namespace EDLib
         /// <param name="filePaths">Paths to files to be attached.</param>
         /// <param name="deleteFileAttachment">Delete the attached files or not</param>
         /// <returns>Successful or not</returns>
-        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs,string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment = false) {
+        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment = false) {
 
             try {
-                //if (string.IsNullOrEmpty(MailFrom)) //※有些公司的Mail Server會規定寄信人的Domain Name要是該Mail Server的Domain Name
-                //    MailFrom = "allen.li@kgi.com";
 
                 //Initialize a new mail message object
-                MailMessage mail = new MailMessage();
-                mail.Subject = mailSub;
-                mail.Body = mailBody;
-                mail.IsBodyHtml = isBodyHtml;
+                using (MailMessage mail = new MailMessage()) {
+                    mail.Subject = mailSub;
+                    mail.Body = mailBody;
+                    mail.IsBodyHtml = isBodyHtml;
 
-                //Sender's address and name
-                if (!string.IsNullOrEmpty(senderName))
-                    mail.From = new MailAddress(mailFrom, senderName);
-                else
-                    mail.From = new MailAddress(mailFrom);
+                    //Sender's address and name
+                    if (!string.IsNullOrEmpty(senderName))
+                        mail.From = new MailAddress(mailFrom, senderName);
+                    else
+                        mail.From = new MailAddress(mailFrom);
 
-                //Receivers' addresses
-                if (mailTos != null)
-                    foreach (string mailTo in mailTos)
-                        if (!string.IsNullOrEmpty(mailTo.Trim()))
-                            mail.To.Add(new MailAddress(mailTo.Trim()));
+                    //Receivers' addresses
+                    if (mailTos != null)
+                        foreach (string mailTo in mailTos)
+                            if (!string.IsNullOrEmpty(mailTo.Trim()))
+                                mail.To.Add(new MailAddress(mailTo.Trim()));
 
-                //CC
-                if (ccs != null)
-                    foreach (string cc in ccs)
-                        if (!string.IsNullOrEmpty(cc.Trim()))
-                            mail.CC.Add(new MailAddress(cc.Trim()));
+                    //CC
+                    if (ccs != null)
+                        foreach (string cc in ccs)
+                            if (!string.IsNullOrEmpty(cc.Trim()))
+                                mail.CC.Add(new MailAddress(cc.Trim()));
 
-                //BCC                
-                if (bccs != null)
-                    foreach (string bcc in bccs)
-                        if (!string.IsNullOrEmpty(bcc.Trim()))
-                            mail.Bcc.Add(new MailAddress(bcc.Trim()));
+                    //BCC                
+                    if (bccs != null)
+                        foreach (string bcc in bccs)
+                            if (!string.IsNullOrEmpty(bcc.Trim()))
+                                mail.Bcc.Add(new MailAddress(bcc.Trim()));
 
-                //Attachments 
-                if (filePaths != null)
-                    foreach (string filePath in filePaths)
-                        if (!string.IsNullOrEmpty(filePath.Trim())) {
-                            Attachment file = new Attachment(filePath.Trim());
-                            mail.Attachments.Add(file);
-                        }
+                    //Attachments 
+                    if (filePaths != null)
+                        foreach (string filePath in filePaths)
+                            if (!string.IsNullOrEmpty(filePath.Trim())) {
+                                Attachment file = new Attachment(filePath.Trim());
+                                mail.Attachments.Add(file);
+                            }
 
-                using (SmtpClient client = new SmtpClient(smtpServer, smtpPort)) {
-                    if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //Send with ID and password
-                        client.Credentials = new NetworkCredential(mailAccount, mailPwd);//ID & password
-                    client.Send(mail);//Send mail
+                    using (SmtpClient client = new SmtpClient(smtpServer, smtpPort)) {
+                        if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //Send with ID and password
+                            client.Credentials = new NetworkCredential(mailAccount, mailPwd);//ID & password
+                        client.Send(mail);//Send mail
+                    }
+
+                    //Release read locks
+                    if (mail.Attachments != null)
+                        for (int i = 0; i < mail.Attachments.Count; i++)
+                            mail.Attachments[i].Dispose();                                       
                 }
-                mail.Dispose();
-
-                //Release read locks
-                /*if (mms.Attachments != null)
-                    for (int i = 0; i < mms.Attachments.Count; i++)
-                        mms.Attachments[i].Dispose();*/
 
                 //Delete attachments
                 if (deleteFileAttachment && filePaths != null)

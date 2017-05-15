@@ -16,6 +16,12 @@ namespace EDLib
     /// <code>
     /// static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
     /// 
+    /// static void Main() {
+    ///     
+    ///     hm.Start();
+    ///     ...
+    /// }
+    /// 
     /// static void myAction() {
     ///     //Do sth on timeout     
     ///     Console.WriteLine("myAction");
@@ -76,9 +82,15 @@ namespace EDLib
                 consoleShow = false;
             }
 
-            Thread workThread = new Thread(CheckHeartbeat);
-            workThread.Start();
+            //new Thread(CheckHeartbeat).Start();
         }
+
+       /// <summary>
+       /// Remember to call this to start the thread at some time after construction.
+       /// </summary>
+       public void Start() {
+           new Thread(CheckHeartbeat).Start();
+       }
 
         //Check data every timeoutSecs
         private void CheckHeartbeat() {

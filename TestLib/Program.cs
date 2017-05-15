@@ -11,7 +11,7 @@ namespace TestLib
 {
     class Program
     {
-        //static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
+        static HeartbeatMonitor hm = new HeartbeatMonitor(5, myAction);
         static void Main(string[] args) {
 
             #region TickExample
@@ -69,21 +69,23 @@ namespace TestLib
             //new SleepToTarget(new DateTime(2017, 5, 9), null); //Throws ArgumentNullException
             //new HeartbeatMonitor(1, null); //Throws ArgumentNullException
 
-            MailService ms = new MailService();
-            //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, null);
-            ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, new string[] { "allen.li@kgi.com", "andrea.chang@kgi.com" }, "Hello", "ㄋ好", false, null);
+            //MailService ms = new MailService();
+            //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" });
+            //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, new string[] { "allen.li@kgi.com", "andrea.chang@kgi.com" }, "Hello", "ㄋ好", false, null);
 
-            //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 10), myAction);
+            //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 15, 11, 58, 0), myAction);
             //st.Start();
 
-            /*
+
             //TIBCORVListener listener = new TIBCORVListener(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
-            TIBCORVListener listener = new TIBCORVListener(EDLib.TIBCORV.GlobalParameters.ExecutionReport);
+
+            hm.Start();
+            TIBCORVListener listener = new TIBCORVListener(GlobalParameters.ExecutionReport);
             //ListenerFunc[] callback = new ListenerFunc[1];
             //callback[0] = new ListenerFunc(OnMessageReceived2);
             ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
-            listener.Listen(callback);
-            */
+            listener.Listen(callback);            
+            
 
             /*var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < 100000; i++) {
