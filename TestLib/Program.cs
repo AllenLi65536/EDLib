@@ -69,8 +69,8 @@ namespace TestLib
             //new SleepToTarget(new DateTime(2017, 5, 9), null); //Throws ArgumentNullException
             //new HeartbeatMonitor(1, null); //Throws ArgumentNullException
 
-            //MailService ms = new MailService();
-            //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" });
+            MailService ms = new MailService();
+            ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" }, System.Net.Mail.MailPriority.Low);
             //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, new string[] { "allen.li@kgi.com", "andrea.chang@kgi.com" }, "Hello", "ㄋ好", false, null);
 
             //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 15, 11, 58, 0), myAction);
@@ -79,12 +79,12 @@ namespace TestLib
 
             //TIBCORVListener listener = new TIBCORVListener(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
 
-            hm.Start();
+            /*hm.Start();
             TIBCORVListener listener = new TIBCORVListener(GlobalParameters.ExecutionReport);
             //ListenerFunc[] callback = new ListenerFunc[1];
             //callback[0] = new ListenerFunc(OnMessageReceived2);
             ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
-            listener.Listen(callback);            
+            listener.Listen(callback);            */
             
 
             /*var watch = System.Diagnostics.Stopwatch.StartNew();

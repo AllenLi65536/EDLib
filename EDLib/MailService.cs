@@ -62,9 +62,10 @@ namespace EDLib
         /// <param name="mailBody">Body of the mail</param>
         /// <param name="isBodyHtml">Is body in html format</param>
         /// <param name="filePaths">Paths to files to be attached.</param>
+        /// <param name="priority">Mail priority. High = 2, Low = 1, Normal = 0</param>
         /// <param name="deleteFileAttachment">Delete the attached files or not</param>
         /// <returns>Successful or not</returns>
-        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, bool deleteFileAttachment = false) {
+        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, MailPriority priority = MailPriority.Normal,bool deleteFileAttachment = false) {
 
             try {
 
@@ -73,6 +74,7 @@ namespace EDLib
                     mail.Subject = mailSub;
                     mail.Body = mailBody;
                     mail.IsBodyHtml = isBodyHtml;
+                    mail.Priority = priority;                 
 
                     //Sender's address and name
                     if (!string.IsNullOrEmpty(senderName))
