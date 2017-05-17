@@ -65,7 +65,7 @@ namespace EDLib
         /// <param name="priority">Mail priority. High = 2, Low = 1, Normal = 0</param>
         /// <param name="deleteFileAttachment">Delete the attached files or not</param>
         /// <returns>Successful or not</returns>
-        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, MailPriority priority = MailPriority.Normal,bool deleteFileAttachment = false) {
+        public bool SendMail(string mailFrom, string senderName, string[] mailTos, string[] ccs, string[] bccs, string mailSub, string mailBody, bool isBodyHtml, string[] filePaths, MailPriority priority = MailPriority.Normal, bool deleteFileAttachment = false) {
 
             try {
 
@@ -74,7 +74,7 @@ namespace EDLib
                     mail.Subject = mailSub;
                     mail.Body = mailBody;
                     mail.IsBodyHtml = isBodyHtml;
-                    mail.Priority = priority;                 
+                    mail.Priority = priority;
 
                     //Sender's address and name
                     if (!string.IsNullOrEmpty(senderName))
@@ -103,10 +103,9 @@ namespace EDLib
                     //Attachments 
                     if (filePaths != null)
                         foreach (string filePath in filePaths)
-                            if (!string.IsNullOrEmpty(filePath.Trim())) {
-                                Attachment file = new Attachment(filePath.Trim());
-                                mail.Attachments.Add(file);
-                            }
+                            if (!string.IsNullOrEmpty(filePath.Trim()))
+                                mail.Attachments.Add(new Attachment(filePath.Trim()));
+
 
                     using (SmtpClient client = new SmtpClient(smtpServer, smtpPort)) {
                         if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //Send with ID and password
@@ -117,7 +116,7 @@ namespace EDLib
                     //Release read locks
                     if (mail.Attachments != null)
                         for (int i = 0; i < mail.Attachments.Count; i++)
-                            mail.Attachments[i].Dispose();                                       
+                            mail.Attachments[i].Dispose();
                 }
 
                 //Delete attachments

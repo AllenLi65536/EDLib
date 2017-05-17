@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using EDLib;
 using EDLib.SQL;
 using EDLib.TIBCORV;
@@ -69,8 +70,8 @@ namespace TestLib
             //new SleepToTarget(new DateTime(2017, 5, 9), null); //Throws ArgumentNullException
             //new HeartbeatMonitor(1, null); //Throws ArgumentNullException
 
-            MailService ms = new MailService();
-            ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" }, System.Net.Mail.MailPriority.Low);
+            //MailService ms = new MailService();
+            //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" });
             //ms.SendMail("kgiBulletin@kgi.com", "內網公告", new string[] { "judy.lu@kgi.com" }, null, new string[] { "allen.li@kgi.com", "andrea.chang@kgi.com" }, "Hello", "ㄋ好", false, null);
 
             //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 15, 11, 58, 0), myAction);
@@ -85,7 +86,7 @@ namespace TestLib
             //callback[0] = new ListenerFunc(OnMessageReceived2);
             ListenerFunc callback = new ListenerFunc(OnMessageReceived2);
             listener.Listen(callback);            */
-            
+
 
             /*var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < 100000; i++) {
@@ -111,7 +112,7 @@ namespace TestLib
                 conn.Open();
             }
             */
-
+            Console.WriteLine(Utility.getHtml("http://warrant.kgi.com/EDWEB/DefaultNew.aspx", Encoding.UTF8));
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");
             Console.ReadKey();

@@ -1,13 +1,37 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace EDLib
 {
-          
-    /*public static class Utility
-    {       
+    /// <summary>
+    /// Miscellaneous utility functions
+    /// </summary>   
+    public static class Utility
+    {
+        /// <summary>
+        /// Get response string from the url
+        /// </summary>
+        /// <param name="url">The URL</param>
+        /// <param name="encode">Encoding</param>
+        /// <returns>Response from the webpage request</returns>
+        public static string getHtml(string url, Encoding encode) {
+            try {
+                
+                using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream()) {
+                    using (StreamReader reader = new StreamReader(dataStream, encode)) {
+                        return reader.ReadToEnd();
+                    }
+                }
+            } catch (Exception err) {
+                Console.WriteLine(err);
+                return err.ToString();
+            }
+        }
+        /*
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {
             int XORMask = 0;
 
@@ -41,8 +65,9 @@ namespace EDLib
         public static bool IsNaturalNumber(string str) {
             System.Text.RegularExpressions.Regex reg1 = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9]+$");
             return reg1.IsMatch(str);
-        }
+        }*/
     }
+    /*
     public static class dMath
     {
         //Returns the standard deviation of data array
