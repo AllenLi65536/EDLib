@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using EDLib.SQL;
 
 namespace EDLib
 {
@@ -30,7 +29,7 @@ namespace EDLib
         /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>DateTime of that day</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be > 0</exception>
-        static public DateTime LastNTradeDate(int N, string region = "TWD") {            
+        static public DateTime LastNTradeDate(int N, string region = "TWD") {
             return GetNTradeDate(N, region, -1);
         }
 
@@ -41,7 +40,7 @@ namespace EDLib
         /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>DateTime of that day</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be > 0</exception>
-        static public DateTime NextNTradeDate(int N, string region = "TWD") {            
+        static public DateTime NextNTradeDate(int N, string region = "TWD") {
             return GetNTradeDate(N, region, 1);
         }
 
@@ -72,7 +71,7 @@ namespace EDLib
         /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>DateTimes of those days</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be > 0</exception>
-        static public DateTime[] NextNTradeDates(int N, string region = "TWD") {                     
+        static public DateTime[] NextNTradeDates(int N, string region = "TWD") {
             return GetNTradeDates(N, region, 1);
         }
 
@@ -83,7 +82,7 @@ namespace EDLib
         /// <param name="region">The currency region: AUD CHF EUR GBP HKD JPY KRW KYD PHP SEK SGD TWD USD</param>
         /// <returns>DateTimes of those days</returns>
         /// <exception cref="ArgumentOutOfRangeException">N has to be > 0</exception>
-        static public DateTime[] LastNTradeDates(int N, string region = "TWD") {               
+        static public DateTime[] LastNTradeDates(int N, string region = "TWD") {
             return GetNTradeDates(N, region, -1);
         }
         static private DateTime[] GetNTradeDates(int N, string region, int nextOrLast) {
@@ -102,7 +101,7 @@ namespace EDLib
                     using (SqlCommand cmd2 = new SqlCommand("Select HOL_DATE from HOLIDAY where CCY='" + region + "' and HOL_DATE='" + date + "'", conn2))
                     using (SqlDataReader holiday = cmd2.ExecuteReader())
                         if (!holiday.HasRows)
-                            retDate[i++] = tmpDate;                                
+                            retDate[i++] = tmpDate;
                 }
             }
             return retDate;

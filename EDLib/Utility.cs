@@ -19,8 +19,7 @@ namespace EDLib
         /// <param name="encode">Encoding</param>
         /// <returns>Response from the webpage request</returns>
         public static string getHtml(string url, Encoding encode) {
-            try {
-                
+            try {                
                 using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream()) {
                     using (StreamReader reader = new StreamReader(dataStream, encode)) {
                         return reader.ReadToEnd();
