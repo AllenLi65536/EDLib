@@ -56,7 +56,14 @@
         /// <value><code>
         /// new RVParameters("9013", "172.31.2;239.16.1.72", "10.60.0.101:7500", "TW.WMM3.PM.PositionReport.>");
         /// </code></value>
-        public static readonly RVParameters PM = new RVParameters("9013", "172.31.2;239.16.1.72", "10.60.0.101:7500", "TW.WMM3.PM.PositionReport.>");
+        public static readonly RVParameters PM = new RVParameters("9013", "172.31.2;239.16.1.72", "10.60.0.101:7500", "TW.WMM3.PM.PositionReport.*");
+        /// <summary>
+        /// PM RV parameters without daemon parameter
+        /// </summary>
+        /// <value><code>
+        /// new RVParameters("9013", "172.31.2;239.16.1.72", null, "TW.WMM3.PM.PositionReport.>");
+        /// </code></value>
+        public static readonly RVParameters PMnoDaemon = new RVParameters("9013", "172.31.2;239.16.1.72", null, "TW.WMM3.PM.PositionReport.*");
         /// <summary>
         /// Market liquidity RV parameters
         /// </summary>
@@ -67,6 +74,15 @@
         /// </value>
         public static readonly RVParameters Liquidity = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "MarketLiquidityInfo.*");
         /// <summary>
+        /// Market liquidity RV parameters without daemon parameter
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", null, "MarketLiquidityInfo.*");
+        /// </code>
+        /// </value>
+        public static readonly RVParameters LiquidityNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "MarketLiquidityInfo.*");
+        /// <summary>
         /// TWSE quotes RV parameters
         /// </summary>
         /// <value>
@@ -75,6 +91,15 @@
         /// </code>
         /// </value>
         public static readonly RVParameters TWSE = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
+        /// <summary>
+        /// TWSE quotes RV parameters without daemon parameter
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
+        /// </code>
+        /// </value>
+        public static readonly RVParameters TWSEnoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
         /// <summary>
         /// Warrant execution report for calculating Slippage cost RV parameters
         /// </summary>
@@ -85,6 +110,15 @@
         /// </value>
         public static readonly RVParameters Slippage = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.101:7500", "TW.WMM3.SlippageCost.HedgeInfo.PROD");
         /// <summary>
+        /// Warrant execution report for calculating Slippage cost RV parameters without daemon parameter
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.SlippageCost.HedgeInfo.PROD");
+        /// </code> 
+        /// </value>
+        public static readonly RVParameters SlippageNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.SlippageCost.HedgeInfo.PROD");
+        /// <summary>
         /// Eecution reports RV parameters
         /// </summary>
         /// <value>
@@ -93,6 +127,15 @@
         /// </code>
         /// </value>
         public static readonly RVParameters ExecutionReport = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.129:7500", "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
+        /// <summary>
+        /// Eecution reports RV parameters without daemon parameter
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
+        /// </code>
+        /// </value>
+        public static readonly RVParameters ExecutionReportNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
 
         /// <summary>
         /// WMM Fix report RV parameters
