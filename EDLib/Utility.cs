@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,7 +20,7 @@ namespace EDLib
         /// <param name="url">The URL</param>
         /// <param name="encode">Encoding</param>
         /// <returns>Response from the webpage request</returns>
-        public static string getHtml(string url, Encoding encode) {
+        public static string GetHtml(string url, Encoding encode) {
             try {                
                 using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream()) {
                     using (StreamReader reader = new StreamReader(dataStream, encode)) {
@@ -29,6 +31,28 @@ namespace EDLib
                 Console.WriteLine(err);
                 return err.ToString();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="filePath"></param>
+        /// <param name="containHeader"></param>
+        public static void SaveToCSV(DataTable dt, string filePath, bool containHeader = false) {
+            StringBuilder sb = new StringBuilder();
+
+            if (containHeader) {
+                IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().Select(column => column.ColumnName);                
+                sb.AppendLine(string.Join(",", columnNames));
+            }
+
+            foreach (DataRow row in dt.Rows) {
+                IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                sb.AppendLine(string.Join(",", fields));
+            }
+
+            File.WriteAllText(filePath, sb.ToString(), Encoding.Default);
         }
         /*
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {

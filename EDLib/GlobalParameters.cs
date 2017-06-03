@@ -63,7 +63,7 @@
         /// <value><code>
         /// new RVParameters("9013", "172.31.2;239.16.1.72", null, "TW.WMM3.PM.PositionReport.>");
         /// </code></value>
-        public static readonly RVParameters PMnoDaemon = new RVParameters("9013", "172.31.2;239.16.1.72", null, "TW.WMM3.PM.PositionReport.*");
+        public static readonly RVParameters PM_NoDaemon = new RVParameters("9013", "172.31.2;239.16.1.72", null, "TW.WMM3.PM.PositionReport.*");
         /// <summary>
         /// Market liquidity RV parameters
         /// </summary>
@@ -81,7 +81,7 @@
         /// new RVParameters(null, "172.31.2;239.16.1.72", null, "MarketLiquidityInfo.*");
         /// </code>
         /// </value>
-        public static readonly RVParameters LiquidityNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "MarketLiquidityInfo.*");
+        public static readonly RVParameters Liquidity_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "MarketLiquidityInfo.*");
         /// <summary>
         /// TWSE quotes RV parameters
         /// </summary>
@@ -99,7 +99,7 @@
         /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
         /// </code>
         /// </value>
-        public static readonly RVParameters TWSEnoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
+        public static readonly RVParameters TWSE_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
         /// <summary>
         /// Warrant execution report for calculating Slippage cost RV parameters
         /// </summary>
@@ -117,7 +117,7 @@
         /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.SlippageCost.HedgeInfo.PROD");
         /// </code> 
         /// </value>
-        public static readonly RVParameters SlippageNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.SlippageCost.HedgeInfo.PROD");
+        public static readonly RVParameters Slippage_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.SlippageCost.HedgeInfo.PROD");
         /// <summary>
         /// Eecution reports RV parameters
         /// </summary>
@@ -135,7 +135,7 @@
         /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
         /// </code>
         /// </value>
-        public static readonly RVParameters ExecutionReportNoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
+        public static readonly RVParameters ExecutionReport_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TW.WMM3.FilledReportRelayService.ExecutionReport.PROD");
 
         /// <summary>
         /// WMM Fix report RV parameters

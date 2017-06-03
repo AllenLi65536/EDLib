@@ -112,7 +112,7 @@ namespace TestLib
                 conn.Open();
             }
             */
-            Console.WriteLine(Utility.getHtml("http://warrant.kgi.com/EDWEB/DefaultNew.aspx", Encoding.UTF8));
+            Console.WriteLine(Utility.GetHtml("http://warrant.kgi.com/EDWEB/DefaultNew.aspx", Encoding.UTF8));
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");
             Console.ReadKey();
