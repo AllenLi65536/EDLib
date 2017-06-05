@@ -36,7 +36,7 @@ namespace EDLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dt"></param>
+        /// <param name="dt">DataTable to be saved</param>
         /// <param name="filePath"></param>
         /// <param name="containHeader"></param>
         public static void SaveToCSV(DataTable dt, string filePath, bool containHeader = false) {
