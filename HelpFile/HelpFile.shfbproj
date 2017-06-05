@@ -45,6 +45,8 @@
     <NamingMethod>Guid</NamingMethod>
     <HelpTitle>Equity Derivitive Library Help Document</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <SHFBROOT>c:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder</SHFBROOT>
+    <DXROOT>c:\Program Files (x86)\Sandcastle</DXROOT>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
