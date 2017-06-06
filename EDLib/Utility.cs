@@ -34,11 +34,11 @@ namespace EDLib
         }
 
         /// <summary>
-        /// 
+        /// Save DataTable into .csv file
         /// </summary>
         /// <param name="dt">DataTable to be saved</param>
-        /// <param name="filePath"></param>
-        /// <param name="containHeader"></param>
+        /// <param name="filePath">File path</param>
+        /// <param name="containHeader">Should the file contains header row or not</param>
         public static void SaveToCSV(DataTable dt, string filePath, bool containHeader = false) {
             StringBuilder sb = new StringBuilder();
 

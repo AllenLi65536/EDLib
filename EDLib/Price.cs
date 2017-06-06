@@ -15,8 +15,8 @@ namespace EDLib.Pricing
         /// <summary>
         /// Probability density function of standard normal distribution
         /// </summary>
-        /// <param name="z"></param>
-        /// <returns>probability</returns>
+        /// <param name="z">z value</param>
+        /// <returns>Probability density</returns>
         public static double n(double z) {
             return (1.0 / Math.Sqrt(2.0 * Math.PI)) * Math.Exp(-0.5 * z * z);
         }
@@ -24,10 +24,10 @@ namespace EDLib.Pricing
         /// <summary>
         /// Probability density function of normal distribution
         /// </summary>
-        /// <param name="r"></param>
-        /// <param name="mu"></param>
-        /// <param name="sigma"></param>
-        /// <returns></returns>
+        /// <param name="r">x value</param>
+        /// <param name="mu">Mean</param>
+        /// <param name="sigma">Standard Deviation</param>
+        /// <returns>Probability density</returns>
         public static double n(double r, double mu, double sigma) {
             double nv = 1.0 / (Math.Sqrt(2.0 * Math.PI) * sigma);
             double z = (r - mu) / sigma;
@@ -44,8 +44,8 @@ namespace EDLib.Pricing
         /// <summary>
         /// Cumulative density function (Phi function)
         /// </summary>
-        /// <param name="z"></param>
-        /// <returns></returns>
+        /// <param name="z">z value</param>
+        /// <returns>Cumulative probability</returns>
         public static double N(double z) {
             double b1 = 0.31938153;
             double b2 = -0.356563782;
@@ -99,12 +99,12 @@ namespace EDLib.Pricing
         /// <summary>
         ///  Numerical approximation to the bivariate normal distribution, 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="aprime"></param>
-        /// <param name="bprime"></param>
-        /// <param name="rho"></param>
-        /// <returns></returns>
+        /// <param name="x">x1 value</param>
+        /// <param name="y">x2 value</param>
+        /// <param name="aprime">a'</param>
+        /// <param name="bprime">b'</param>
+        /// <param name="rho">Correlation coefficient</param>
+        /// <returns>Probability density</returns>
         private static double f(double x, double y, double aprime, double bprime, double rho) {
             double r = aprime * (2 * x - aprime) + bprime * (2 * y - bprime)
                 + 2 * rho * (x - aprime) * (y - bprime);
@@ -112,10 +112,10 @@ namespace EDLib.Pricing
         }
 
         /// <summary>
-        ///  sign function
+        ///  Sign function
         /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
+        /// <param name="x">x</param>
+        /// <returns>-1 for negative number, 1 otherwise</returns>
         private static double sgn(double x) {
             return Math.Sign(x);
             /*if (x >= 0.0)
@@ -126,10 +126,10 @@ namespace EDLib.Pricing
         /// <summary>
         /// Cumulative density function of bivariate standard normal distribution
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="rho"></param>
-        /// <returns></returns>
+        /// <param name="a">x1 value</param>
+        /// <param name="b">x2 value</param>
+        /// <param name="rho">Correlation coefficient</param>
+        /// <returns>Cumulative probability</returns>
         public static double N(double a, double b, double rho) {
             if ((a <= 0.0) && (b <= 0.0) && (rho <= 0.0)) {
                 double aprime = a / Math.Sqrt(2.0 * (1.0 - rho * rho));
@@ -161,6 +161,9 @@ namespace EDLib.Pricing
             return -99.9; // should never get here
         }
     }
+    /// <summary>
+    /// Used for pricing warrants
+    /// </summary>
     public class Warrant
     {
 
