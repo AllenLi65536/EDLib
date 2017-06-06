@@ -47,6 +47,7 @@
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <SHFBROOT>c:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder</SHFBROOT>
     <DXROOT>c:\Program Files (x86)\Sandcastle</DXROOT>
+    <MSBuildPath>C:\Windows\Microsoft.NET\Framework64\v4.0.30319</MSBuildPath>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -95,9 +96,8 @@
   <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
 			 evaluated correctly. -->
   <PropertyGroup>
-    <PreBuildEvent>set DXROOT=c:\Program Files (x86)\Sandcastle
-set SHFBROOT=c:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder
-set LANGUAGE="%SHFBROOT%\SandcastleBuilderGUI.exe"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
