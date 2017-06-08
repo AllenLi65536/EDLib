@@ -245,13 +245,22 @@ namespace EDLib.Pricing
             Vega = S * time_sqrt * NormDist.n(d1);
             Rho = X * time * Math.Exp(-r * time) * NormDist.N(d2);
         }
-        public static double CallIVBisection(double S, double X, double r, double time, double option_price) {
+        /// <summary>
+        /// Implied volatility of call option by bisection method
+        /// </summary>
+        /// <param name="S">Spot</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>        
+        /// <param name="time">Time to expiration</param>  
+        /// <param name="optionPrice">Option's price</param>
+        /// <returns>Implied volatility</returns>
+        public static double CallIVBisection(double S, double X, double r, double time, double optionPrice) {
             // check for arbitrage violations: 
             // if price at almost zero volatility greater than price, return 0
 
             double sigma_low = 0.0001;
             double price = CallPrice(S, X, r, sigma_low, time);
-            if (price > option_price) return 0.0;
+            if (price > optionPrice) return 0.0;
 
             // simple binomial search for the implied volatility.
             // relies on the value of the option increasing in volatility
@@ -264,7 +273,7 @@ namespace EDLib.Pricing
             // with a estimated price higher than the actual price.
             double sigma_high = 0.3;
             price = CallPrice(S, X, r, sigma_high, time);
-            while (price < option_price) {
+            while (price < optionPrice) {
                 sigma_high = 2.0 * sigma_high; // keep doubling.
                 price = CallPrice(S, X, r, sigma_high, time);
                 if (sigma_high > HIGH_VALUE) return ERROR; // panic, something wrong.
@@ -272,19 +281,28 @@ namespace EDLib.Pricing
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 double sigma = (sigma_low + sigma_high) * 0.5;
                 price = CallPrice(S, X, r, sigma, time);
-                double test = (price - option_price);
+                double test = (price - optionPrice);
                 if (Math.Abs(test) < ACCURACY) { return sigma; };
                 if (test < 0.0) { sigma_low = sigma; } else { sigma_high = sigma; }
             }
             return ERROR;
         }
-        public static double PutIVBisection(double S, double X, double r, double time, double option_price) {
+        /// <summary>
+        /// Implied volatility of put option by bisection method
+        /// </summary>
+        /// <param name="S">Spot</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>        
+        /// <param name="time">Time to expiration</param>  
+        /// <param name="optionPrice">Option's price</param>
+        /// <returns>Implied volatility</returns>
+        public static double PutIVBisection(double S, double X, double r, double time, double optionPrice) {
             // check for arbitrage violations: 
             // if price at almost zero volatility greater than price, return 0
 
             double sigma_low = 0.0001;
             double price = PutPrice(S, X, r, sigma_low, time);
-            if (price > option_price)
+            if (price > optionPrice)
                 return 0.0;
 
             // simple binomial search for the implied volatility.
@@ -298,7 +316,7 @@ namespace EDLib.Pricing
             // with a estimated price higher than the actual price.
             double sigma_high = 0.3;
             price = PutPrice(S, X, r, sigma_high, time);
-            while (price < option_price) {
+            while (price < optionPrice) {
                 sigma_high = 2.0 * sigma_high; // keep doubling.
                 price = PutPrice(S, X, r, sigma_high, time);
                 if (sigma_high > HIGH_VALUE)
@@ -307,7 +325,7 @@ namespace EDLib.Pricing
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 double sigma = (sigma_low + sigma_high) * 0.5;
                 price = PutPrice(S, X, r, sigma, time);
-                double test = (price - option_price);
+                double test = (price - optionPrice);
                 if (Math.Abs(test) < ACCURACY)
                     return sigma;
                 if (test < 0.0)
@@ -317,22 +335,31 @@ namespace EDLib.Pricing
             }
             return ERROR;
         }
-        public static double CallIVNewton(double S, double X, double r, double time, double option_price) {
+        /// <summary>
+        /// Implied volatility of call option by Newton method
+        /// </summary>
+        /// <param name="S">Spot</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>        
+        /// <param name="time">Time to expiration</param>  
+        /// <param name="optionPrice">Option's price</param>
+        /// <returns>Implied volatility</returns>
+        public static double CallIVNewton(double S, double X, double r, double time, double optionPrice) {
             // check for arbitrage violations:
             // if price at almost zero volatility greater than price, return 0
             double sigma_low = 1e-5;
             double price = CallPrice(S, X, r, sigma_low, time);
-            if (price > option_price)
+            if (price > optionPrice)
                 return 0.0;
 
             const int MAX_ITERATIONS = 100;
             const double ACCURACY = 1.0e-4;
             double t_sqrt = Math.Sqrt(time);
 
-            double sigma = (option_price / S) / (0.398 * t_sqrt);    // find initial value
+            double sigma = (optionPrice / S) / (0.398 * t_sqrt);    // find initial value
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 price = CallPrice(S, X, r, sigma, time);
-                double diff = option_price - price;
+                double diff = optionPrice - price;
                 if (Math.Abs(diff) < ACCURACY)
                     return sigma;
                 double d1 = (Math.Log(S / X) + r * time) / (sigma * t_sqrt) + 0.5 * sigma * t_sqrt;
@@ -341,21 +368,30 @@ namespace EDLib.Pricing
             }
             return -99e10;  // something screwy happened, should throw exception
         }
-        public static double PutIVNewton(double S, double X, double r, double time, double option_price) {
+        /// <summary>
+        /// Implied volatility of put option by Newton method
+        /// </summary>
+        /// <param name="S">Spot</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>        
+        /// <param name="time">Time to expiration</param>  
+        /// <param name="optionPrice">Option's price</param>
+        /// <returns>Implied volatility</returns>
+        public static double PutIVNewton(double S, double X, double r, double time, double optionPrice) {
             // check for arbitrage violations:
             // if price at almost zero volatility greater than price, return 0
             double sigma_low = 1e-5;
             double price = PutPrice(S, X, r, sigma_low, time);
-            if (price > option_price) return 0.0;
+            if (price > optionPrice) return 0.0;
 
             const int MAX_ITERATIONS = 100;
             const double ACCURACY = 1.0e-4;
             double t_sqrt = Math.Sqrt(time);
 
-            double sigma = (option_price / S) / (0.398 * t_sqrt);    // find initial value
+            double sigma = (optionPrice / S) / (0.398 * t_sqrt);    // find initial value
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 price = PutPrice(S, X, r, sigma, time);
-                double diff = option_price - price;
+                double diff = optionPrice - price;
                 if (Math.Abs(diff) < ACCURACY)
                     return sigma;
                 double d1 = (Math.Log(S / X) + r * time) / (sigma * t_sqrt) + 0.5 * sigma * t_sqrt;
