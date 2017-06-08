@@ -144,13 +144,13 @@ namespace EDLib.Pricing
                 sum = sum * (Math.Sqrt(1.0 - rho * rho) / Math.PI);
                 return sum;
             } else if (a * b * rho <= 0.0) {
-                if ((a <= 0.0) && (b >= 0.0) && (rho >= 0.0)) 
+                if ((a <= 0.0) && (b >= 0.0) && (rho >= 0.0))
                     return N(a) - N(a, -b, -rho);
-                 else if ((a >= 0.0) && (b <= 0.0) && (rho >= 0.0)) 
+                else if ((a >= 0.0) && (b <= 0.0) && (rho >= 0.0))
                     return N(b) - N(-a, b, -rho);
-                 else if ((a >= 0.0) && (b >= 0.0) && (rho <= 0.0)) 
+                else if ((a >= 0.0) && (b >= 0.0) && (rho <= 0.0))
                     return N(a) + N(b) - 1.0 + N(-a, -b, rho);
-                
+
             } else if (a * b * rho >= 0.0) {
                 double denum = Math.Sqrt(a * a - 2 * rho * a * b + b * b);
                 double rho1 = ((rho * a - b) * sgn(a)) / denum;
@@ -168,6 +168,5 @@ namespace EDLib.Pricing
     {
 
     }
-
-
+   
 }
