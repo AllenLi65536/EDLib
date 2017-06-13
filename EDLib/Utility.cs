@@ -15,6 +15,40 @@ namespace EDLib
     public static class Utility
     {
         /// <summary>
+        /// Commodity type
+        /// </summary>
+        public enum CommodityType
+        {
+            ///<summary>Stock</summary>
+            Stock,
+            ///<summary>Index Future</summary>
+            IndexFuture,
+            ///<summary>Warrant</summary>
+            Warrant,
+            ///<summary>ETF</summary>
+            ETF,
+            ///<summary>Others</summary>
+            Others
+        };
+
+        /// <summary>
+        /// Get the commodity type of ID
+        /// </summary>
+        /// <param name="ID">Commodity ID</param>
+        /// <returns>CommodityType</returns>
+        public static CommodityType GetCommodityType(string ID) {
+            if (ID.StartsWith("IX"))
+                return CommodityType.IndexFuture;
+            if (ID.StartsWith("00"))
+                return CommodityType.ETF;
+            if (ID.Length == 4)
+                return CommodityType.Stock;
+            if (ID.Length == 6)
+                return CommodityType.Warrant;
+            return CommodityType.Others;
+        }
+
+        /// <summary>
         /// Get response string from the url
         /// </summary>
         /// <param name="url">The URL</param>

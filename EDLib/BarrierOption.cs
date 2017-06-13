@@ -18,8 +18,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Price of up and out call option</returns>
-        public static double CallUpOutPrice(double S, double X, double r, double sigma, double T, double H, int n) {
-            //Price
+        public static double CallUpOutPrice(double S, double X, double r, double sigma, double T, double H, int n = 500) {            
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                        
@@ -72,7 +71,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Δ of up and out call option</returns>
-        public static double CallUpOutDelta(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double CallUpOutDelta(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                        
@@ -128,7 +127,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Γ of up and out call option</returns>
-        public static double CallUpOutGamma(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double CallUpOutGamma(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //Gamma
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
@@ -189,7 +188,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Θ of up and out call option</returns>
-        public static double CallUpOutTheta(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double CallUpOutTheta(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //Theta
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
@@ -245,7 +244,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>ν of up and out call option</returns>
-        public static double CallUpOutVega(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double CallUpOutVega(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //double temp1 = CallUpOutPrice(S, X, r, sigma, T, H, n);
             //double temp2 = CallUpOutPrice(S, X, r, sigma + 0.0001, T, H, n);
             return (CallUpOutPrice(S, X, r, sigma + 0.0001, T, H, n) - CallUpOutPrice(S, X, r, sigma, T, H, n)) / 0.0001;
@@ -261,7 +260,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>ρ of up and out call option</returns>
-        public static double CallUpOutRho(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double CallUpOutRho(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //double temp1 = CallUpOutPrice(S, X, r, sigma, T, H, n);
             //double temp2 = CallUpOutPrice(S, X, r + 0.0001, sigma, T, H, n);
             return (CallUpOutPrice(S, X, r + 0.0001, sigma, T, H, n) - CallUpOutPrice(S, X, r, sigma, T, H, n)) / 0.0001;
@@ -278,7 +277,7 @@ namespace EDLib.Pricing
         /// <param name="optionPrice">Option price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Implied vloatility of up and out call option</returns>
-        public static double CallUpOutIV(double S, double X, double r, double T, double H, double optionPrice, int n) {
+        public static double CallUpOutIV(double S, double X, double r, double T, double H, double optionPrice, int n = 1000) {
             double Vmin = 0.05, Vmax = 2, Vmid = (Vmin + Vmax) / 2;
             double Fmin = CallUpOutPrice(S, X, r, Vmin, T, H, n) - optionPrice;
             double Fmax = CallUpOutPrice(S, X, r, Vmax, T, H, n) - optionPrice;
@@ -319,7 +318,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Price of down and out put option</returns>
-        public static double PutDownOutPrice(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutPrice(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                        
@@ -376,7 +375,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Δ of down and out put option</returns>
-        public static double PutDownOutDelta(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutDelta(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                        
@@ -417,7 +416,7 @@ namespace EDLib.Pricing
                 for (int i = 0; i <= 2 * j; i++) 
                     P[i] = Math.Max((pu * P[i] + pm * P[i + 1] + pd * P[i + 2]) / R, X - S * Math.Pow(u, j - i));
                             
-            double dif = S * (Math.Pow(u, 1) - Math.Pow(u, -1));
+            double dif = S * (u - 1.0 / u);
             return (P[0] - P[2]) / dif;
         }
         /// <summary>
@@ -431,7 +430,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Γ of down and out put option</returns>
-        public static double PutDownOutGamma(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutGamma(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                         
@@ -490,7 +489,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Θ of down and out put option</returns>
-        public static double PutDownOutTheta(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutTheta(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             if (S == 0 || X == 0 || H == 0 || r == 0 || T == 0 || sigma == 0 || n == 0)
                 return 0;
                         
@@ -547,7 +546,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>ν of down and out put option</returns>
-        public static double PutDownOutVega(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutVega(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //double temp1 = PutDownOutPrice(S, X, r, sigma, T, H, n);
             //double temp2 = PutDownOutPrice(S, X, r, sigma + 0.0001, T, H, n);
             return (PutDownOutPrice(S, X, r, sigma + 0.0001, T, H, n) - PutDownOutPrice(S, X, r, sigma, T, H, n)) / 0.0001;
@@ -564,7 +563,7 @@ namespace EDLib.Pricing
         /// <param name="H">Barrier price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>ρ of down and out put option</returns>
-        public static double PutDownOutRho(double S, double X, double r, double sigma, double T, double H, int n) {
+        public static double PutDownOutRho(double S, double X, double r, double sigma, double T, double H, int n = 500) {
             //double temp1 = PutDownOutPrice(S, X, r, sigma, T, H, n);
             //double temp2 = PutDownOutPrice(S, X, r + 0.0001, sigma, T, H, n);
             return (PutDownOutPrice(S, X, r + 0.0001, sigma, T, H, n) - PutDownOutPrice(S, X, r, sigma, T, H, n)) / 0.0001;
@@ -580,7 +579,7 @@ namespace EDLib.Pricing
         /// <param name="optionPrice">Option price</param>
         /// <param name="n">N of trinominal tree</param>
         /// <returns>Implied vloatility of down and out put option</returns>
-        public static double PutDownOutIV(double S, double X, double r, double T, double H, double optionPrice, int n) {
+        public static double PutDownOutIV(double S, double X, double r, double T, double H, double optionPrice, int n = 1000) {
             double Vmin = 0.05, Vmax = 2, Vmid = (Vmin + Vmax) / 2;
             double Fmin = PutDownOutPrice(S, X, r, Vmin, T, H, n) - optionPrice;
             double Fmax = PutDownOutPrice(S, X, r, Vmax, T, H, n) - optionPrice;

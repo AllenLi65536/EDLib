@@ -28,40 +28,7 @@ namespace EDLib
     /// </example>
     public static class Tick
     {
-        /// <summary>
-        /// Commodity type
-        /// </summary>
-        public enum CommodityType
-        {
-            ///<summary>Stock</summary>
-            Stock,
-            ///<summary>Index Future</summary>
-            IndexFuture,
-            ///<summary>Warrant</summary>
-            Warrant,
-            ///<summary>ETF</summary>
-            ETF,
-            ///<summary>Others</summary>
-            Others
-        };
-
-        /// <summary>
-        /// Get the commodity type of ID
-        /// </summary>
-        /// <param name="ID">Commodity ID</param>
-        /// <returns>CommodityType</returns>
-        public static CommodityType GetCommodityType(string ID) {
-            if (ID.StartsWith("IX"))
-                return CommodityType.IndexFuture;
-            if (ID.StartsWith("00"))
-                return CommodityType.ETF;
-            if (ID.Length == 4)
-                return CommodityType.Stock;
-            if (ID.Length == 6)
-                return CommodityType.Warrant;
-            return CommodityType.Others;
-        }
-
+       
         /// <summary>
         /// Tick size of one tick upward.
         /// </summary>
@@ -69,11 +36,11 @@ namespace EDLib
         /// <param name="price">Current price</param>
         /// <returns>Tick size of uptick</returns>
         public static double UpTickSize(string ID, double price) {
-            CommodityType type = GetCommodityType(ID);
+            Utility.CommodityType type = Utility.GetCommodityType(ID);
             price = Math.Round(price, 2);
             switch (type) {
 
-                case CommodityType.Warrant:
+                case Utility.CommodityType.Warrant:
                     if (price < 5)
                         return 0.01;
                     if (price < 10)
@@ -86,7 +53,7 @@ namespace EDLib
                         return 1;
                     return 5;
 
-                case CommodityType.IndexFuture:
+                case Utility.CommodityType.IndexFuture:
                     if (ID == "IX0001")
                         return 1;
                     if (ID == "IX0027")
@@ -95,7 +62,7 @@ namespace EDLib
                         return 0.2;
                     return 0;
 
-                case CommodityType.Stock:
+                case Utility.CommodityType.Stock:
                     if (price < 10)
                         return 0.01;
                     if (price < 50)
@@ -108,12 +75,12 @@ namespace EDLib
                         return 1;
                     return 5;
 
-                case CommodityType.ETF:
+                case Utility.CommodityType.ETF:
                     if (price < 50)
                         return 0.01;
                     return 0.05;
 
-                case CommodityType.Others:
+                case Utility.CommodityType.Others:
                 default:
                     return 0;
             }
