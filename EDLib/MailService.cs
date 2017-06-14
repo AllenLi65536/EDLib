@@ -85,25 +85,25 @@ namespace EDLib
                     //Receivers' addresses
                     if (mailTos != null)
                         foreach (string mailTo in mailTos)
-                            if (!string.IsNullOrWhiteSpace(mailTo.Trim()))
+                            if (!string.IsNullOrWhiteSpace(mailTo))
                                 mail.To.Add(new MailAddress(mailTo.Trim()));
 
                     //CC
                     if (ccs != null)
                         foreach (string cc in ccs)
-                            if (!string.IsNullOrWhiteSpace(cc.Trim()))
+                            if (!string.IsNullOrWhiteSpace(cc))
                                 mail.CC.Add(new MailAddress(cc.Trim()));
 
                     //BCC                
                     if (bccs != null)
                         foreach (string bcc in bccs)
-                            if (!string.IsNullOrWhiteSpace(bcc.Trim()))
+                            if (!string.IsNullOrWhiteSpace(bcc))
                                 mail.Bcc.Add(new MailAddress(bcc.Trim()));
 
                     //Attachments 
                     if (filePaths != null)
                         foreach (string filePath in filePaths)
-                            if (!string.IsNullOrWhiteSpace(filePath.Trim()))
+                            if (!string.IsNullOrWhiteSpace(filePath))
                                 mail.Attachments.Add(new Attachment(filePath.Trim()));
 
 
@@ -122,7 +122,7 @@ namespace EDLib
                 //Delete attachments
                 if (deleteFileAttachment && filePaths != null)
                     foreach (string filePath in filePaths)
-                        if (!string.IsNullOrWhiteSpace(filePath.Trim()))
+                        if (!string.IsNullOrWhiteSpace(filePath))
                             File.Delete(filePath.Trim());
 
                 return true;
