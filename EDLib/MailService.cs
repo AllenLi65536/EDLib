@@ -77,7 +77,7 @@ namespace EDLib
                     mail.Priority = priority;
 
                     //Sender's address and name
-                    if (!string.IsNullOrEmpty(senderName))
+                    if (!string.IsNullOrWhiteSpace(senderName))
                         mail.From = new MailAddress(mailFrom, senderName);
                     else
                         mail.From = new MailAddress(mailFrom);
@@ -85,30 +85,30 @@ namespace EDLib
                     //Receivers' addresses
                     if (mailTos != null)
                         foreach (string mailTo in mailTos)
-                            if (!string.IsNullOrEmpty(mailTo.Trim()))
+                            if (!string.IsNullOrWhiteSpace(mailTo.Trim()))
                                 mail.To.Add(new MailAddress(mailTo.Trim()));
 
                     //CC
                     if (ccs != null)
                         foreach (string cc in ccs)
-                            if (!string.IsNullOrEmpty(cc.Trim()))
+                            if (!string.IsNullOrWhiteSpace(cc.Trim()))
                                 mail.CC.Add(new MailAddress(cc.Trim()));
 
                     //BCC                
                     if (bccs != null)
                         foreach (string bcc in bccs)
-                            if (!string.IsNullOrEmpty(bcc.Trim()))
+                            if (!string.IsNullOrWhiteSpace(bcc.Trim()))
                                 mail.Bcc.Add(new MailAddress(bcc.Trim()));
 
                     //Attachments 
                     if (filePaths != null)
                         foreach (string filePath in filePaths)
-                            if (!string.IsNullOrEmpty(filePath.Trim()))
+                            if (!string.IsNullOrWhiteSpace(filePath.Trim()))
                                 mail.Attachments.Add(new Attachment(filePath.Trim()));
 
 
                     using (SmtpClient client = new SmtpClient(smtpServer, smtpPort)) {
-                        if (!string.IsNullOrEmpty(mailAccount) && !string.IsNullOrEmpty(mailPwd)) //Send with ID and password
+                        if (!string.IsNullOrWhiteSpace(mailAccount) && !string.IsNullOrWhiteSpace(mailPwd)) //Send with ID and password
                             client.Credentials = new NetworkCredential(mailAccount, mailPwd);//ID & password
                         client.Send(mail);//Send mail
                     }
@@ -122,7 +122,7 @@ namespace EDLib
                 //Delete attachments
                 if (deleteFileAttachment && filePaths != null)
                     foreach (string filePath in filePaths)
-                        if (!string.IsNullOrEmpty(filePath.Trim()))
+                        if (!string.IsNullOrWhiteSpace(filePath.Trim()))
                             File.Delete(filePath.Trim());
 
                 return true;

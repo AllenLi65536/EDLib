@@ -205,13 +205,13 @@ namespace EDLib.Pricing
         /// <param name="vega">Output ν</param>
         /// <param name="rho">Output ρ</param>
         public static void CallGreeks(double S, double X, double r, double sigma, double T,
-            out double delta, out double gamma, out double theta, out double vega, out double rho) {
+            ref double delta, ref double gamma, ref double theta, ref double vega, ref double rho) {
             if (T == 0)
                 T = 0.0000000000001;
             double time_sqrt = Math.Sqrt(T);
             double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
             double d2 = d1 - (sigma * time_sqrt);
-
+            
             delta = NormDist.N(d1);
             gamma = NormDist.n(d1) / (S * sigma * time_sqrt);
             theta = -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
