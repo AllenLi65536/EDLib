@@ -12,6 +12,7 @@ namespace EDLib.Pricing
     /// </summary>
     public static class NormDist
     {
+        //private static readonly double sqrt2pi = Math.Sqrt(2.0 * Math.PI);
         /// <summary>
         /// Probability density function of standard normal distribution
         /// </summary>

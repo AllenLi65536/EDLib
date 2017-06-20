@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <topic id="de348b85-0790-4ad6-95bb-efa1836c0b83" revisionNumber="1">
-	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<introduction>
-			<para>This is an awesome, ultimate, and perfect solution to Equity Derivitive related programs with some useful functions.</para>
-		</introduction>
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>This is an awesome, ultimate, and perfect solution to Equity Derivitive related programs with some useful functions.</para>
+    </introduction>
 
-		<section>
-			<title>Getting Started</title>
-			<content>
-        <para>Brief introduction of namespaces:
+    <section>
+      <title>Getting Started</title>
+      <content>
+        <para>
+          Brief introduction of namespaces:
         </para>
         <list class="bullet">
           <listItem>
             <para>
-             EDLib.SQL: SQL related operations.
+              EDLib: Other miscellaneous and, hopefully, useful functions.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              EDLib.Pricing: Options pricing models.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              EDLib.SQL: SQL related operations.
             </para>
           </listItem>
           <listItem>
@@ -21,15 +32,9 @@
               EDLib.TIBCORV: Listen or send via TIBCO Rendezvous services.
             </para>
           </listItem>
-          <listItem>
-            <para>
-              EDLib: Other miscellaneous and, hopefully, useful functions.
-            </para>
-          </listItem>
-          
         </list>
 
-          <!--
+        <!--
 				<para>To get started, add a documentation source to the project (a Visual Studio solution, project, or
 assembly and XML comments file).  See the <legacyBold>Getting Started</legacyBold> topics in the Sandcastle Help
 File Builder's help file for more information.  The following default items are included in this project:</para>
@@ -67,11 +72,11 @@ in order to be compiled into the help file.</para>
 help file for more information.  See the <legacyBold> Sandcastle MAML Guide</legacyBold> for details on Microsoft
 Assistance Markup Language (MAML) which is used to create these topics.</para>
 -->
-			</content>
-		</section>
+      </content>
+    </section>
 
-		<relatedTopics>
-			<link xlink:href="7c51216c-f3d1-4439-a124-92fa436df119" />
-		</relatedTopics>
-	</developerConceptualDocument>
+    <relatedTopics>
+      <link xlink:href="7c51216c-f3d1-4439-a124-92fa436df119" />
+    </relatedTopics>
+  </developerConceptualDocument>
 </topic>

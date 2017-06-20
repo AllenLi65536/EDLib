@@ -8,6 +8,45 @@ namespace EDLib.Pricing
     public static class PlainVanilla
     {
         /// <summary>
+        /// Bitmask that shows type of Greeks to be calculated
+        /// </summary>
+        [Flags]
+        public enum Greeks
+        {
+            /// <summary>
+            /// None
+            /// </summary>
+            None = 0,
+            /// <summary>
+            /// Δ
+            /// </summary>
+            Delta = 1,
+            /// <summary>
+            /// Γ
+            /// </summary>
+            Gamma = 2,
+            /// <summary>
+            /// Θ
+            /// </summary>
+            Theta = 4,
+            /// <summary>
+            /// ν
+            /// </summary>
+            Vega = 8,
+            /// <summary>
+            /// Oftenly used: Δ, Γ, Θ, ν
+            /// </summary>
+            Regular = Delta | Gamma | Theta | Vega,
+            /// <summary>
+            /// ρ
+            /// </summary>
+            Rho = 16,
+            /// <summary>
+            /// All 5 Greeks
+            /// </summary>
+            All = Delta | Gamma | Theta | Vega | Rho
+        }
+        /// <summary>
         /// Price of call option
         /// </summary>
         /// <param name="S">Spot price</param>
@@ -100,35 +139,7 @@ namespace EDLib.Pricing
             double time_sqrt = Math.Sqrt(T);
             double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
             return NormDist.n(d1) / (S * sigma * time_sqrt);
-        }
-        /// <summary>
-        /// ν of call option
-        /// </summary>
-        /// <param name="S">Spot price</param>
-        /// <param name="X">Exercise price</param>
-        /// <param name="r">Interest rate</param>
-        /// <param name="sigma">σ of spot price</param>
-        /// <param name="T">Time to maturity</param>
-        /// <returns>ν of call option</returns>
-        public static double CallVega(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return S * time_sqrt * NormDist.n(d1);
-        }
-        /// <summary>
-        /// ν of put option
-        /// </summary>
-        /// <param name="S">Spot price</param>
-        /// <param name="X">Exercise price</param>
-        /// <param name="r">Interest rate</param>
-        /// <param name="sigma">σ of spot price</param>
-        /// <param name="T">Time to maturity</param>
-        /// <returns>ν of put option</returns>
-        public static double PutVega(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return S * time_sqrt * NormDist.n(d1);
-        }
+        }        
         /// <summary>
         /// Θ of call option
         /// </summary>
@@ -162,6 +173,34 @@ namespace EDLib.Pricing
             return -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
+        /// ν of call option
+        /// </summary>
+        /// <param name="S">Spot price</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>
+        /// <param name="sigma">σ of spot price</param>
+        /// <param name="T">Time to maturity</param>
+        /// <returns>ν of call option</returns>
+        public static double CallVega(double S, double X, double r, double sigma, double T) {
+            double time_sqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            return S * time_sqrt * NormDist.n(d1);
+        }
+        /// <summary>
+        /// ν of put option
+        /// </summary>
+        /// <param name="S">Spot price</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>
+        /// <param name="sigma">σ of spot price</param>
+        /// <param name="T">Time to maturity</param>
+        /// <returns>ν of put option</returns>
+        public static double PutVega(double S, double X, double r, double sigma, double T) {
+            double time_sqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            return S * time_sqrt * NormDist.n(d1);
+        }
+        /// <summary>
         /// ρ of call option
         /// </summary>
         /// <param name="S">Spot price</param>
@@ -189,10 +228,10 @@ namespace EDLib.Pricing
             double time_sqrt = Math.Sqrt(T);
             double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
             double d2 = d1 - (sigma * time_sqrt);
-            return X * T * Math.Exp(-r * T) * NormDist.N(d2);
+            return -X * T * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
-        /// Calculate greeks of call option
+        /// Calculate Greeks of call option
         /// </summary>
         /// <param name="S">Spot price</param>
         /// <param name="X">Exercise price</param>
@@ -205,13 +244,13 @@ namespace EDLib.Pricing
         /// <param name="vega">Output ν</param>
         /// <param name="rho">Output ρ</param>
         public static void CallGreeks(double S, double X, double r, double sigma, double T,
-            ref double delta, ref double gamma, ref double theta, ref double vega, ref double rho) {
+            out double delta, out double gamma, out double theta, out double vega, out double rho) {
             if (T == 0)
                 T = 0.0000000000001;
             double time_sqrt = Math.Sqrt(T);
             double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
             double d2 = d1 - (sigma * time_sqrt);
-            
+
             delta = NormDist.N(d1);
             gamma = NormDist.n(d1) / (S * sigma * time_sqrt);
             theta = -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
@@ -219,7 +258,73 @@ namespace EDLib.Pricing
             rho = X * T * Math.Exp(-r * T) * NormDist.N(d2);
         }
         /// <summary>
-        /// Calculate greeks of put option
+        /// Calculate specified Greeks of call option
+        /// </summary>
+        /// <param name="S">Spot price</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>
+        /// <param name="sigma">Sigma of spot price</param>
+        /// <param name="T">Time to maturity</param>
+        /// <param name="bitmask">Specify which greeks to calculate</param>
+        /// <returns>Always returns an double array with 5 elements, having delta, gamma, theta, vega, rho, accordingly. Unspecified Greeks would be set to 0.</returns>
+        /// <exception cref="ArgumentException">Nothing is set in bitmask</exception>
+        /// <example>
+        /// <code>
+        /// double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Delta | PlainVanilla.Greeks.Gamma | PlainVanilla.Greeks.Rho);
+        /// for (int i = 0; i &lt; greeks.Length; i++)
+        ///     Console.WriteLine(greeks[i]);
+        /// //greeks[0]: Delta, greeks[1]: Gamma, greeks[4]: Rho, greeks[2]: 0, greeks[3]: 0
+        /// </code>
+        /// </example>
+        public static double[] CallGreeks(double S, double X, double r, double sigma, double T, Greeks bitmask) {
+            if (bitmask == Greeks.None)
+                throw new ArgumentException("Nothing is set in bitmask.", "bitmask");
+
+            double[] ret = new double[5];
+            //int size = 0;
+            if (T == 0)
+                T = 0.0000000000001;
+            double time_sqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+
+            double nd1 = 0.0; //Compute them only when needed
+            double d2 = 0.0; 
+            double nd2 = 0.0;
+
+            if ((bitmask & Greeks.Delta) != Greeks.None)
+                ret[0] = NormDist.N(d1);
+
+            if ((bitmask & Greeks.Gamma) != Greeks.None) {
+                nd1 = NormDist.n(d1);
+                ret[1] = nd1 / (S * sigma * time_sqrt);
+            }
+
+            if ((bitmask & Greeks.Theta) != Greeks.None) {
+                d2 = d1 - (sigma * time_sqrt);
+                nd2 = X * Math.Exp(-r * T) * NormDist.N(d2);
+                if (nd1 == 0.0)
+                    nd1 = NormDist.n(d1);
+                ret[2] = -(S * sigma * nd1) / (2 * time_sqrt) - r * nd2;
+            }
+            if ((bitmask & Greeks.Vega) != Greeks.None) {
+                if (nd1 == 0.0)
+                    nd1 = NormDist.n(d1);
+                ret[3] = S * time_sqrt * nd1;
+            }
+
+            if ((bitmask & Greeks.Rho) != Greeks.None) {
+                if (d2 == 0.0) {
+                    d2 = d1 - (sigma * time_sqrt);
+                    nd2 = X * Math.Exp(-r * T) * NormDist.N(d2);
+                }
+                ret[4] = T * nd2;
+            }
+            //if (size != 5)
+            //    Array.Resize(ref ret, size);
+            return ret;
+        }
+        /// <summary>
+        /// Calculate Greeks of put option
         /// </summary>
         /// <param name="S">Spot price</param>
         /// <param name="X">Exercise price</param>
@@ -243,7 +348,71 @@ namespace EDLib.Pricing
             gamma = NormDist.n(d1) / (S * sigma * time_sqrt);
             theta = -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
             vega = S * time_sqrt * NormDist.n(d1);
-            rho = X * T * Math.Exp(-r * T) * NormDist.N(d2);
+            rho = -X * T * Math.Exp(-r * T) * NormDist.N(-d2);
+        }
+        /// <summary>
+        /// Calculate specified Greeks of put option
+        /// </summary>
+        /// <param name="S">Spot price</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="r">Interest rate</param>
+        /// <param name="sigma">Sigma of spot price</param>
+        /// <param name="T">Time to maturity</param>
+        /// <param name="bitmask">Specify which greeks to calculate</param>
+        /// <returns>Always returns an double array with 5 elements, having delta, gamma, theta, vega, rho, accordingly. Unspecified Greeks would be set to 0.</returns>
+        /// <exception cref="ArgumentException">Nothing is set in bitmask</exception>
+        /// <example>
+        /// <code>
+        /// double[] greeks = PlainVanilla.PutGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Regular);
+        /// for (int i = 0; i &lt; greeks.Length; i++)
+        ///     Console.WriteLine(greeks[i]);
+        /// //greeks[0]: Delta, greeks[1]: Gamma, greeks[2]: Theta, greeks[3]: Vega, greeks[4]: 0 
+        /// </code>
+        /// </example>
+        public static double[] PutGreeks(double S, double X, double r, double sigma, double T, Greeks bitmask) {
+            if (bitmask == Greeks.None)
+                throw new ArgumentException("Nothing is set in bitmask.", "bitmask");
+
+            double[] ret = new double[5];
+            //int size = 0;
+            if (T == 0)
+                T = 0.0000000000001;
+            double time_sqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+
+            double nd1 = 0.0;//Compute them only when needed
+            double d2 = 0.0; 
+            double nd2 = 0.0;
+
+            if ((bitmask & Greeks.Delta) != Greeks.None)
+                ret[0] = NormDist.N(d1) - 1;
+
+            if ((bitmask & Greeks.Gamma) != Greeks.None) {
+                nd1 = NormDist.n(d1);
+                ret[1] = nd1 / (S * sigma * time_sqrt);
+            }
+
+            if ((bitmask & Greeks.Theta) != Greeks.None) {
+                d2 = d1 - (sigma * time_sqrt);
+                nd2 = X * Math.Exp(-r * T);
+                if (nd1 == 0.0)
+                    nd1 = NormDist.n(d1);
+                ret[2] = -(S * sigma * nd1) / (2 * time_sqrt) + r * nd2 * NormDist.N(d2);
+            }
+            if ((bitmask & Greeks.Vega) != Greeks.None) {
+                if (nd1 == 0.0)
+                    nd1 = NormDist.n(d1);
+                ret[3] = S * time_sqrt * nd1;
+            }
+
+            if ((bitmask & Greeks.Rho) != Greeks.None) {
+                if (d2 == 0.0) {
+                    d2 = d1 - (sigma * time_sqrt);
+                    nd2 = X * Math.Exp(-r * T);
+                }
+                ret[4] = -T * nd2 * NormDist.N(-d2);
+            }           
+            return ret;
         }
         /// <summary>
         /// Implied volatility of call option by bisection method
@@ -275,7 +444,7 @@ namespace EDLib.Pricing
             double sigma_high = 0.3;
             price = CallPrice(S, X, r, sigma_high, T);
             while (price < optionPrice) {
-                sigma_high *= 2.0 ; // keep doubling.
+                sigma_high *= 2.0; // keep doubling.
                 price = CallPrice(S, X, r, sigma_high, T);
                 if (sigma_high > HIGH_VALUE)
                     return ERROR; // panic, something wrong.

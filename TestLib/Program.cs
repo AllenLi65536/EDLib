@@ -3,6 +3,7 @@ using System.Text;
 using EDLib;
 using EDLib.SQL;
 using EDLib.TIBCORV;
+using EDLib.Pricing;
 using System.Data;
 using TIBCO.Rendezvous;
 using System.Data.SqlClient;
@@ -112,7 +113,18 @@ namespace TestLib
                 conn.Open();
             }
             */
-            Console.WriteLine(Utility.GetHtml("http://warrant.kgi.com/EDWEB/DefaultNew.aspx", Encoding.UTF8));
+            //Console.WriteLine(Utility.GetHtml("http://warrant.kgi.com/EDWEB/DefaultNew.aspx", Encoding.UTF8));
+
+
+            //double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Delta | PlainVanilla.Greeks.Gamma | PlainVanilla.Greeks.Rho);
+            double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.All);
+            for (int i = 0; i < greeks.Length; i++)
+                Console.WriteLine(greeks[i]);
+
+            greeks = PlainVanilla.PutGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Regular);
+            for (int i = 0; i < greeks.Length; i++)
+                Console.WriteLine(greeks[i]);
+
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");
             Console.ReadKey();
