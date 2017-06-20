@@ -61,18 +61,22 @@ namespace EDLib.Pricing
                 return 1.0;  // this guards against overflow 
             if (z < -6.0)
                 return 0.0;
-            double a = Math.Abs(z);
-            double t = 1.0 / (1.0 + a * p);
-            double b = c2 * Math.Exp((-z) * (z / 2.0));
+            //double a = Math.Abs(z);
+            double t = 1.0 / (1.0 + Math.Abs(z) * p);
+            //double b = c2 * Math.Exp((-z) * (z / 2.0));
             double n = ((((b5 * t + b4) * t + b3) * t + b2) * t + b1) * t;
-            n = 1.0 - b * n;
+            n = 1.0 - c2 * Math.Exp(-z * (z / 2.0)) * n;
             if (z < 0.0)
                 n = 1.0 - n;
             return n;
         }
 
-
-        private static double CND1(double x) {
+        /// <summary>
+        /// Cumulative density function (Phi function)
+        /// </summary>
+        /// <param name="z">z value</param>
+        /// <returns>Cumulative probability</returns>
+        public static double N1(double z) {
             // constants
             double a1 = 0.254829592;
             double a2 = -0.284496736;
@@ -83,13 +87,13 @@ namespace EDLib.Pricing
 
             // Save the sign of x
             int sign = 1;
-            if (x < 0)
+            if (z < 0)
                 sign = -1;
-            x = Math.Abs(x) / Math.Sqrt(2.0);
+            z = Math.Abs(z) / Math.Sqrt(2.0);
 
             // A&S formula 7.1.26
-            double t = 1.0 / (1.0 + p * x);
-            double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
+            double t = 1.0 / (1.0 + p * z);
+            double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-z * z);
 
             return 0.5 * (1.0 + sign * y);
         }
@@ -98,7 +102,7 @@ namespace EDLib.Pricing
         //  as described e.g. in Hulls book
 
         /// <summary>
-        ///  Numerical approximation to the bivariate normal distribution, 
+        /// Numerical approximation to the bivariate normal distribution, 
         /// </summary>
         /// <param name="x">x1 value</param>
         /// <param name="y">x2 value</param>
@@ -113,15 +117,15 @@ namespace EDLib.Pricing
         }
 
         /// <summary>
-        ///  Sign function
+        /// Sign function
         /// </summary>
         /// <param name="x">x</param>
         /// <returns>-1 for negative number, 1 otherwise</returns>
         private static double sgn(double x) {
-            return Math.Sign(x);
-            /*if (x >= 0.0)
+            //return Math.Sign(x);
+            if (x >= 0.0)
                 return 1.0;
-            return -1.0;*/
+            return -1.0;
         }
 
         /// <summary>
