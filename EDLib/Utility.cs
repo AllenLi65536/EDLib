@@ -9,8 +9,18 @@ using System.Text;
 
 namespace EDLib
 {
+    /// <summary>
+    /// Manipulate bitmask
+    /// </summary>
     public static class FlagsHelper
     {
+        /// <summary>
+        /// Is flag set in flags
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="flags">Flags</param>
+        /// <param name="flag">Flag</param>
+        /// <returns>Is set or not</returns>
         public static bool IsSet<T>(T flags, T flag) where T : struct {
             int flagsValue = (int) (object) flags;
             int flagValue = (int) (object) flag;
@@ -18,13 +28,24 @@ namespace EDLib
             return (flagsValue & flagValue) != 0;
         }
 
+        /// <summary>
+        /// Set the flag in flags
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="flags">Flags</param>
+        /// <param name="flag">Flag</param>
         public static void Set<T>(ref T flags, T flag) where T : struct {
             int flagsValue = (int) (object) flags;
             int flagValue = (int) (object) flag;
 
             flags = (T) (object) (flagsValue | flagValue);
         }
-
+        /// <summary>
+        /// Unset the flag in flags
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="flags">Flags</param>
+        /// <param name="flag">Flag</param>
         public static void Unset<T>(ref T flags, T flag) where T : struct {
             int flagsValue = (int) (object) flags;
             int flagValue = (int) (object) flag;

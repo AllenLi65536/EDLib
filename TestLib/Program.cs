@@ -124,6 +124,7 @@ namespace TestLib
             greeks = PlainVanilla.PutGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Regular);
             for (int i = 0; i < greeks.Length; i++)
                 Console.WriteLine(greeks[i]);
+            //MSSQL.ExecSqlQry().AsDataView();
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");

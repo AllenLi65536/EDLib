@@ -13,7 +13,7 @@
     <RootNamespace>HelpFile</RootNamespace>
     <Name>HelpFile</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.6</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>HelpFile</HtmlHelpName>
     <Language>en-US</Language>
@@ -47,6 +47,13 @@
     <SHFBROOT>c:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder</SHFBROOT>
     <DXROOT>c:\Program Files (x86)\Sandcastle</DXROOT>
     <MSBuildPath>C:\Windows\Microsoft.NET\Framework64\v4.0.30319</MSBuildPath>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <IndentHtml>False</IndentHtml>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CleanIntermediates>True</CleanIntermediates>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
