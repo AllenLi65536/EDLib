@@ -75,15 +75,16 @@ namespace EDLib.SQL
         /// </summary>
         /// <param name="sql">SQL command string</param>
         /// <param name="conn">SQL server connection</param>
+        /// <param name="timeout">SQL server timeout seconds</param>
         /// <returns>Number of data rows affected</returns>
-        public static int ExecSqlCmd(string sql, SqlConnection conn) {
+        public static int ExecSqlCmd(string sql, SqlConnection conn, int timeout = 300) {
             bool wasClosed = false;
             if (conn.State == ConnectionState.Closed) {
                 conn.Open();
                 wasClosed = true;
             }
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.CommandTimeout = 300;
+            cmd.CommandTimeout = timeout;
             int ret = cmd.ExecuteNonQuery();
             if (wasClosed)
                 conn.Close();
@@ -94,12 +95,13 @@ namespace EDLib.SQL
         /// Execute MS SQL command
         /// </summary>
         /// <param name="sql">SQL command string</param>
-        /// <param name="connstr">SQL server connection string</param>  
+        /// <param name="connstr">SQL server connection string</param> 
+        /// <param name="timeout">SQL server timeout seconds</param>
         /// <returns>Number of data rows affected</returns>
-        public static int ExecSqlCmd(string sql, string connstr) {
+        public static int ExecSqlCmd(string sql, string connstr, int timeout = 300) {
             using (SqlConnection conn = new SqlConnection(connstr)) {
                 conn.Open();
-                return ExecSqlCmd(sql, conn);
+                return ExecSqlCmd(sql, conn, timeout);
             }
         }
 
@@ -114,15 +116,16 @@ namespace EDLib.SQL
         /// </summary>
         /// <param name="sql">SQL command string</param>
         /// <param name="conn">SQL server connection</param>
+        /// <param name="timeout">SQL server timeout seconds</param>
         /// <returns>Number of data rows affected</returns>
-        public static int ExecMySqlCmd(string sql, MySqlConnection conn) {
+        public static int ExecMySqlCmd(string sql, MySqlConnection conn, int timeout = 300) {
             bool wasClosed = false;
             if (conn.State == ConnectionState.Closed) {
                 conn.Open();
                 wasClosed = true;
             }
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            cmd.CommandTimeout = 300;
+            cmd.CommandTimeout = timeout;
             int ret = cmd.ExecuteNonQuery();
             if (wasClosed)
                 conn.Close();
@@ -133,12 +136,13 @@ namespace EDLib.SQL
         /// Execute MySQL command
         /// </summary>
         /// <param name="sql">SQL command string</param>
-        /// <param name="connstr">SQL server connection string</param>  
+        /// <param name="connstr">SQL server connection string</param> 
+        /// <param name="timeout">SQL server timeout seconds</param>
         /// <returns>Number of data rows affected</returns>
-        public static int ExecMySqlCmd(string sql, string connstr) {
+        public static int ExecMySqlCmd(string sql, string connstr, int timeout = 300) {
             using (MySqlConnection conn = new MySqlConnection(connstr)) {
                 conn.Open();
-                return ExecMySqlCmd(sql, conn);
+                return ExecMySqlCmd(sql, conn, timeout);
             }
         }
 

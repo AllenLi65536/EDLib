@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -111,7 +112,20 @@ namespace EDLib
                 return err.ToString();
             }
         }
-
+        /// <summary>
+        /// Get local IP address that begins with 10.*
+        /// </summary>
+        /// <returns>IP address</returns>
+        /// <exception cref="Exception">Local IP Address Not Found!</exception>
+        public static string GetLocalIPAddress() {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList) {
+                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().StartsWith("10")) {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
+        }
         /// <summary>
         /// Save DataTable into .csv file
         /// </summary>

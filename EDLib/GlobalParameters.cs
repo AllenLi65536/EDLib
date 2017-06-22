@@ -152,18 +152,47 @@
         /// </summary>
         /// <value>
         /// <code>
-        /// "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser"
+        /// "SERVER=10.101.10.5;DATABASE=HEDGE;UID=hedgeuser;PWD=hedgeuser"
         /// </code>
         /// </value>
-        public static readonly string hedgeSqlConnStr = "Data Source=10.101.10.5;Initial Catalog=HEDGE;User ID=hedgeuser;Password=hedgeuser";
+        public static readonly string hedgeSqlConnStr = "SERVER=10.101.10.5;DATABASE=HEDGE;UID=hedgeuser;PWD=hedgeuser";
         /// <summary>
         /// SQL server connection string of WMM3
         /// </summary>
         /// <value>
         /// <code>
-        /// "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser"
+        /// "SERVER=10.101.10.5;DATABASE=WMM3;UID=hedgeuser;PWD=hedgeuser"
         /// </code>
         /// </value>
-        public static readonly string wmm3SqlConnStr = "Data Source=10.101.10.5;Initial Catalog=WMM3;User ID=hedgeuser;Password=hedgeuser";
+        public static readonly string wmm3SqlConnStr = "SERVER=10.101.10.5;DATABASE=WMM3;UID=hedgeuser;PWD=hedgeuser";
+        /// <summary>
+        /// SQL server connection string of TsQuote
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// "SERVER=10.60.0.37;DATABASE=TsQuote;UID=WarrantWeb;PWD=WarrantWeb"
+        /// </code>
+        /// </value>
+        public static readonly string tsquoteSqlConnString = "SERVER=10.60.0.37;DATABASE=TsQuote;UID=WarrantWeb;PWD=WarrantWeb";
+        /// <summary>
+        /// SQL server connection string of WAFT (WTF is this name?)
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// "SERVER=10.7.0.52;DATABASE=WAFT;UID=warpap;PWD=warpap"
+        /// </code>
+        /// </value>
+        public static readonly string warrantSysSqlConnString = "SERVER=10.7.0.52;DATABASE=WAFT;UID=warpap;PWD=warpap";
+        /// <summary>
+        /// SQL server connection string of EDAISYS
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// "SERVER=10.7.0.52;DATABASE=EDAISYS;UID=warpap;PWD=warpap"
+        /// </code>
+        /// </value>
+        public static readonly string warrantSysKeySqlConnString = "SERVER=10.7.0.52;DATABASE=EDAISYS;UID=warpap;PWD=warpap";
+
+        //public static readonly string edis30SqlConnString = "SERVER=10.10.1.30;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb";
     }
 }
