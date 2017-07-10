@@ -87,7 +87,7 @@ namespace EDLib
         }
 
         /// <summary>
-        /// Tick size of one tick downard.
+        /// Tick size of one tick downward.
         /// </summary>
         /// <param name="ID">Commodity ID</param>
         /// <param name="price">Current price</param>

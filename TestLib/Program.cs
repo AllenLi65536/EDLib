@@ -117,14 +117,16 @@ namespace TestLib
 
 
             //double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Delta | PlainVanilla.Greeks.Gamma | PlainVanilla.Greeks.Rho);
-            double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.All);
+            /*double[] greeks = PlainVanilla.CallGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.All);
             for (int i = 0; i < greeks.Length; i++)
                 Console.WriteLine(greeks[i]);
 
             greeks = PlainVanilla.PutGreeks(150, 50, 0.025, 0.5, 0.56, PlainVanilla.Greeks.Regular);
             for (int i = 0; i < greeks.Length; i++)
-                Console.WriteLine(greeks[i]);
+                Console.WriteLine(greeks[i]);*/
             //MSSQL.ExecSqlQry().AsDataView();
+
+            Console.WriteLine(Utility.GetFutureContractID());       
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");

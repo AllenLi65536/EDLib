@@ -147,6 +147,27 @@ namespace EDLib
 
             File.WriteAllText(filePath, sb.ToString(), Encoding.Default);
         }
+
+        /// <summary>
+        /// Get ID of nearby futures contract
+        /// </summary>
+        /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>
+        public static string GetFutureContractID() {
+            DateTime today = DateTime.Today;// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
+            DateTime dt = today.AddDays(1 - today.Day);
+            int iNth = 0;
+            while (dt <= today) {
+                if (dt.DayOfWeek == DayOfWeek.Wednesday)
+                    iNth++;
+                dt = dt.AddDays(1);
+            }
+            // string sCont = string.Empty;            
+            if (iNth >= 3)
+                return (char) (today.AddMonths(1).Month + 64) + Convert.ToString(today.AddMonths(1).Year % 10);
+            else
+                return (char) (today.Month + 64) + Convert.ToString(today.Year % 10);
+        }
+
         /*
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {
             int XORMask = 0;
