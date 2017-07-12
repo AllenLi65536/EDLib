@@ -2,6 +2,7 @@
 
 namespace EDLib.Pricing
 {
+    //TODO: CallDownOut PutUpOut
     /// <summary>
     /// Used for barrier options pricing. 
     /// (WARNING: Does not guarantee the correctness and efficiency! Please check the code before using it)

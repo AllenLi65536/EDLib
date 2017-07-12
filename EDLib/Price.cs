@@ -165,13 +165,5 @@ namespace EDLib.Pricing
             }
             return -99.9; // should never get here
         }
-    }
-    /// <summary>
-    /// Used for pricing warrants
-    /// </summary>
-    public class Warrant
-    {
-
-    }
-   
+    }   
 }

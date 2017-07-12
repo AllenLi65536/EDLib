@@ -101,6 +101,24 @@
         /// </value>
         public static readonly RVParameters TWSE_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TWSE.MarketDataSnapshotFullRefresh");
         /// <summary>
+        /// TAIFEX quotes RV parameters
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TAIFEX.MarketDataSnapshotFullRefresh");
+        /// </code>
+        /// </value>
+        public static readonly RVParameters TAIFEX = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TAIFEX.MarketDataSnapshotFullRefresh");
+        /// <summary>
+        /// TAIFEX quotes RV parameters without daemon parameter
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// new RVParameters(null, "172.31.2;239.16.1.72", null, "TAIFEX.MarketDataSnapshotFullRefresh");
+        /// </code>
+        /// </value>
+        public static readonly RVParameters TAIFEX_NoDaemon = new RVParameters(null, "172.31.2;239.16.1.72", null, "TAIFEX.MarketDataSnapshotFullRefresh");
+        /// <summary>
         /// Warrant execution report for calculating Slippage cost RV parameters
         /// </summary>
         /// <value>
