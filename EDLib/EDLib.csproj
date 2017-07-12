@@ -67,6 +67,7 @@
     <Compile Include="Tick.cs" />
     <Compile Include="TradeDate.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="Warrant.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
