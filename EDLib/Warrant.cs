@@ -93,46 +93,46 @@ namespace EDLib.Pricing
         }
 
         public override double Price() {
-            return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T) * CR;
         }
         public double Price(double S) {
             this.S = S;
-            return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Delta() {
-            return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T) * CR;
         }
         public double Delta(double S) {
             this.S = S;
-            return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Gamma() {
-            return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T) * CR;
         }
         public double Gamma(double S) {
             this.S = S;
-            return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Theta() {
-            return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T) * CR;
         }
         public double Theta(double S) {
             this.S = S;
-            return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Vega() {
-            return PlainVanilla.CallVega(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallVega(S, X, r, sigma_finRate, T) * CR;
         }
         public double Vega(double S) {
             this.S = S;
-            return PlainVanilla.CallVega(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallVega(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Rho() {
-            return PlainVanilla.CallRho(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallRho(S, X, r, sigma_finRate, T) * CR;
         }
         public double Rho(double S) {
             this.S = S;
-            return PlainVanilla.CallRho(S, X, r, sigma_finRate, T);
+            return PlainVanilla.CallRho(S, X, r, sigma_finRate, T) * CR;
         }
     }
     public class Put:Warrant
@@ -141,46 +141,46 @@ namespace EDLib.Pricing
         }
 
         public override double Price() {
-            return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T) * CR;
         }
         public double Price(double S) {
             this.S = S;
-            return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Delta() {
-            return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T) * CR;
         }
         public double Delta(double S) {
             this.S = S;
-            return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Gamma() {
-            return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T) * CR;
         }
         public double Gamma(double S) {
             this.S = S;
-            return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Theta() {
-            return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T) * CR;
         }
         public double Theta(double S) {
             this.S = S;
-            return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Vega() {
-            return PlainVanilla.PutVega(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutVega(S, X, r, sigma_finRate, T) * CR;
         }
         public double Vega(double S) {
             this.S = S;
-            return PlainVanilla.PutVega(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutVega(S, X, r, sigma_finRate, T) * CR;
         }
         public override double Rho() {
-            return PlainVanilla.PutRho(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutRho(S, X, r, sigma_finRate, T) * CR;
         }
         public double Rho(double S) {
             this.S = S;
-            return PlainVanilla.PutRho(S, X, r, sigma_finRate, T);
+            return PlainVanilla.PutRho(S, X, r, sigma_finRate, T) * CR;
         }
     }
 
@@ -239,22 +239,22 @@ namespace EDLib.Pricing
         }
 
         public override double Price() {
-            return BarrierOption.CallUpOutPrice(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutPrice(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Delta() {
-            return BarrierOption.CallUpOutDelta(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutDelta(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Gamma() {
-            return BarrierOption.CallUpOutGamma(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutGamma(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Theta() {
-            return BarrierOption.CallUpOutTheta(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutTheta(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Vega() {
-            return BarrierOption.CallUpOutVega(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutVega(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Rho() {
-            return BarrierOption.CallUpOutRho(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.CallUpOutRho(S, X, r, sigma_finRate, T, H) * CR;
         }
     }
     public class PutDownOut:BarrierWarrant
@@ -263,22 +263,22 @@ namespace EDLib.Pricing
         }
 
         public override double Price() {
-            return BarrierOption.PutDownOutPrice(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutPrice(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Delta() {
-            return BarrierOption.PutDownOutDelta(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutDelta(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Gamma() {
-            return BarrierOption.PutDownOutGamma(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutGamma(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Theta() {
-            return BarrierOption.PutDownOutTheta(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutTheta(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Vega() {
-            return BarrierOption.PutDownOutVega(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutVega(S, X, r, sigma_finRate, T, H) * CR;
         }
         public override double Rho() {
-            return BarrierOption.PutDownOutRho(S, X, r, sigma_finRate, T, H);
+            return BarrierOption.PutDownOutRho(S, X, r, sigma_finRate, T, H) * CR;
         }
     }
 }
