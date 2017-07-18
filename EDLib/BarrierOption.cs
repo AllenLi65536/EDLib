@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EDLib.Pricing
+namespace EDLib.Pricing.Option
 {
     //TODO: CallDownOut PutUpOut
     /// <summary>

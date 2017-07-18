@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EDLib.Pricing
+namespace EDLib.Pricing.Option
 {
     /// <summary>
     /// Used for plain vanilla options pricing
@@ -58,9 +58,9 @@ namespace EDLib.Pricing
         public static double CallPrice(double S, double X, double r, double sigma, double T) {
             if (T <= 0)
                 return Math.Max(0, S - X);
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
             return S * NormDist.N(d1) - X * Math.Exp(-r * T) * NormDist.N(d2);
         }
         /// <summary>
@@ -75,9 +75,9 @@ namespace EDLib.Pricing
         public static double PutPrice(double S, double X, double r, double sigma, double T) {
             if (T <= 0)
                 return Math.Max(0, X - S);
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
             return -S * NormDist.N(-d1) + X * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
@@ -92,8 +92,8 @@ namespace EDLib.Pricing
         public static double CallDelta(double S, double X, double r, double sigma, double T) {
             if (T <= 0)
                 return 1;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
             return NormDist.N(d1);
         }
         /// <summary>
@@ -108,8 +108,8 @@ namespace EDLib.Pricing
         public static double PutDelta(double S, double X, double r, double sigma, double T) {
             if (T <= 0)
                 return -1;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
             return NormDist.N(d1) - 1;
         }
         /// <summary>
@@ -122,9 +122,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>Γ of call option</returns>
         public static double CallGamma(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return NormDist.n(d1) / (S * sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            return NormDist.n(d1) / (S * sigma * timeSqrt);
         }
         /// <summary>
         /// Γ of put option
@@ -136,9 +136,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>Γ of put option</returns>
         public static double PutGamma(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return NormDist.n(d1) / (S * sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            return NormDist.n(d1) / (S * sigma * timeSqrt);
         }        
         /// <summary>
         /// Θ of call option
@@ -152,10 +152,10 @@ namespace EDLib.Pricing
         public static double CallTheta(double S, double X, double r, double sigma, double T) {
             if (T == 0)
                 T = 0.0000000000001;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
-            return -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
+            return -(S * sigma * NormDist.n(d1)) / (2 * timeSqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
         }
         /// <summary>
         /// Θ of put option
@@ -167,10 +167,10 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>Θ of put option</returns>
         public static double PutTheta(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
-            return -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
+            return -(S * sigma * NormDist.n(d1)) / (2 * timeSqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
         /// ν of call option
@@ -182,9 +182,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>ν of call option</returns>
         public static double CallVega(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return S * time_sqrt * NormDist.n(d1);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            return S * timeSqrt * NormDist.n(d1);
         }
         /// <summary>
         /// ν of put option
@@ -196,9 +196,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>ν of put option</returns>
         public static double PutVega(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            return S * time_sqrt * NormDist.n(d1);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            return S * timeSqrt * NormDist.n(d1);
         }
         /// <summary>
         /// ρ of call option
@@ -210,9 +210,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>ρ of call option</returns>
         public static double CallRho(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
             return X * T * Math.Exp(-r * T) * NormDist.N(d2);
         }
         /// <summary>
@@ -225,9 +225,9 @@ namespace EDLib.Pricing
         /// <param name="T">Time to maturity</param>
         /// <returns>ρ of put option</returns>
         public static double PutRho(double S, double X, double r, double sigma, double T) {
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
             return -X * T * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
@@ -247,14 +247,14 @@ namespace EDLib.Pricing
             out double delta, out double gamma, out double theta, out double vega, out double rho) {
             if (T == 0)
                 T = 0.0000000000001;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
 
             delta = NormDist.N(d1);
-            gamma = NormDist.n(d1) / (S * sigma * time_sqrt);
-            theta = -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
-            vega = S * time_sqrt * NormDist.n(d1);
+            gamma = NormDist.n(d1) / (S * sigma * timeSqrt);
+            theta = -(S * sigma * NormDist.n(d1)) / (2 * timeSqrt) - r * X * Math.Exp(-r * T) * NormDist.N(d2);
+            vega = S * timeSqrt * NormDist.n(d1);
             rho = X * T * Math.Exp(-r * T) * NormDist.N(d2);
         }
         /// <summary>
@@ -284,8 +284,8 @@ namespace EDLib.Pricing
             //int size = 0;
             if (T == 0)
                 T = 0.0000000000001;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
 
             double nd1 = 0.0; //Compute them only when needed
             double d2 = 0.0; 
@@ -296,25 +296,25 @@ namespace EDLib.Pricing
 
             if ((bitmask & Greeks.Gamma) != Greeks.None) {
                 nd1 = NormDist.n(d1);
-                ret[1] = nd1 / (S * sigma * time_sqrt);
+                ret[1] = nd1 / (S * sigma * timeSqrt);
             }
 
             if ((bitmask & Greeks.Theta) != Greeks.None) {
-                d2 = d1 - (sigma * time_sqrt);
+                d2 = d1 - (sigma * timeSqrt);
                 nd2 = X * Math.Exp(-r * T) * NormDist.N(d2);
                 if (nd1 == 0.0)
                     nd1 = NormDist.n(d1);
-                ret[2] = -(S * sigma * nd1) / (2 * time_sqrt) - r * nd2;
+                ret[2] = -(S * sigma * nd1) / (2 * timeSqrt) - r * nd2;
             }
             if ((bitmask & Greeks.Vega) != Greeks.None) {
                 if (nd1 == 0.0)
                     nd1 = NormDist.n(d1);
-                ret[3] = S * time_sqrt * nd1;
+                ret[3] = S * timeSqrt * nd1;
             }
 
             if ((bitmask & Greeks.Rho) != Greeks.None) {
                 if (d2 == 0.0) {
-                    d2 = d1 - (sigma * time_sqrt);
+                    d2 = d1 - (sigma * timeSqrt);
                     nd2 = X * Math.Exp(-r * T) * NormDist.N(d2);
                 }
                 ret[4] = T * nd2;
@@ -340,14 +340,14 @@ namespace EDLib.Pricing
            out double delta, out double gamma, out double theta, out double vega, out double rho) {
             if (T == 0)
                 T = 0.0000000000001;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
-            double d2 = d1 - (sigma * time_sqrt);
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
+            double d2 = d1 - (sigma * timeSqrt);
 
             delta = NormDist.N(d1) - 1;
-            gamma = NormDist.n(d1) / (S * sigma * time_sqrt);
-            theta = -(S * sigma * NormDist.n(d1)) / (2 * time_sqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
-            vega = S * time_sqrt * NormDist.n(d1);
+            gamma = NormDist.n(d1) / (S * sigma * timeSqrt);
+            theta = -(S * sigma * NormDist.n(d1)) / (2 * timeSqrt) + r * X * Math.Exp(-r * T) * NormDist.N(-d2);
+            vega = S * timeSqrt * NormDist.n(d1);
             rho = -X * T * Math.Exp(-r * T) * NormDist.N(-d2);
         }
         /// <summary>
@@ -377,8 +377,8 @@ namespace EDLib.Pricing
             //int size = 0;
             if (T == 0)
                 T = 0.0000000000001;
-            double time_sqrt = Math.Sqrt(T);
-            double d1 = (Math.Log(S / X) + r * T) / (sigma * time_sqrt) + 0.5 * sigma * time_sqrt;
+            double timeSqrt = Math.Sqrt(T);
+            double d1 = (Math.Log(S / X) + r * T) / (sigma * timeSqrt) + 0.5 * sigma * timeSqrt;
 
             double nd1 = 0.0;//Compute them only when needed
             double d2 = 0.0; 
@@ -389,25 +389,25 @@ namespace EDLib.Pricing
 
             if ((bitmask & Greeks.Gamma) != Greeks.None) {
                 nd1 = NormDist.n(d1);
-                ret[1] = nd1 / (S * sigma * time_sqrt);
+                ret[1] = nd1 / (S * sigma * timeSqrt);
             }
 
             if ((bitmask & Greeks.Theta) != Greeks.None) {
-                d2 = d1 - (sigma * time_sqrt);
+                d2 = d1 - (sigma * timeSqrt);
                 nd2 = X * Math.Exp(-r * T);
                 if (nd1 == 0.0)
                     nd1 = NormDist.n(d1);
-                ret[2] = -(S * sigma * nd1) / (2 * time_sqrt) + r * nd2 * NormDist.N(d2);
+                ret[2] = -(S * sigma * nd1) / (2 * timeSqrt) + r * nd2 * NormDist.N(d2);
             }
             if ((bitmask & Greeks.Vega) != Greeks.None) {
                 if (nd1 == 0.0)
                     nd1 = NormDist.n(d1);
-                ret[3] = S * time_sqrt * nd1;
+                ret[3] = S * timeSqrt * nd1;
             }
 
             if ((bitmask & Greeks.Rho) != Greeks.None) {
                 if (d2 == 0.0) {
-                    d2 = d1 - (sigma * time_sqrt);
+                    d2 = d1 - (sigma * timeSqrt);
                     nd2 = X * Math.Exp(-r * T);
                 }
                 ret[4] = -T * nd2 * NormDist.N(-d2);
@@ -427,8 +427,8 @@ namespace EDLib.Pricing
             // check for arbitrage violations: 
             // if price at almost zero volatility greater than price, return 0
 
-            double sigma_low = 0.0001;
-            double price = CallPrice(S, X, r, sigma_low, T);
+            double sigmaLow = 0.0001;
+            double price = CallPrice(S, X, r, sigmaLow, T);
             if (price > optionPrice)
                 return 0.0;
 
@@ -441,24 +441,24 @@ namespace EDLib.Pricing
 
             // want to bracket sigma. first find a maximum sigma by finding a sigma
             // with a estimated price higher than the actual price.
-            double sigma_high = 0.3;
-            price = CallPrice(S, X, r, sigma_high, T);
+            double sigmaHigh = 0.3;
+            price = CallPrice(S, X, r, sigmaHigh, T);
             while (price < optionPrice) {
-                sigma_high *= 2.0; // keep doubling.
-                price = CallPrice(S, X, r, sigma_high, T);
-                if (sigma_high > HIGH_VALUE)
+                sigmaHigh *= 2.0; // keep doubling.
+                price = CallPrice(S, X, r, sigmaHigh, T);
+                if (sigmaHigh > HIGH_VALUE)
                     return ERROR; // panic, something wrong.
             }
             for (int i = 0; i < MAX_ITERATIONS; i++) {
-                double sigma = (sigma_low + sigma_high) * 0.5;
+                double sigma = (sigmaLow + sigmaHigh) * 0.5;
                 price = CallPrice(S, X, r, sigma, T);
                 double test = (price - optionPrice);
                 if (Math.Abs(test) < ACCURACY)
                     return sigma;
                 if (test < 0.0)
-                    sigma_low = sigma;
+                    sigmaLow = sigma;
                 else
-                    sigma_high = sigma;
+                    sigmaHigh = sigma;
             }
             return ERROR;
         }
@@ -475,8 +475,8 @@ namespace EDLib.Pricing
             // check for arbitrage violations: 
             // if price at almost zero volatility greater than price, return 0
 
-            double sigma_low = 0.0001;
-            double price = PutPrice(S, X, r, sigma_low, T);
+            double sigmaLow = 0.0001;
+            double price = PutPrice(S, X, r, sigmaLow, T);
             if (price > optionPrice)
                 return 0.0;
 
@@ -489,24 +489,24 @@ namespace EDLib.Pricing
 
             // want to bracket sigma. first find a maximum sigma by finding a sigma
             // with a estimated price higher than the actual price.
-            double sigma_high = 0.3;
-            price = PutPrice(S, X, r, sigma_high, T);
+            double sigmaHigh = 0.3;
+            price = PutPrice(S, X, r, sigmaHigh, T);
             while (price < optionPrice) {
-                sigma_high = 2.0 * sigma_high; // keep doubling.
-                price = PutPrice(S, X, r, sigma_high, T);
-                if (sigma_high > HIGH_VALUE)
+                sigmaHigh = 2.0 * sigmaHigh; // keep doubling.
+                price = PutPrice(S, X, r, sigmaHigh, T);
+                if (sigmaHigh > HIGH_VALUE)
                     return ERROR; // panic, something wrong.
             }
             for (int i = 0; i < MAX_ITERATIONS; i++) {
-                double sigma = (sigma_low + sigma_high) * 0.5;
+                double sigma = (sigmaLow + sigmaHigh) * 0.5;
                 price = PutPrice(S, X, r, sigma, T);
                 double test = (price - optionPrice);
                 if (Math.Abs(test) < ACCURACY)
                     return sigma;
                 if (test < 0.0)
-                    sigma_low = sigma;
+                    sigmaLow = sigma;
                 else
-                    sigma_high = sigma;
+                    sigmaHigh = sigma;
             }
             return ERROR;
         }
@@ -522,23 +522,23 @@ namespace EDLib.Pricing
         public static double CallIVNewton(double S, double X, double r, double T, double optionPrice) {
             // check for arbitrage violations:
             // if price at almost zero volatility greater than price, return 0
-            double sigma_low = 1e-5;
-            double price = CallPrice(S, X, r, sigma_low, T);
+            double sigmaLow = 1e-5;
+            double price = CallPrice(S, X, r, sigmaLow, T);
             if (price > optionPrice)
                 return 0.0;
 
             const int MAX_ITERATIONS = 100;
             const double ACCURACY = 1.0e-4;
-            double t_sqrt = Math.Sqrt(T);
+            double tSqrt = Math.Sqrt(T);
 
-            double sigma = (optionPrice / S) / (0.398 * t_sqrt);    // find initial value
+            double sigma = (optionPrice / S) / (0.398 * tSqrt);    // find initial value
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 price = CallPrice(S, X, r, sigma, T);
                 double diff = optionPrice - price;
                 if (Math.Abs(diff) < ACCURACY)
                     return sigma;
-                double d1 = (Math.Log(S / X) + r * T) / (sigma * t_sqrt) + 0.5 * sigma * t_sqrt;
-                double vega = S * t_sqrt * NormDist.n(d1);
+                double d1 = (Math.Log(S / X) + r * T) / (sigma * tSqrt) + 0.5 * sigma * tSqrt;
+                double vega = S * tSqrt * NormDist.n(d1);
                 sigma = sigma + diff / vega;
             }
             return -99e10;  // something screwy happened, should throw exception
@@ -555,23 +555,23 @@ namespace EDLib.Pricing
         public static double PutIVNewton(double S, double X, double r, double T, double optionPrice) {
             // check for arbitrage violations:
             // if price at almost zero volatility greater than price, return 0
-            double sigma_low = 1e-5;
-            double price = PutPrice(S, X, r, sigma_low, T);
+            double sigmaLow = 1e-5;
+            double price = PutPrice(S, X, r, sigmaLow, T);
             if (price > optionPrice)
                 return 0.0;
 
             const int MAX_ITERATIONS = 100;
             const double ACCURACY = 1.0e-4;
-            double t_sqrt = Math.Sqrt(T);
+            double tSqrt = Math.Sqrt(T);
 
-            double sigma = (optionPrice / S) / (0.398 * t_sqrt);    // find initial value
+            double sigma = (optionPrice / S) / (0.398 * tSqrt);    // find initial value
             for (int i = 0; i < MAX_ITERATIONS; i++) {
                 price = PutPrice(S, X, r, sigma, T);
                 double diff = optionPrice - price;
                 if (Math.Abs(diff) < ACCURACY)
                     return sigma;
-                double d1 = (Math.Log(S / X) + r * T) / (sigma * t_sqrt) + 0.5 * sigma * t_sqrt;
-                double vega = S * t_sqrt * NormDist.n(d1);
+                double d1 = (Math.Log(S / X) + r * T) / (sigma * tSqrt) + 0.5 * sigma * tSqrt;
+                double vega = S * tSqrt * NormDist.n(d1);
                 sigma = sigma + diff / vega;
             }
             return -99e10;  // something screwy happened, should throw exception
