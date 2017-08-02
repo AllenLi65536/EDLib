@@ -54,9 +54,9 @@
         /// PM RV parameters
         /// </summary>
         /// <value><code>
-        /// new RVParameters("9013", "172.31.2;239.16.1.72", "172.31.2.3:7500", "TW.WMM3.PM.PositionReport.>");
+        /// new RVParameters("9013", "172.31.2;239.16.1.72", "10.60.0.128:7500", "TW.WMM3.PM.PositionReport.>");
         /// </code></value>
-        public static readonly RVParameters PM = new RVParameters("9013", "172.31.2;239.16.1.72", "172.31.2.3:7500", "TW.WMM3.PM.PositionReport.*");
+        public static readonly RVParameters PM = new RVParameters("9013", "172.31.2;239.16.1.72", "10.60.0.128:7500", "TW.WMM3.PM.PositionReport.*");
         /// <summary>
         /// PM RV parameters without daemon parameter
         /// </summary>
@@ -123,10 +123,10 @@
         /// </summary>
         /// <value>
         /// <code>
-        /// new RVParameters(null, "172.31.2;239.16.1.72", "172.31.2.3:7500", "TW.WMM3.SlippageCost.HedgeInfo.PROD");
+        /// new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TW.WMM3.SlippageCost.HedgeInfo.PROD");
         /// </code> 
         /// </value>
-        public static readonly RVParameters Slippage = new RVParameters(null, "172.31.2;239.16.1.72", "172.31.2.3:7500", "TW.WMM3.SlippageCost.HedgeInfo.PROD");
+        public static readonly RVParameters Slippage = new RVParameters(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TW.WMM3.SlippageCost.HedgeInfo.PROD");
         /// <summary>
         /// Warrant execution report for calculating Slippage cost RV parameters without daemon parameter
         /// </summary>
