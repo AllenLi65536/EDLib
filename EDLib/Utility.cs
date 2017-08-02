@@ -152,7 +152,7 @@ namespace EDLib
         /// Get ID of nearby futures contract
         /// </summary>
         /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>
-        public static string GetFutureContractID(int nDays) {
+        public static string GetFutureContractID(int nDays = 0) {
             DateTime today = DateTime.Today.AddDays(nDays);// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
             DateTime dt = today.AddDays(1 - today.Day);
             int iNth = 0;
