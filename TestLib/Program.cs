@@ -126,7 +126,8 @@ namespace TestLib
                 Console.WriteLine(greeks[i]);*/
             //MSSQL.ExecSqlQry().AsDataView();
 
-            Console.WriteLine(Utility.GetFutureContractID(3));       
+            //Console.WriteLine(Utility.GetFutureContractID(3));
+            Console.WriteLine(9.ToString("00"));
 
             //Console.WriteLine(TradeDate.LastNTradeDate(1));
             Console.WriteLine("press any key to exit");

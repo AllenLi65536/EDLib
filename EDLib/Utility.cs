@@ -126,6 +126,7 @@ namespace EDLib
             }
             throw new Exception("Local IP Address Not Found!");
         }
+
         /// <summary>
         /// Save DataTable into .csv file
         /// </summary>
@@ -133,6 +134,17 @@ namespace EDLib
         /// <param name="filePath">File path</param>
         /// <param name="containHeader">Should the file contains header row or not</param>
         public static void SaveToCSV(DataTable dt, string filePath, bool containHeader = false) {
+            SaveToCSV(dt, filePath, Encoding.Default, containHeader);
+        }
+
+        /// <summary>
+        /// Save DataTable into .csv file
+        /// </summary>
+        /// <param name="dt">DataTable to be saved</param>
+        /// <param name="filePath">File path</param>
+        /// <param name="encoding">Encoding of file</param>
+        /// <param name="containHeader">Should the file contains header row or not</param>
+        public static void SaveToCSV(DataTable dt, string filePath, Encoding encoding, bool containHeader = false) {
             StringBuilder sb = new StringBuilder();
 
             if (containHeader) {
@@ -145,7 +157,7 @@ namespace EDLib
                 sb.AppendLine(string.Join(",", fields));
             }
 
-            File.WriteAllText(filePath, sb.ToString(), Encoding.Default);
+            File.WriteAllText(filePath, sb.ToString(), encoding);
         }
 
         /// <summary>
