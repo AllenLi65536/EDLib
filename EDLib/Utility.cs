@@ -56,6 +56,47 @@ namespace EDLib
     }
 
     /// <summary>
+    /// Permutations and Combinations
+    /// </summary>
+    public static class PermutationsAndCombinations
+    {
+        /// <summary>
+        /// Combination
+        /// </summary>
+        /// <param name="n">n items to choose from</param>
+        /// <param name="r">Choose r items</param>
+        /// <returns>Number of combinations</returns>
+        public static long nCr(int n, int r) {
+            // naive: return Factorial(n) / (Factorial(r) * Factorial(n - r));
+            return nPr(n, r) / Factorial(r);
+        }
+
+        /// <summary>
+        /// Permutation
+        /// </summary>
+        /// <param name="n">n items to choose from</param>
+        /// <param name="r">Permute r items</param>
+        /// <returns>Number of permutations</returns>
+        public static long nPr(int n, int r) {
+            // naive: return Factorial(n) / Factorial(n - r);
+            return FactorialDivision(n, n - r);
+        }
+
+        private static long FactorialDivision(int topFactorial, int divisorFactorial) {
+            long result = 1;
+            for (int i = topFactorial; i > divisorFactorial; i--)
+                result *= i;
+            return result;
+        }
+
+        private static long Factorial(int i) {
+            if (i <= 1)
+                return 1;
+            return i * Factorial(i - 1);
+        }
+    }
+
+    /// <summary>
     /// Miscellaneous utility functions
     /// </summary>   
     public static class Utility
@@ -92,7 +133,7 @@ namespace EDLib
             if (ID.Length == 6)
                 return CommodityType.Warrant;
             return CommodityType.Others;
-        }              
+        }
 
         /// <summary>
         /// Get response string from the url
@@ -101,12 +142,11 @@ namespace EDLib
         /// <param name="encode">Encoding</param>
         /// <returns>Response from the webpage request</returns>
         public static string GetHtml(string url, Encoding encode) {
-            try {                
-                using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream()) {
-                    using (StreamReader reader = new StreamReader(dataStream, encode)) {
-                        return reader.ReadToEnd();
-                    }
-                }
+            try {
+                using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream())
+                using (StreamReader reader = new StreamReader(dataStream, encode))
+                    return reader.ReadToEnd();
+                
             } catch (Exception err) {
                 Console.WriteLine(err);
                 return err.ToString();
@@ -119,11 +159,9 @@ namespace EDLib
         /// <exception cref="Exception">Local IP Address Not Found!</exception>
         public static string GetLocalIPAddress() {
             var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList) {
-                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().StartsWith("10")) {
+            foreach (var ip in host.AddressList)
+                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().StartsWith("10"))
                     return ip.ToString();
-                }
-            }
             throw new Exception("Local IP Address Not Found!");
         }
 
@@ -148,7 +186,7 @@ namespace EDLib
             StringBuilder sb = new StringBuilder();
 
             if (containHeader) {
-                IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().Select(column => column.ColumnName);                
+                IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().Select(column => column.ColumnName);
                 sb.AppendLine(string.Join(",", columnNames));
             }
 
@@ -179,6 +217,47 @@ namespace EDLib
             else
                 return (char) (today.Month + 64) + Convert.ToString(today.Year % 10);
         }
+
+        /// <summary>
+        /// Returns all combinations of an enumerable item
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="elements"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> DifferentCombinations<T>(this IEnumerable<T> elements, int k) {
+            return k == 0 ? new[] { new T[0] } :
+              elements.SelectMany((e, i) =>
+                elements.Skip(i + 1).DifferentCombinations(k - 1).Select(c => (new[] { e }).Concat(c)));
+        }
+
+        public static IEnumerable<IEnumerable<T>> GetPermutationsWithRept<T>(IEnumerable<T> list, int length) {
+            if (length == 1) return list.Select(t => new T[] { t });
+            return GetPermutationsWithRept(list, length - 1)
+                .SelectMany(t => list,
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+        public static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length) {
+            if (length == 1) return list.Select(t => new T[] { t });
+            return GetPermutations(list, length - 1)
+                .SelectMany(t => list.Where(o => !t.Contains(o)),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+
+        public static IEnumerable<IEnumerable<T>> GetKCombsWithRept<T>(IEnumerable<T> list, int length) where T : IComparable {
+            if (length == 1) return list.Select(t => new T[] { t });
+            return GetKCombsWithRept(list, length - 1)
+                .SelectMany(t => list.Where(o => o.CompareTo(t.Last()) >= 0),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+
+        public static IEnumerable<IEnumerable<T>> GetKCombs<T>(IEnumerable<T> list, int length) where T : IComparable {
+            if (length == 1) return list.Select(t => new T[] { t });
+            return GetKCombs(list, length - 1)
+                .SelectMany(t => list.Where(o => o.CompareTo(t.Last()) > 0),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+
 
         /*
         public static bool FunChechSum(byte[] nCheckByte, byte nCheckSum) {

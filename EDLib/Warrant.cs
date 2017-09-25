@@ -3,14 +3,42 @@ using EDLib.Pricing.Option;
 
 namespace EDLib.Pricing.Warrant
 {
+    /// <summary>
+    /// Use for warrants pricing
+    /// </summary>
+    internal class NamespaceDoc { }
+    /// <summary>
+    /// Type of warrants
+    /// </summary>
     public enum WarrantType
     {
+        /// <summary>
+        /// Call
+        /// </summary>
         Call,
+        /// <summary>
+        /// Put
+        /// </summary>
         Put,
+        /// <summary>
+        /// Up and knock out call
+        /// </summary>
         CallUpOut,
+        /// <summary>
+        /// Down and knock out put
+        /// </summary>
         PutDownOut,
-        CallDownOut, // Bull
-        PutUpOut, // Bear
+        /// <summary>
+        /// Down and knock out call (aka Bull)
+        /// </summary>
+        CallDownOut,
+        /// <summary>
+        /// Up and knock out put (aka Bear)
+        /// </summary>
+        PutUpOut,
+        /// <summary>
+        /// Other unlisted warrants (Should not have any)
+        /// </summary>
         Others
     }
 
@@ -150,6 +178,9 @@ namespace EDLib.Pricing.Warrant
     /// </summary>
     public abstract class BarrierWarrant:Warrant
     {
+        /// <summary>
+        /// Barrier
+        /// </summary>
         public readonly double H;
         /// <summary>
         /// Constructor of barrier warrant
@@ -191,6 +222,11 @@ namespace EDLib.Pricing.Warrant
         public override double Price() {
             return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant price
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant price</returns>
         public double Price(double S) {
             this.S = S;
             return PlainVanilla.CallPrice(S, X, r, sigma_finRate, T) * CR;
@@ -202,6 +238,11 @@ namespace EDLib.Pricing.Warrant
         public override double Delta() {
             return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant delta
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant delta</returns>
         public double Delta(double S) {
             this.S = S;
             return PlainVanilla.CallDelta(S, X, r, sigma_finRate, T) * CR;
@@ -213,6 +254,11 @@ namespace EDLib.Pricing.Warrant
         public override double Gamma() {
             return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant gamma
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant gamma</returns>
         public double Gamma(double S) {
             this.S = S;
             return PlainVanilla.CallGamma(S, X, r, sigma_finRate, T) * CR;
@@ -224,6 +270,11 @@ namespace EDLib.Pricing.Warrant
         public override double Theta() {
             return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant theta
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant theta</returns>
         public double Theta(double S) {
             this.S = S;
             return PlainVanilla.CallTheta(S, X, r, sigma_finRate, T) * CR;
@@ -235,6 +286,11 @@ namespace EDLib.Pricing.Warrant
         public override double Vega() {
             return PlainVanilla.CallVega(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant vega
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant vega</returns>
         public double Vega(double S) {
             this.S = S;
             return PlainVanilla.CallVega(S, X, r, sigma_finRate, T) * CR;
@@ -246,6 +302,11 @@ namespace EDLib.Pricing.Warrant
         public override double Rho() {
             return PlainVanilla.CallRho(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant rho
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant rho</returns>
         public double Rho(double S) {
             this.S = S;
             return PlainVanilla.CallRho(S, X, r, sigma_finRate, T) * CR;
@@ -275,6 +336,11 @@ namespace EDLib.Pricing.Warrant
         public override double Price() {
             return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant price
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant price</returns>
         public double Price(double S) {
             this.S = S;
             return PlainVanilla.PutPrice(S, X, r, sigma_finRate, T) * CR;
@@ -286,6 +352,11 @@ namespace EDLib.Pricing.Warrant
         public override double Delta() {
             return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant delta
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant delta</returns>
         public double Delta(double S) {
             this.S = S;
             return PlainVanilla.PutDelta(S, X, r, sigma_finRate, T) * CR;
@@ -297,6 +368,11 @@ namespace EDLib.Pricing.Warrant
         public override double Gamma() {
             return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant gamma
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant gamma</returns>
         public double Gamma(double S) {
             this.S = S;
             return PlainVanilla.PutGamma(S, X, r, sigma_finRate, T) * CR;
@@ -308,6 +384,11 @@ namespace EDLib.Pricing.Warrant
         public override double Theta() {
             return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant theta
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant theta</returns>
         public double Theta(double S) {
             this.S = S;
             return PlainVanilla.PutTheta(S, X, r, sigma_finRate, T) * CR;
@@ -319,6 +400,11 @@ namespace EDLib.Pricing.Warrant
         public override double Vega() {
             return PlainVanilla.PutVega(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant vega
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant vega</returns>
         public double Vega(double S) {
             this.S = S;
             return PlainVanilla.PutVega(S, X, r, sigma_finRate, T) * CR;
@@ -330,105 +416,258 @@ namespace EDLib.Pricing.Warrant
         public override double Rho() {
             return PlainVanilla.PutRho(S, X, r, sigma_finRate, T) * CR;
         }
+        /// <summary>
+        /// Update stock price and calculate warrant rho
+        /// </summary>
+        /// <param name="S">Stock price</param>
+        /// <returns>Warrant rho</returns>
         public double Rho(double S) {
             this.S = S;
             return PlainVanilla.PutRho(S, X, r, sigma_finRate, T) * CR;
         }
     }
 
-    public class CallDownOut:BarrierWarrant //Bull
+    /// <summary>
+    /// Down and knock out call (aka Bull)
+    /// </summary>
+    public class CallDownOut:BarrierWarrant
     {
+        /// <summary>
+        /// Constructor of down and knock out call
+        /// </summary>
+        /// <param name="WID">Warrant ID</param>
+        /// <param name="issuer">Issuer ID of the warrant</param>
+        /// <param name="traderID">Trader ID</param>
+        /// <param name="UID">Underlying ID</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="T">Time to maturity in year</param>
+        /// <param name="CR">Conversion ratio</param>
+        /// <param name="H">Barrier</param>
         public CallDownOut(string WID, string issuer, string traderID, string UID, double X, double T, double CR, double H) : base(WID, issuer, traderID, UID, X, T, CR, H) {
         }
 
+        /// <summary>
+        /// Price of down and knock out call
+        /// </summary>
+        /// <returns>Price of down and knock out call</returns>
         public override double Price() {
-            return (S - Math.Round(S * H, 2)) * CR + Math.Round(S * H, 2) * T * CR * sigma_finRate;
-            throw new NotImplementedException();
+            return ((S - X) + X * T * sigma_finRate) * CR;
         }
+        /// <summary>
+        /// Delta of down and knock out call
+        /// </summary>
+        /// <returns>==1</returns>
         public override double Delta() {
             return 1;
         }
+        /// <summary>
+        /// Gamma of down and knock out call
+        /// </summary>
+        /// <returns>==0</returns>
         public override double Gamma() {
             return 0;
         }
+        /// <summary>
+        /// Theta of down and knock out call
+        /// </summary>
+        /// <returns>Theta of down and knock out call</returns>
         public override double Theta() {
             return -X * sigma_finRate * CR / 365.0;
         }
+        /// <summary>
+        /// Vega of down and knock out call
+        /// </summary>
+        /// <returns>==0</returns>
         public override double Vega() {
             return 0;
         }
+        /// <summary>
+        /// Rho of down and knock out call
+        /// </summary>
+        /// <returns>NotImplementedException</returns>
         public override double Rho() {
             throw new NotImplementedException();
         }
     }
-    public class PutUpOut:BarrierWarrant //Bear
+    /// <summary>
+    /// Up and knock out put (aka Bear)
+    /// </summary>
+    public class PutUpOut:BarrierWarrant
     {
+        /// <summary>
+        /// Constructor of down and knock out call
+        /// </summary>
+        /// <param name="WID">Warrant ID</param>
+        /// <param name="issuer">Issuer ID of the warrant</param>
+        /// <param name="traderID">Trader ID</param>
+        /// <param name="UID">Underlying ID</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="T">Time to maturity in year</param>
+        /// <param name="CR">Conversion ratio</param>
+        /// <param name="H">Barrier</param>
         public PutUpOut(string WID, string issuer, string traderID, string UID, double X, double T, double CR, double H) : base(WID, issuer, traderID, UID, X, T, CR, H) {
         }
-
+        /// <summary>
+        /// Price of up and knock out put
+        /// </summary>
+        /// <returns>Price of up and knock out put</returns>
         public override double Price() {
-            throw new NotImplementedException();
+            return ((X - S) + X * T * sigma_finRate) * CR;
         }
+        /// <summary>
+        /// Delta of up and knock out put
+        /// </summary>
+        /// <returns>== -1</returns>
         public override double Delta() {
             return -1;
         }
+        /// <summary>
+        /// Gamma of up and knock out put
+        /// </summary>
+        /// <returns>== 0</returns>
         public override double Gamma() {
             return 0;
         }
+        /// <summary>
+        /// Theta of up and knock out put
+        /// </summary>
+        /// <returns>Theta of up and knock out put</returns>
         public override double Theta() {
             return -X * sigma_finRate * CR / 365.0;
         }
+        /// <summary>
+        /// Vega of up and knock out put
+        /// </summary>
+        /// <returns>== 0</returns>
         public override double Vega() {
             return 0;
         }
+        /// <summary>
+        /// Rho of up and knock out put
+        /// </summary>
+        /// <returns>NotImplementedException</returns>
         public override double Rho() {
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// Up and knock out call
+    /// </summary>
     public class CallUpOut:BarrierWarrant
     {
+        /// <summary>
+        /// Constructor of up and knock out call
+        /// </summary>
+        /// <param name="WID">Warrant ID</param>
+        /// <param name="issuer">Issuer ID of the warrant</param>
+        /// <param name="traderID">Trader ID</param>
+        /// <param name="UID">Underlying ID</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="T">Time to maturity in year</param>
+        /// <param name="CR">Conversion ratio</param>
+        /// <param name="H">Barrier</param>
         public CallUpOut(string WID, string issuer, string traderID, string UID, double X, double T, double CR, double H) : base(WID, issuer, traderID, UID, X, T, CR, H) {
         }
-
+        /// <summary>
+        /// Price of up and knock out call
+        /// </summary>
+        /// <returns>Price of up and knock out call</returns>
         public override double Price() {
             return BarrierOption.CallUpOutPrice(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Delta of up and knock out call
+        /// </summary>
+        /// <returns>Delta of up and knock out call</returns>
         public override double Delta() {
             return BarrierOption.CallUpOutDelta(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Gamma of up and knock out call
+        /// </summary>
+        /// <returns>Gamma of up and knock out call</returns>
         public override double Gamma() {
             return BarrierOption.CallUpOutGamma(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Theta of up and knock out call
+        /// </summary>
+        /// <returns>Theta of up and knock out call</returns>
         public override double Theta() {
             return BarrierOption.CallUpOutTheta(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Vega of up and knock out call
+        /// </summary>
+        /// <returns>Vega of up and knock out call</returns>
         public override double Vega() {
             return BarrierOption.CallUpOutVega(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Rho of up and knock out call
+        /// </summary>
+        /// <returns>Rho of up and knock out call</returns>
         public override double Rho() {
             return BarrierOption.CallUpOutRho(S, X, r, sigma_finRate, T, H) * CR;
         }
     }
+    /// <summary>
+    /// Down and knock out put
+    /// </summary>
     public class PutDownOut:BarrierWarrant
     {
+        /// <summary>
+        /// Constructor of down and knock out put
+        /// </summary>
+        /// <param name="WID">Warrant ID</param>
+        /// <param name="issuer">Issuer ID of the warrant</param>
+        /// <param name="traderID">Trader ID</param>
+        /// <param name="UID">Underlying ID</param>
+        /// <param name="X">Exercise price</param>
+        /// <param name="T">Time to maturity in year</param>
+        /// <param name="CR">Conversion ratio</param>
+        /// <param name="H">Barrier</param>
         public PutDownOut(string WID, string issuer, string traderID, string UID, double X, double T, double CR, double H) : base(WID, issuer, traderID, UID, X, T, CR, H) {
         }
-
+        /// <summary>
+        /// Price of down and knock out put
+        /// </summary>
+        /// <returns>Price of down and knock out put</returns>
         public override double Price() {
             return BarrierOption.PutDownOutPrice(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Delta of down and knock out put
+        /// </summary>
+        /// <returns>Delta of down and knock out put</returns>
         public override double Delta() {
             return BarrierOption.PutDownOutDelta(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Gamma of down and knock out put
+        /// </summary>
+        /// <returns>Gamma of down and knock out put</returns>
         public override double Gamma() {
             return BarrierOption.PutDownOutGamma(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Theta of down and knock out put
+        /// </summary>
+        /// <returns>Theta of down and knock out put</returns>
         public override double Theta() {
             return BarrierOption.PutDownOutTheta(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Vega of down and knock out put
+        /// </summary>
+        /// <returns>Vega of down and knock out put</returns>
         public override double Vega() {
             return BarrierOption.PutDownOutVega(S, X, r, sigma_finRate, T, H) * CR;
         }
+        /// <summary>
+        /// Rho of down and knock out put
+        /// </summary>
+        /// <returns>Rho of down and knock out put</returns>
         public override double Rho() {
             return BarrierOption.PutDownOutRho(S, X, r, sigma_finRate, T, H) * CR;
         }

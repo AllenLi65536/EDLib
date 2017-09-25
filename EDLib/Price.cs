@@ -3,7 +3,7 @@
 namespace EDLib.Pricing
 {
     /// <summary>
-    /// Use for options pricing
+    /// Tools for options and warrants pricing
     /// </summary>
     internal class NamespaceDoc { }
 

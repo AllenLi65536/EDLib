@@ -3,6 +3,10 @@
 namespace EDLib.Pricing.Option
 {
     /// <summary>
+    /// Use for options pricing
+    /// </summary>
+    internal class NamespaceDoc { }
+    /// <summary>
     /// Used for plain vanilla options pricing
     /// </summary>
     public static class PlainVanilla
