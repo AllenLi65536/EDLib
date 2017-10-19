@@ -199,6 +199,15 @@ namespace EDLib
         }
 
         /// <summary>
+        /// Is the directory empty
+        /// </summary>
+        /// <param name="path">Path of directory</param>
+        /// <returns>Is the directory empty</returns>
+        public static bool IsDirectoryEmpty(string path) {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
+        }
+
+        /// <summary>
         /// Get ID of nearby futures contract
         /// </summary>
         /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>

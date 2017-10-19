@@ -210,6 +210,15 @@
         /// </code>
         /// </value>
         public static readonly string warrantSysKeySqlConnString = "SERVER=10.7.0.52;DATABASE=EDAISYS;UID=warpap;PWD=warpap";
+        /// <summary>
+        /// SQL server connection string of EDIS
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// "SERVER=10.19.1.20;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb"
+        /// </code>
+        /// </value>
+        public static readonly string edis20SqlConnString = "SERVER=10.19.1.20;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb";
 
         //public static readonly string edis30SqlConnString = "SERVER=10.10.1.30;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb";
     }
