@@ -83,9 +83,11 @@ namespace EDLib.SQL
                 conn.Open();
                 wasClosed = true;
             }
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.CommandTimeout = timeout;
-            int ret = cmd.ExecuteNonQuery();
+            int ret;
+            using (SqlCommand cmd = new SqlCommand(sql, conn)) {
+                cmd.CommandTimeout = timeout;
+                ret = cmd.ExecuteNonQuery();                
+            }
             if (wasClosed)
                 conn.Close();
             return ret;
@@ -124,9 +126,11 @@ namespace EDLib.SQL
                 conn.Open();
                 wasClosed = true;
             }
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            cmd.CommandTimeout = timeout;
-            int ret = cmd.ExecuteNonQuery();
+            int ret;
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn)) {
+                cmd.CommandTimeout = timeout;
+                ret = cmd.ExecuteNonQuery();
+            }
             if (wasClosed)
                 conn.Close();
             return ret;
