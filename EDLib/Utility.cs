@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -146,7 +147,7 @@ namespace EDLib
                 using (Stream dataStream = WebRequest.Create(url).GetResponse().GetResponseStream())
                 using (StreamReader reader = new StreamReader(dataStream, encode))
                     return reader.ReadToEnd();
-                
+
             } catch (Exception err) {
                 Console.WriteLine(err);
                 return err.ToString();
@@ -210,6 +211,7 @@ namespace EDLib
         /// <summary>
         /// Get ID of nearby futures contract
         /// </summary>
+        /// <param name="nDays">Number of days to shift</param>
         /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>
         public static string GetFutureContractID(int nDays = 0) {
             DateTime today = DateTime.Today.AddDays(nDays);// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
@@ -220,12 +222,63 @@ namespace EDLib
                     iNth++;
                 dt = dt.AddDays(1);
             }
-            // string sCont = string.Empty;            
             if (iNth >= 3)
                 return (char) (today.AddMonths(1).Month + 64) + Convert.ToString(today.AddMonths(1).Year % 10);
             else
                 return (char) (today.Month + 64) + Convert.ToString(today.Year % 10);
         }
+        /// <summary>
+        /// Get ID of nearby futures contract of the date
+        /// </summary>
+        /// <param name = "today" >The date</param>
+        /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>
+        public static string GetFutureContractID(DateTime today) {
+            //DateTime today = DateTime.Today.AddDays(nDays);// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
+            DateTime dt = today.AddDays(1 - today.Day);
+            int iNth = 0;
+            while (dt <= today) {
+                if (dt.DayOfWeek == DayOfWeek.Wednesday)
+                    iNth++;
+                dt = dt.AddDays(1);
+            }
+            if (iNth >= 3)
+                return (char) (today.AddMonths(1).Month + 64) + Convert.ToString(today.AddMonths(1).Year % 10);
+            else
+                return (char) (today.Month + 64) + Convert.ToString(today.Year % 10);
+        }
+
+        /// <summary>
+        /// Send Wake On Lan packet.
+        /// </summary>
+        /// <param name="MAC_ADDRESS">MAC Address</param>
+        /// <param name="IPBCast">Broadcast IP address, usually 255.255.255.255 will work</param>
+        public static void WakeUp(string MAC_ADDRESS, IPAddress IPBCast) {
+
+            using (UdpClient UDP = new UdpClient()) {
+                UDP.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+
+                int offset = 0;
+                byte[] buffer = new byte[512];   // more than enough :-)
+
+                //first 6 bytes should be 0xFF
+                for (int y = 0; y < 6; y++)
+                    buffer[offset++] = 0xFF;
+
+                //now repeate MAC 16 times
+                for (int y = 0; y < 16; y++) {
+                    int i = 0;
+                    for (int z = 0; z < 6; z++) {
+                        buffer[offset++] =
+                            byte.Parse(MAC_ADDRESS.Substring(i, 2), NumberStyles.HexNumber);
+                        i += 2;
+                    }
+                }
+
+                UDP.EnableBroadcast = true;
+                UDP.Send(buffer, 512, new IPEndPoint(IPBCast, 0x1));
+            }
+        }
+
 
         /// <summary>
         /// Returns all combinations of an enumerable item

@@ -86,7 +86,7 @@ namespace EDLib.SQL
             int ret;
             using (SqlCommand cmd = new SqlCommand(sql, conn)) {
                 cmd.CommandTimeout = timeout;
-                ret = cmd.ExecuteNonQuery();                
+                ret = cmd.ExecuteNonQuery();
             }
             if (wasClosed)
                 conn.Close();
