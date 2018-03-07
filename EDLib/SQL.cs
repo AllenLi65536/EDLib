@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Data.OleDb;
+using System.Threading.Tasks;
 
 namespace EDLib.SQL
 {
@@ -106,6 +107,43 @@ namespace EDLib.SQL
                 return ExecSqlCmd(sql, conn, timeout);
             }
         }
+
+        /// <summary>
+        /// Execute MS SQL command
+        /// </summary>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="conn">SQL server connection</param>
+        /// <param name="timeout">SQL server timeout seconds</param>
+        /// <returns>Number of data rows affected</returns>
+       /* public static async Task<int> ExecSqlCmdAsync(string sql, SqlConnection conn, int timeout = 300) {
+            bool wasClosed = false;
+            if (conn.State == ConnectionState.Closed) {
+                conn.Open();
+                wasClosed = true;
+            }
+            int ret;
+            using (SqlCommand cmd = new SqlCommand(sql, conn)) {
+                cmd.CommandTimeout = timeout;
+                ret = await cmd.ExecuteNonQueryAsync();
+            }
+            if (wasClosed)
+                conn.Close();
+            return ret;
+        }
+
+        /// <summary>
+        /// Execute MS SQL command
+        /// </summary>
+        /// <param name="sql">SQL command string</param>
+        /// <param name="connstr">SQL server connection string</param> 
+        /// <param name="timeout">SQL server timeout seconds</param>
+        /// <returns>Number of data rows affected</returns>
+        public static async Task<int> ExecSqlCmdAsync(string sql, string connstr, int timeout = 300) {
+            using (SqlConnection conn = new SqlConnection(connstr)) {
+                conn.Open();
+                return await ExecSqlCmdAsync(sql, conn, timeout);
+            }
+        }*/
 
     }
     /// <summary>

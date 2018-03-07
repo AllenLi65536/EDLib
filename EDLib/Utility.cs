@@ -214,18 +214,8 @@ namespace EDLib
         /// <param name="nDays">Number of days to shift</param>
         /// <returns>A letter and a number that represent the expirary month and year.(e.g. H7 for Aug. 2017)</returns>
         public static string GetFutureContractID(int nDays = 0) {
-            DateTime today = DateTime.Today.AddDays(nDays);// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
-            DateTime dt = today.AddDays(1 - today.Day);
-            int iNth = 0;
-            while (dt <= today) {
-                if (dt.DayOfWeek == DayOfWeek.Wednesday)
-                    iNth++;
-                dt = dt.AddDays(1);
-            }
-            if (iNth >= 3)
-                return (char) (today.AddMonths(1).Month + 64) + Convert.ToString(today.AddMonths(1).Year % 10);
-            else
-                return (char) (today.Month + 64) + Convert.ToString(today.Year % 10);
+            //DateTime today = DateTime.Today.AddDays(nDays);// new DateTime(int.Parse(Date.Substring(0, 4)), int.Parse(Date.Substring(4, 2)), int.Parse(Date.Substring(6, 2)));
+            return GetFutureContractID(DateTime.Today.AddDays(nDays));
         }
         /// <summary>
         /// Get ID of nearby futures contract of the date

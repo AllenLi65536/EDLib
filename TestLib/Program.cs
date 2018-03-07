@@ -72,10 +72,11 @@ namespace TestLib
             //new SleepToTarget(new DateTime(2017, 5, 9), null); //Throws ArgumentNullException
             //new HeartbeatMonitor(1, null); //Throws ArgumentNullException
 
-            /*MailService ms = new MailService();
+            MailService ms = new MailService();
             //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" });
             //kgiBulletin@kgi.com // new string[] { "judy.lu@kgi.com", "allen.li@kgi.com", "andrea.chang@kgi.com" }
-            ms.SendMail("allen.li@kgi.com", "內網公告", null, null, new string[] { "judy.lu@kgi.com", "allen.li@kgi.com", "andrea.chang@kgi.com", "katechang@kgi.com"},
+            //ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.syntw@kgi.com"},
+                ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.syntw@kgi.com", "joufan.chen@kgi.com", "jerry.zeng@kgi.com" },
                 "凱基大樓-辦公室內部規範宣導", $@"<html>
   <head>
     <style>
@@ -87,10 +88,10 @@ namespace TestLib
   <body>
     <div class=""main"">
       <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 各位同仁大家好:</span </p>
-      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 為維護企業形象及工作環境之安全與衛生，提醒各位同仁確實遵守公司內部相關規範，避免汙染環境並造成資源的浪費 !</span></p>
+      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 為維護企業形象及工作環境之安全與衛生，提醒各位同仁確實遵守公司內部相關規範，避免汙染環境並造成資源的浪費!</span></p>
       <p><br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 1.注意口腔衛生及味道，避免影響他人及工作環境。</span><br/>
-        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 2.請不要在茶水間放置私人盆栽。</span></p>
-      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 3.餐廳取菜請注意禮節勿插隊。</span><br/>
+        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 2.為避免產生不必要噪音，請勿用力敲擊鍵盤與滑鼠或自言自語。</span></p>
+      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 3.請恪遵出缺勤管理規定，勿隨意翹班。</span><br/>
         <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 4.餐廳取菜請取適量不要浪費食物。</span><br/>
         <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 5.節約用水、擦手紙及衛生紙。</span><br/>
         <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 6.下班後請隨手關閉照明及空調，以節約用電。</span><br/>
@@ -101,12 +102,12 @@ namespace TestLib
   </body>
 </html>
 ", true, null);
-*/
+
 
             //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 15, 11, 58, 0), myAction);
             //st.Start();
 
-            Utility.WakeUp("00113262CB1B", new IPAddress(0xffffffff));
+            //Utility.WakeUp("00113262CB1B", new IPAddress(0xffffffff));
 
             //TIBCORVListener listener = new TIBCORVListener(null, "172.31.2;239.16.1.72", "10.60.0.128:7500", "TWSE.MarketDataSnapshotFullRefresh");
 
