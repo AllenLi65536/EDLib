@@ -456,9 +456,9 @@ namespace EDLib.Pricing.Warrant
         /// <summary>
         /// Delta of down and knock out call
         /// </summary>
-        /// <returns>==1</returns>
+        /// <returns>==CR</returns>
         public override double Delta() {
-            return CR;//Problem found
+            return CR;//Problem
         }
         /// <summary>
         /// Gamma of down and knock out call
@@ -517,9 +517,9 @@ namespace EDLib.Pricing.Warrant
         /// <summary>
         /// Delta of up and knock out put
         /// </summary>
-        /// <returns>== -1</returns>
+        /// <returns>== -CR</returns>
         public override double Delta() {
-            return -CR;
+            return -CR; // Problem
         }
         /// <summary>
         /// Gamma of up and knock out put

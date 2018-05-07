@@ -220,6 +220,15 @@
         /// </value>
         public static readonly string edis20SqlConnString = "SERVER=10.19.1.20;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb";
 
+        /// <summary>
+        /// SQL server connection string of newEDIS
+        /// </summary>
+        /// <value>
+        /// <code>
+        /// "SERVER=10.19.1.45;DATABASE=newEDIS;UID=readuser;PWD=readuser"
+        /// </code>
+        /// </value>
+        public static readonly string newEDISSqlConnString = "SERVER=10.19.1.45;DATABASE=newEDIS;UID=readuser;PWD=readuser";
         //public static readonly string edis30SqlConnString = "SERVER=10.10.1.30;DATABASE=EDIS;UID=WarrantWeb;PWD=WarrantWeb";
     }
 }

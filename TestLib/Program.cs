@@ -75,9 +75,10 @@ namespace TestLib
             MailService ms = new MailService();
             //ms.SendMail("allen.li@kgi.com", "Test", null, null, new string[] { "allen.li@kgi.com" }, "Test", "test", false, new string[] { "D:\\Document\\ED_NAS_Warrant.bat" });
             //kgiBulletin@kgi.com // new string[] { "judy.lu@kgi.com", "allen.li@kgi.com", "andrea.chang@kgi.com" }
-            //ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.syntw@kgi.com"},
-                ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.syntw@kgi.com", "joufan.chen@kgi.com", "jerry.zeng@kgi.com" },
-                "凱基大樓-辦公室內部規範宣導", $@"<html>
+            ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.tw@kgi.com"},
+            // ms.SendMail("kgiBulletin@kgi.com", "內網公告", null, null, new string[] { "ed.syntw@kgi.com", "joufan.chen@kgi.com", "jerry.zeng@kgi.com" },
+            // ms.SendMail("allen.li@kgi.com", "內網公告", null, null, new string[] { "allen.li@kgi.com", "andrea.chang@kgi.com" },
+                "2018中華開發金控春酒晚會公告(提醒與澄清)！", $@"<html>
   <head>
     <style>
       @media only screen and (max-device-width: 480px) {{
@@ -87,21 +88,39 @@ namespace TestLib
   </head>
   <body>
     <div class=""main"">
-      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 各位同仁大家好:</span </p>
-      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 為維護企業形象及工作環境之安全與衛生，提醒各位同仁確實遵守公司內部相關規範，避免汙染環境並造成資源的浪費!</span></p>
-      <p><br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 1.注意口腔衛生及味道，避免影響他人及工作環境。</span><br/>
-        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 2.為避免產生不必要噪音，請勿用力敲擊鍵盤與滑鼠或自言自語。</span></p>
-      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 3.請恪遵出缺勤管理規定，勿隨意翹班。</span><br/>
-        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 4.餐廳取菜請取適量不要浪費食物。</span><br/>
-        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 5.節約用水、擦手紙及衛生紙。</span><br/>
-        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 6.下班後請隨手關閉照明及空調，以節約用電。</span><br/>
+      <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 各位同仁大家好:</span></p>     
+      <p><br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 1.請勿將春酒晚會同仁酒醉醜態影片或相片流傳，以維護同仁與企業形象。</span><br/>
+        <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 2.衍生性商品部張可欣同仁並沒有喝醉只是有點茫而且走路不穩而已。</span></p>
+<p><br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" >以上事項特此提醒</span></p>   
+<p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" >物業管理部</span></p>    
+</div>
+  </body>
+</html>"
+/*"凱基大樓-辦公室內部規範宣導", $@"<html>
+<head>
+<style>
+@media only screen and (max-device-width: 480px) {{
+
+}}
+</style>
+</head>
+<body>
+<div class=""main"">
+<p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 各位同仁大家好:</span </p>
+<p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 為維護企業形象及工作環境之安全與衛生，提醒各位同仁確實遵守公司內部相關規範，避免汙染環境並造成資源的浪費!</span></p>
+<p><br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 1.注意口腔衛生及味道，避免影響他人及工作環境。</span><br/>
+ <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 2.為避免產生不必要噪音，請勿用力敲擊鍵盤與滑鼠或自言自語。</span></p>
+<p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 3.請恪遵出缺勤管理規定，勿隨意翹班。</span><br/>
+ <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 4.餐廳取菜請取適量不要浪費食物。</span><br/>
+ <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 5.節約用水、擦手紙及衛生紙。</span><br/>
+ <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 6.下班後請隨手關閉照明及空調，以節約用電。</span><br/>
 <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 7.打噴嚏請用手帕或衣袖摀住口鼻。</span><br/>
 <br/><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" > 8.有感冒症狀請依正確方式戴上口罩，如有諮詢需求請洽沈芳如護理師，分機:8499。</span><br/></p>       
 <p><span style = ""font-size: 16pt; font-family: DFKai-sb, arial, helvetica, sans-serif;"" >物業管理部</span></p>    
 </div>
-  </body>
-</html>
-", true, null);
+</body>
+</html>"*/
+, true, null);
 
 
             //SleepToTarget st = new SleepToTarget(new DateTime(2017, 5, 15, 11, 58, 0), myAction);
