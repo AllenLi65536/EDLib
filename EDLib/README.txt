@@ -1,1 +1,1 @@
-Please see .\packages\EDLib.1.1.4\HelpFile.chm
+Please see .\packages\EDLib.1.1.9\HelpFile.chm

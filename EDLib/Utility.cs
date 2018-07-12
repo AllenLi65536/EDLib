@@ -276,7 +276,7 @@ namespace EDLib
         /// </summary>
         /// <param name="source">Source filepath</param>
         /// <param name="dest">Destination filepath</param>
-        static void GZipDecompress(string source, string dest) {
+        public static void GZipDecompress(string source, string dest) {
             using (FileStream sourceFile = File.OpenRead(source))
             using (FileStream destFile = File.Create(dest))
             using (GZipStream Gzip = new GZipStream(sourceFile, CompressionMode.Decompress, true)) {
