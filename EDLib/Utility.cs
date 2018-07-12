@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -266,6 +267,24 @@ namespace EDLib
 
                 UDP.EnableBroadcast = true;
                 UDP.Send(buffer, 512, new IPEndPoint(IPBCast, 0x1));
+            }
+        }
+
+
+        /// <summary>
+        /// Unzip .gz file to designated filepath
+        /// </summary>
+        /// <param name="source">Source filepath</param>
+        /// <param name="dest">Destination filepath</param>
+        static void GZipDecompress(string source, string dest) {
+            using (FileStream sourceFile = File.OpenRead(source))
+            using (FileStream destFile = File.Create(dest))
+            using (GZipStream Gzip = new GZipStream(sourceFile, CompressionMode.Decompress, true)) {
+                int theByte = Gzip.ReadByte();
+                while (theByte != -1) {
+                    destFile.WriteByte((byte) theByte);
+                    theByte = Gzip.ReadByte();
+                }
             }
         }
 
