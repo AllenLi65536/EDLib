@@ -201,6 +201,38 @@ namespace EDLib
         }
 
         /// <summary>
+        /// Read from csv file and store values into a datatable
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="containsHeaders">Did the file contains header row or not</param>
+        /// <returns>DataTable contains the contents of CSV file</returns>
+        static DataTable CSVtoDataTable(string filePath, bool containsHeaders = false) {
+            DataTable dt = new DataTable();
+            using (StreamReader sr = new StreamReader(filePath)) {
+                string[] headers = sr.ReadLine().Split(',');
+                if (containsHeaders) {
+                    foreach (string header in headers)
+                        dt.Columns.Add(header);
+                } else {
+                    for (int i = 0; i < headers.Length; i++)
+                        dt.Columns.Add();
+                    DataRow dr = dt.NewRow();
+                    for (int i = 0; i < headers.Length; i++)
+                        dr[i] = headers[i];
+                    dt.Rows.Add(dr);
+                }
+                while (!sr.EndOfStream) {
+                    string[] rows = sr.ReadLine().Split(',');
+                    DataRow dr = dt.NewRow();
+                    for (int i = 0; i < headers.Length; i++)
+                        dr[i] = rows[i];
+                    dt.Rows.Add(dr);
+                }
+            }
+            return dt;
+        }
+
+        /// <summary>
         /// Is the directory empty
         /// </summary>
         /// <param name="path">Path of directory</param>
