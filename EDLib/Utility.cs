@@ -206,7 +206,7 @@ namespace EDLib
         /// <param name="filePath">File path</param>
         /// <param name="containsHeaders">Did the file contains header row or not</param>
         /// <returns>DataTable contains the contents of CSV file</returns>
-        static DataTable CSVtoDataTable(string filePath, bool containsHeaders = false) {
+        public static DataTable CSVtoDataTable(string filePath, bool containsHeaders = false) {
             DataTable dt = new DataTable();
             using (StreamReader sr = new StreamReader(filePath)) {
                 string[] headers = sr.ReadLine().Split(',');
